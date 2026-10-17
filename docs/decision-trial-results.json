@@ -1,0 +1,632 @@
+{
+  "plan_sha256": "7aa444d8bedcfd2c2ca8e73facc7d277d1a404d207e2ffb4a775c78cf2ecad16",
+  "benchmark_sha256": "61b9ad4fa3d3bde63554c5f958ae52edaf91134de5a742bc104daf5d5985c25e",
+  "created_at": "2026-10-16T20:04:31.820911+00:00",
+  "status": "completed",
+  "operations": [
+    {
+      "kind": "metadata",
+      "model_id": "gemini-3.5-flash-lite",
+      "task_id": null,
+      "status": "completed",
+      "name": "publishers/google/models/gemini-3.5-flash-lite"
+    },
+    {
+      "kind": "metadata",
+      "model_id": "gemini-3.7-flash",
+      "task_id": null,
+      "status": "completed",
+      "name": "publishers/google/models/gemini-3.7-flash"
+    },
+    {
+      "kind": "count",
+      "model_id": "gemini-3.5-flash-lite",
+      "task_id": "clamp",
+      "status": "completed",
+      "tokens": 162
+    },
+    {
+      "kind": "generate",
+      "model_id": "gemini-3.5-flash-lite",
+      "task_id": "clamp",
+      "status": "completed"
+    },
+    {
+      "kind": "count",
+      "model_id": "gemini-3.7-flash",
+      "task_id": "clamp",
+      "status": "completed",
+      "tokens": 162
+    },
+    {
+      "kind": "generate",
+      "model_id": "gemini-3.7-flash",
+      "task_id": "clamp",
+      "status": "completed"
+    },
+    {
+      "kind": "count",
+      "model_id": "gemini-3.5-flash-lite",
+      "task_id": "discount",
+      "status": "completed",
+      "tokens": 196
+    },
+    {
+      "kind": "generate",
+      "model_id": "gemini-3.5-flash-lite",
+      "task_id": "discount",
+      "status": "completed"
+    },
+    {
+      "kind": "count",
+      "model_id": "gemini-3.7-flash",
+      "task_id": "discount",
+      "status": "completed",
+      "tokens": 196
+    },
+    {
+      "kind": "generate",
+      "model_id": "gemini-3.7-flash",
+      "task_id": "discount",
+      "status": "completed"
+    },
+    {
+      "kind": "count",
+      "model_id": "gemini-3.5-flash-lite",
+      "task_id": "merge",
+      "status": "completed",
+      "tokens": 229
+    },
+    {
+      "kind": "generate",
+      "model_id": "gemini-3.5-flash-lite",
+      "task_id": "merge",
+      "status": "completed"
+    },
+    {
+      "kind": "count",
+      "model_id": "gemini-3.7-flash",
+      "task_id": "merge",
+      "status": "completed",
+      "tokens": 229
+    },
+    {
+      "kind": "generate",
+      "model_id": "gemini-3.7-flash",
+      "task_id": "merge",
+      "status": "completed"
+    }
+  ],
+  "total_catalog_cost_usd": "0.01010385",
+  "known_catalog_cost_usd": "0.01010385",
+  "prior_catalog_cost_usd": "0",
+  "prior_ledger_sha256": null,
+  "usage_policy": "protojson_full_v3",
+  "billing_status": "catalog estimate before credits/tax/FX; all dispatched generations accounted for",
+  "carbon": "uncalibrated; no provider energy measurement",
+  "policy_replay": [
+    {
+      "task_id": "clamp",
+      "baseline_accepted": true,
+      "compact_first_accepted": true,
+      "escalated": false,
+      "baseline_catalog_cost_usd": "0.0016815",
+      "compact_first_catalog_cost_usd": "0.0008311",
+      "efficiency_comparison_supported": true,
+      "provenance": "paired policy replay from independently generated suites",
+      "carbon": "unavailable; provider energy uncalibrated"
+    },
+    {
+      "task_id": "discount",
+      "baseline_accepted": true,
+      "compact_first_accepted": true,
+      "escalated": false,
+      "baseline_catalog_cost_usd": "0.002442",
+      "compact_first_catalog_cost_usd": "0.0013913",
+      "efficiency_comparison_supported": true,
+      "provenance": "paired policy replay from independently generated suites",
+      "carbon": "unavailable; provider energy uncalibrated"
+    },
+    {
+      "task_id": "merge",
+      "baseline_accepted": true,
+      "compact_first_accepted": true,
+      "escalated": false,
+      "baseline_catalog_cost_usd": "0.00262425",
+      "compact_first_catalog_cost_usd": "0.0011337",
+      "efficiency_comparison_supported": true,
+      "provenance": "paired policy replay from independently generated suites",
+      "carbon": "unavailable; provider energy uncalibrated"
+    }
+  ],
+  "source_ledger_sha256": "7eb71fe4091f621a015d0bab0b730d8320d83b75bb5e8eeff3e3a5b9dc5cc4b1",
+  "source_ledger_path": "data/live-ledgers/7aa444d8bedcfd2c2ca8e73facc7d277d1a404d207e2ffb4a775c78cf2ecad16.json",
+  "generations": [
+    {
+      "task_id": "clamp",
+      "model_role": "compact",
+      "model_id": "gemini-3.5-flash-lite",
+      "model_version": "gemini-3.5-flash-lite",
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+      "finish_reason": "STOP",
+      "elapsed_seconds": 1.6494440000024042,
+      "usage": {
+        "input_tokens": 162,
+        "candidate_tokens": 313,
+        "thinking_tokens": null,
+        "cached_tokens": null,
+        "total_tokens": 475,
+        "tool_tokens": null
+      },
+      "quality": {
+        "task_id": "clamp",
+        "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+        "suite_sha256": "2318d399d245c7da48f8ed41f39524811bfa3da1ffd1ce3bfe32deb38d8c61a2",
+        "reference": {
+          "status": "passed",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "detail": ""
+        },
+        "mutations": {
+          "lower": {
+            "status": "failed",
+            "tests": 8,
+            "failures": 4,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "upper": {
+            "status": "failed",
+            "tests": 8,
+            "failures": 4,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "reversed": {
+            "status": "failed",
+            "tests": 8,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "inside": {
+            "status": "failed",
+            "tests": 8,
+            "failures": 2,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          }
+        },
+        "detected": 4,
+        "total_mutations": 4,
+        "accepted": true,
+        "live_model_calls": 0
+      },
+      "catalog_cost_usd": "0.0008311",
+      "usage_interpretation": {
+        "policy": "protojson_full_v3",
+        "effective": {
+          "input_tokens": 162,
+          "candidate_tokens": 313,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 475,
+          "tool_tokens": 0
+        },
+        "raw_usage_preserved": true
+      }
+    },
+    {
+      "task_id": "clamp",
+      "model_role": "strong",
+      "model_id": "gemini-3.7-flash",
+      "model_version": "gemini-3.7-flash",
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+      "finish_reason": "STOP",
+      "elapsed_seconds": 3.496255416997883,
+      "usage": {
+        "input_tokens": 162,
+        "candidate_tokens": 416,
+        "thinking_tokens": null,
+        "cached_tokens": null,
+        "total_tokens": 578,
+        "tool_tokens": null
+      },
+      "quality": {
+        "task_id": "clamp",
+        "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+        "suite_sha256": "9b2fd262996f2c13becbccad7d331d9c22fba79cf01378ec06da277669e50366",
+        "reference": {
+          "status": "passed",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "detail": ""
+        },
+        "mutations": {
+          "lower": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "upper": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "reversed": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "inside": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          }
+        },
+        "detected": 4,
+        "total_mutations": 4,
+        "accepted": true,
+        "live_model_calls": 0
+      },
+      "catalog_cost_usd": "0.0016815",
+      "usage_interpretation": {
+        "policy": "protojson_full_v3",
+        "effective": {
+          "input_tokens": 162,
+          "candidate_tokens": 416,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 578,
+          "tool_tokens": 0
+        },
+        "raw_usage_preserved": true
+      }
+    },
+    {
+      "task_id": "discount",
+      "model_role": "compact",
+      "model_id": "gemini-3.5-flash-lite",
+      "model_version": "gemini-3.5-flash-lite",
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "finish_reason": "STOP",
+      "elapsed_seconds": 2.248816875006014,
+      "usage": {
+        "input_tokens": 196,
+        "candidate_tokens": 533,
+        "thinking_tokens": null,
+        "cached_tokens": null,
+        "total_tokens": 729,
+        "tool_tokens": null
+      },
+      "quality": {
+        "task_id": "discount",
+        "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+        "suite_sha256": "422d068f7529ad2b39251722b400de3196f9ec0ca4fcc802d6aba02f1d309912",
+        "reference": {
+          "status": "passed",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "detail": ""
+        },
+        "mutations": {
+          "quantity": {
+            "status": "failed",
+            "tests": 10,
+            "failures": 5,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "discount": {
+            "status": "failed",
+            "tests": 10,
+            "failures": 4,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "rounding": {
+            "status": "failed",
+            "tests": 10,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "validation": {
+            "status": "failed",
+            "tests": 10,
+            "failures": 5,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          }
+        },
+        "detected": 4,
+        "total_mutations": 4,
+        "accepted": true,
+        "live_model_calls": 0
+      },
+      "catalog_cost_usd": "0.0013913",
+      "usage_interpretation": {
+        "policy": "protojson_full_v3",
+        "effective": {
+          "input_tokens": 196,
+          "candidate_tokens": 533,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 729,
+          "tool_tokens": 0
+        },
+        "raw_usage_preserved": true
+      }
+    },
+    {
+      "task_id": "discount",
+      "model_role": "strong",
+      "model_id": "gemini-3.7-flash",
+      "model_version": "gemini-3.7-flash",
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "finish_reason": "STOP",
+      "elapsed_seconds": 4.623397625000507,
+      "usage": {
+        "input_tokens": 196,
+        "candidate_tokens": 612,
+        "thinking_tokens": null,
+        "cached_tokens": null,
+        "total_tokens": 808,
+        "tool_tokens": null
+      },
+      "quality": {
+        "task_id": "discount",
+        "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+        "suite_sha256": "de5231db79e3b7f88f36e34953a4dc0d278a6bae7e13d28fddc84e90716b99a6",
+        "reference": {
+          "status": "passed",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "detail": ""
+        },
+        "mutations": {
+          "quantity": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "discount": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "rounding": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "validation": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          }
+        },
+        "detected": 4,
+        "total_mutations": 4,
+        "accepted": true,
+        "live_model_calls": 0
+      },
+      "catalog_cost_usd": "0.002442",
+      "usage_interpretation": {
+        "policy": "protojson_full_v3",
+        "effective": {
+          "input_tokens": 196,
+          "candidate_tokens": 612,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 808,
+          "tool_tokens": 0
+        },
+        "raw_usage_preserved": true
+      }
+    },
+    {
+      "task_id": "merge",
+      "model_role": "compact",
+      "model_id": "gemini-3.5-flash-lite",
+      "model_version": "gemini-3.5-flash-lite",
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "finish_reason": "STOP",
+      "elapsed_seconds": 1.9039952080056537,
+      "usage": {
+        "input_tokens": 229,
+        "candidate_tokens": 426,
+        "thinking_tokens": null,
+        "cached_tokens": null,
+        "total_tokens": 655,
+        "tool_tokens": null
+      },
+      "quality": {
+        "task_id": "merge",
+        "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+        "suite_sha256": "b2bbcaf79c02287894ba184bd00f6472911564a952ad4c6146bf1d4b8f8dfdf2",
+        "reference": {
+          "status": "passed",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "detail": ""
+        },
+        "mutations": {
+          "sorting": {
+            "status": "failed",
+            "tests": 10,
+            "failures": 4,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "touching": {
+            "status": "failed",
+            "tests": 10,
+            "failures": 2,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "containment": {
+            "status": "failed",
+            "tests": 10,
+            "failures": 4,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "validation": {
+            "status": "failed",
+            "tests": 10,
+            "failures": 2,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          }
+        },
+        "detected": 4,
+        "total_mutations": 4,
+        "accepted": true,
+        "live_model_calls": 0
+      },
+      "catalog_cost_usd": "0.0011337",
+      "usage_interpretation": {
+        "policy": "protojson_full_v3",
+        "effective": {
+          "input_tokens": 229,
+          "candidate_tokens": 426,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 655,
+          "tool_tokens": 0
+        },
+        "raw_usage_preserved": true
+      }
+    },
+    {
+      "task_id": "merge",
+      "model_role": "strong",
+      "model_id": "gemini-3.7-flash",
+      "model_version": "gemini-3.7-flash",
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "finish_reason": "STOP",
+      "elapsed_seconds": 6.287226832995657,
+      "usage": {
+        "input_tokens": 229,
+        "candidate_tokens": 654,
+        "thinking_tokens": null,
+        "cached_tokens": null,
+        "total_tokens": 883,
+        "tool_tokens": null
+      },
+      "quality": {
+        "task_id": "merge",
+        "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+        "suite_sha256": "49bc318f0768dc9bff852ae62493dc3cb6456bdecb07434cda8426973bae1aae",
+        "reference": {
+          "status": "passed",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "detail": ""
+        },
+        "mutations": {
+          "sorting": {
+            "status": "failed",
+            "tests": 13,
+            "failures": 4,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "touching": {
+            "status": "failed",
+            "tests": 13,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "containment": {
+            "status": "failed",
+            "tests": 13,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "validation": {
+            "status": "failed",
+            "tests": 13,
+            "failures": 2,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          }
+        },
+        "detected": 4,
+        "total_mutations": 4,
+        "accepted": true,
+        "live_model_calls": 0
+      },
+      "catalog_cost_usd": "0.00262425",
+      "usage_interpretation": {
+        "policy": "protojson_full_v3",
+        "effective": {
+          "input_tokens": 229,
+          "candidate_tokens": 654,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 883,
+          "tool_tokens": 0
+        },
+        "raw_usage_preserved": true
+      }
+    }
+  ]
+}

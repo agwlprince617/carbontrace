@@ -1,0 +1,85 @@
+{
+  "observed_on": "2026-10-16",
+  "pricing_as_of": "2026-10-16",
+  "pricing_source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+  "source_report_sha256": "be878203b6dfd179887e8b55c18e50a1959226f04f268e2b599164d7bbf8a142",
+  "benchmark_sha256": "61b9ad4fa3d3bde63554c5f958ae52edaf91134de5a742bc104daf5d5985c25e",
+  "profiles": [
+    {
+      "role": "compact",
+      "model_id": "gemini-3.5-flash-lite",
+      "input_usd_per_million": "0.30",
+      "generated_usd_per_million": "2.50",
+      "observations": [
+        {
+          "task_id": "clamp",
+          "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+          "input_tokens": 162,
+          "generated_tokens": 240,
+          "tests": 8,
+          "detected": 4,
+          "total_mutations": 4,
+          "accepted": true
+        },
+        {
+          "task_id": "discount",
+          "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+          "input_tokens": 196,
+          "generated_tokens": 473,
+          "tests": 13,
+          "detected": 4,
+          "total_mutations": 4,
+          "accepted": true
+        },
+        {
+          "task_id": "merge",
+          "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+          "input_tokens": 229,
+          "generated_tokens": 473,
+          "tests": 11,
+          "detected": 4,
+          "total_mutations": 4,
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "role": "strong",
+      "model_id": "gemini-3.8-flash",
+      "input_usd_per_million": "1.50",
+      "generated_usd_per_million": "7.50",
+      "observations": [
+        {
+          "task_id": "clamp",
+          "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+          "input_tokens": 162,
+          "generated_tokens": 555,
+          "tests": 8,
+          "detected": 4,
+          "total_mutations": 4,
+          "accepted": true
+        },
+        {
+          "task_id": "discount",
+          "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+          "input_tokens": 196,
+          "generated_tokens": 625,
+          "tests": 9,
+          "detected": 4,
+          "total_mutations": 4,
+          "accepted": true
+        },
+        {
+          "task_id": "merge",
+          "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+          "input_tokens": 229,
+          "generated_tokens": 736,
+          "tests": 15,
+          "detected": 4,
+          "total_mutations": 4,
+          "accepted": true
+        }
+      ]
+    }
+  ]
+}

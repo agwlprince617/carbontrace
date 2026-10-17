@@ -1,0 +1,20 @@
+CLEER Data License
+
+Copyright © 2026 Sustainable AI Group
+
+Except where otherwise stated, the datasets and data files contained in this
+directory are licensed under the Creative Commons
+Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+
+You may share and adapt this material for non-commercial purposes, provided
+that you give appropriate credit, provide a link to the license, and indicate
+whether changes were made.
+
+Commercial use is not permitted without separate written permission from
+Sustainable AI Group.
+
+License deed:
+https://creativecommons.org/licenses/by-nc/4.0/
+
+Full legal code:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode

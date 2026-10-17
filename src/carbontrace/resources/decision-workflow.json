@@ -1,0 +1,92 @@
+{
+  "plan_sha256": "7aa444d8bedcfd2c2ca8e73facc7d277d1a404d207e2ffb4a775c78cf2ecad16",
+  "source_report_sha256": "be2c0077bda69abd8ba475178ea5fd1b595ccb4dfbb65bbfd152b67c0ae6854f",
+  "source_ledger_sha256": "7eb71fe4091f621a015d0bab0b730d8320d83b75bb5e8eeff3e3a5b9dc5cc4b1",
+  "project": "carbontrace-511814",
+  "region": "global",
+  "api_version": "v1",
+  "recorded_at": "2026-10-16T20:04:31.820911+00:00",
+  "thinking_level": "LOW",
+  "maximum_generated_tokens": 4096,
+  "candidate_count": 1,
+  "automatic_continuation": false,
+  "automatic_retries": 0,
+  "metadata_reads": 2,
+  "token_count_calls": 6,
+  "generation_calls": 6,
+  "full_run_catalog_cost_usd": "0.01010385",
+  "requests": [
+    {
+      "task_id": "clamp",
+      "model_id": "gemini-3.5-flash-lite",
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+      "metadata_name": "publishers/google/models/gemini-3.5-flash-lite",
+      "metadata_status": "completed",
+      "token_count_status": "completed",
+      "counted_input_tokens": 162,
+      "generation_status": "completed",
+      "response_model_version": "gemini-3.5-flash-lite",
+      "finish_reason": "STOP"
+    },
+    {
+      "task_id": "clamp",
+      "model_id": "gemini-3.7-flash",
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+      "metadata_name": "publishers/google/models/gemini-3.7-flash",
+      "metadata_status": "completed",
+      "token_count_status": "completed",
+      "counted_input_tokens": 162,
+      "generation_status": "completed",
+      "response_model_version": "gemini-3.7-flash",
+      "finish_reason": "STOP"
+    },
+    {
+      "task_id": "discount",
+      "model_id": "gemini-3.5-flash-lite",
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "metadata_name": "publishers/google/models/gemini-3.5-flash-lite",
+      "metadata_status": "completed",
+      "token_count_status": "completed",
+      "counted_input_tokens": 196,
+      "generation_status": "completed",
+      "response_model_version": "gemini-3.5-flash-lite",
+      "finish_reason": "STOP"
+    },
+    {
+      "task_id": "discount",
+      "model_id": "gemini-3.7-flash",
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "metadata_name": "publishers/google/models/gemini-3.7-flash",
+      "metadata_status": "completed",
+      "token_count_status": "completed",
+      "counted_input_tokens": 196,
+      "generation_status": "completed",
+      "response_model_version": "gemini-3.7-flash",
+      "finish_reason": "STOP"
+    },
+    {
+      "task_id": "merge",
+      "model_id": "gemini-3.5-flash-lite",
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "metadata_name": "publishers/google/models/gemini-3.5-flash-lite",
+      "metadata_status": "completed",
+      "token_count_status": "completed",
+      "counted_input_tokens": 229,
+      "generation_status": "completed",
+      "response_model_version": "gemini-3.5-flash-lite",
+      "finish_reason": "STOP"
+    },
+    {
+      "task_id": "merge",
+      "model_id": "gemini-3.7-flash",
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "metadata_name": "publishers/google/models/gemini-3.7-flash",
+      "metadata_status": "completed",
+      "token_count_status": "completed",
+      "counted_input_tokens": 229,
+      "generation_status": "completed",
+      "response_model_version": "gemini-3.7-flash",
+      "finish_reason": "STOP"
+    }
+  ]
+}

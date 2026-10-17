@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "kind": "vertex_smoke_quote",
+  "status": "awaiting explicit approval for remaining five generations; not executable",
+  "project": "carbontrace-511814",
+  "location": "global",
+  "service": "aiplatform.googleapis.com",
+  "api_version": "v1",
+  "billing_mode": "Standard PayGo",
+  "prepared_at_utc": "2026-10-16T17:10:28.478662+00:00",
+  "benchmark_sha256": "61b9ad4fa3d3bde63554c5f958ae52edaf91134de5a742bc104daf5d5985c25e",
+  "models": {
+    "compact": {
+      "id": "gemini-3.5-flash-lite",
+      "input_usd_per_million": "0.30",
+      "generated_usd_per_million": "2.50",
+      "calls": 2
+    },
+    "strong": {
+      "id": "gemini-3.8-flash",
+      "input_usd_per_million": "1.50",
+      "generated_usd_per_million": "7.50",
+      "calls": 3
+    }
+  },
+  "configuration": {
+    "thinking_level": "LOW",
+    "requested_max_output_tokens": 4096,
+    "candidate_count": 1,
+    "sampling": "provider defaults; do not claim temperature control",
+    "tools": [],
+    "automatic_continuation": false,
+    "automatic_retries": 0,
+    "application_retries": 0,
+    "generation_timeout_seconds": 60
+  },
+  "limits": {
+    "generation_calls": 5,
+    "count_tokens_calls": 5,
+    "model_metadata_reads": 2,
+    "input_tokens_per_request": 4096,
+    "accounting_allowance_generated_tokens_per_request": 8192,
+    "proposed_allowance_usd_before_tax_fx": "0.50",
+    "allowance_is_hard_provider_billing_cap": false
+  },
+  "cost": {
+    "currency": "USD",
+    "basis": "Uncached catalog prices before promotional credits; no tax or FX",
+    "requested_limit_estimate_usd": "0.1335296",
+    "stress_allowance_estimate_usd": "0.2461696",
+    "count_tokens_fee_usd": "0",
+    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+    "pilot_requested_estimate_with_prior_usd": "0.1341782",
+    "pilot_stress_estimate_with_prior_usd": "0.2468182",
+    "prior_response_catalog_estimate_usd": "0.0006486"
+  },
+  "requests": [
+    {
+      "task_id": "clamp",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+      "model_id": "gemini-3.8-flash",
+      "prompt_utf8_bytes": 767
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "model_id": "gemini-3.5-flash-lite",
+      "prompt_utf8_bytes": 850
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "model_id": "gemini-3.8-flash",
+      "prompt_utf8_bytes": 850
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "model_id": "gemini-3.5-flash-lite",
+      "prompt_utf8_bytes": 1021
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "model_id": "gemini-3.8-flash",
+      "prompt_utf8_bytes": 1021
+    }
+  ],
+  "stop_conditions": [
+    "Missing or mismatched approval/plan hash",
+    "Authentication, model metadata, or CountTokens failure",
+    "Model version or request configuration changes",
+    "Input count missing or above 4096",
+    "Observed thinking plus candidate tokens above requested 4096",
+    "Timeout, transport error, or unknown billable usage",
+    "Any observed budget breach; never silently retry or switch models",
+    "Missing input/candidate/total counters, negative values, unreconciled totals, or nonzero tool tokens. Only omitted thoughts/cache/tool proto3 scalars resolve to zero, with raw values retained."
+  ],
+  "setup": {
+    "api_enabled": true,
+    "local_gcloud_found": true,
+    "adc_file_found": true,
+    "billing": "paid, INR; console shows zero current-month cost with reporting delay",
+    "budget_present": false,
+    "project_model_access": "metadata reads succeeded for both exact model IDs; one compact generation succeeded",
+    "quota_project_matches": true
+  },
+  "excluded": [
+    "80-call benchmark",
+    "Cloud Run or VM deployment",
+    "Cloud Storage/BigQuery databases",
+    "paid grading",
+    "grounding",
+    "service-account keys",
+    "IAM expansion",
+    "budget notifications without approval"
+  ],
+  "live_model_calls": 1,
+  "replacement_of": "3572cb926c4309fe3c27e7adc9dadc40980351cb56c29787f8fd25d0ea8c9a18",
+  "transport": {
+    "certificate_trust": "OS-managed truststore 0.10.5; certificate and hostname verification required",
+    "certificate_installation": false,
+    "tls_verification_disabled": false
+  },
+  "previous_attempt": {
+    "ledger_sha256": "93219657fceba4aeb3565a5c85f51543f69fb702e2f400ce18222b497027333b",
+    "generations_dispatched": 1,
+    "generations_reused": 1,
+    "additional_generation_attempts": 5,
+    "stop_reason": "Missing or negative usage counter; stop without retry"
+  },
+  "usage_policy": "protojson_v2",
+  "prior_catalog_cost_usd": "0.0006486",
+  "prior_ledger_sha256": "93219657fceba4aeb3565a5c85f51543f69fb702e2f400ce18222b497027333b",
+  "usage_sources": [
+    "https://raw.githubusercontent.com/googleapis/googleapis/master/google/cloud/aiplatform/v1/prediction_service.proto",
+    "https://protobuf.dev/programming-guides/json/#presence-and-default-values",
+    "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest/v1/GenerateContentResponse"
+  ],
+  "plan_sha256": "6145bd52e78c3ec890d80a1c5adeaf84836126f9284b2b114c70d9c5632c8607"
+}

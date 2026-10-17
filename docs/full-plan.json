@@ -1,0 +1,583 @@
+{
+  "status": "draft; not approved or executable",
+  "stage": "full",
+  "benchmark_sha256": "61b9ad4fa3d3bde63554c5f958ae52edaf91134de5a742bc104daf5d5985c25e",
+  "generation_calls": 80,
+  "models": {
+    "compact": null,
+    "strong": null
+  },
+  "max_input_tokens_per_request": 4096,
+  "max_generated_tokens_including_thinking": 4096,
+  "automatic_retries": 0,
+  "paid_grading_calls": 0,
+  "cost_estimate": null,
+  "cost_status": "Pending exact available model IDs, current official pricing, and token-budget enforcement. Show estimate and obtain explicit approval before any live call.",
+  "quality_gate": "Reference passes, no skipped/error/empty tests, all four seeded faults detected; infrastructure failures remain inconclusive.",
+  "evaluation": "Use the same prompt and settings for both models; evaluate separately, then replay compact-first escalation including every failed generation. Freeze settings on development items before holdout runs.",
+  "reuse": "Reuse smoke results only when model version, configuration, prompt hash, benchmark hash, and usage record match the final protocol.",
+  "interpretation": "Exploratory benchmark only. Two repeats are insufficient to establish statistical significance or real carbon savings.",
+  "requests": [
+    {
+      "task_id": "clamp",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383"
+    },
+    {
+      "task_id": "clamp",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383"
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb"
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb"
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68"
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68"
+    },
+    {
+      "task_id": "parse_bool",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "600d06d9a8ed656ae1b8033fc1960bd86e923ab7d8fbc04eaf0d1a43cc43c759"
+    },
+    {
+      "task_id": "parse_bool",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "600d06d9a8ed656ae1b8033fc1960bd86e923ab7d8fbc04eaf0d1a43cc43c759"
+    },
+    {
+      "task_id": "valid_identifier",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "f5d65a9c6bf5996f2d268cdcdd68dcf740b9182bc385a1074a50a8f4a1ce22a1"
+    },
+    {
+      "task_id": "valid_identifier",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "f5d65a9c6bf5996f2d268cdcdd68dcf740b9182bc385a1074a50a8f4a1ce22a1"
+    },
+    {
+      "task_id": "normalize_hex",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "24db326336bec01abcdcfdd11dbf3ce6195ce137a3a1fa6bb0250669183537c9"
+    },
+    {
+      "task_id": "normalize_hex",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "24db326336bec01abcdcfdd11dbf3ce6195ce137a3a1fa6bb0250669183537c9"
+    },
+    {
+      "task_id": "ceil_div",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "3eb34c0a8c5bbdf6759bfe28dc2a541485aa31d1e1e132e9c40f0918b9109a4e"
+    },
+    {
+      "task_id": "ceil_div",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "3eb34c0a8c5bbdf6759bfe28dc2a541485aa31d1e1e132e9c40f0918b9109a4e"
+    },
+    {
+      "task_id": "shipping_cost",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "884d8c5c99de31451dddc8ddc0d8b248ba3b47cd2e34819394547a48ecd6e64a"
+    },
+    {
+      "task_id": "shipping_cost",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "884d8c5c99de31451dddc8ddc0d8b248ba3b47cd2e34819394547a48ecd6e64a"
+    },
+    {
+      "task_id": "weighted_average",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "75a7fa0f9d9933f0832ce6211e8837963d365067d9fc7bc04f294a2a5f6016c2"
+    },
+    {
+      "task_id": "weighted_average",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "75a7fa0f9d9933f0832ce6211e8837963d365067d9fc7bc04f294a2a5f6016c2"
+    },
+    {
+      "task_id": "stable_unique",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "4ae3dc552f0994eef4760e727a966a075aeb488596a249a8b7edeed15d4a23f1"
+    },
+    {
+      "task_id": "stable_unique",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "4ae3dc552f0994eef4760e727a966a075aeb488596a249a8b7edeed15d4a23f1"
+    },
+    {
+      "task_id": "chunks",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "975004d18f52736fe6b35e4701fcd709b670cd85cae75feed31ceb81c73712ab"
+    },
+    {
+      "task_id": "chunks",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "975004d18f52736fe6b35e4701fcd709b670cd85cae75feed31ceb81c73712ab"
+    },
+    {
+      "task_id": "rotate",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "c719ad8a8541741e2f826ccf9ab7a6b92c02dbd264a36add3d09e5784aa9d7ff"
+    },
+    {
+      "task_id": "rotate",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "c719ad8a8541741e2f826ccf9ab7a6b92c02dbd264a36add3d09e5784aa9d7ff"
+    },
+    {
+      "task_id": "top_k",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "370d16436fbecc86ad2aa449c8eb305a92154f846249fbb58d3c675fbf980441"
+    },
+    {
+      "task_id": "top_k",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "370d16436fbecc86ad2aa449c8eb305a92154f846249fbb58d3c675fbf980441"
+    },
+    {
+      "task_id": "slugify",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "314b05a38d275349af4646324b2c4936d6e6ffee2785fa6502fe133fea9aac4f"
+    },
+    {
+      "task_id": "slugify",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "314b05a38d275349af4646324b2c4936d6e6ffee2785fa6502fe133fea9aac4f"
+    },
+    {
+      "task_id": "truncate",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "60498d7a2e5ba3a90d29b193f436ef6970fa9f0487626190b8f592a3448bac76"
+    },
+    {
+      "task_id": "truncate",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "60498d7a2e5ba3a90d29b193f436ef6970fa9f0487626190b8f592a3448bac76"
+    },
+    {
+      "task_id": "mask_email",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "b518aa389f3991e535b3431e35e4ea9b59998df8cb46f03d06123074e2a23972"
+    },
+    {
+      "task_id": "mask_email",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "b518aa389f3991e535b3431e35e4ea9b59998df8cb46f03d06123074e2a23972"
+    },
+    {
+      "task_id": "collapse_whitespace",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "7ee12d9442ec057a839b5ef6c66275a0abf2aa0c8b2e463965a20b1cb4c5a55d"
+    },
+    {
+      "task_id": "collapse_whitespace",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "7ee12d9442ec057a839b5ef6c66275a0abf2aa0c8b2e463965a20b1cb4c5a55d"
+    },
+    {
+      "task_id": "overlaps",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "d090e501875c6f0c68847d7ccc27ecd77d62d165d064fd4617e30e72c68d66fc"
+    },
+    {
+      "task_id": "overlaps",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "d090e501875c6f0c68847d7ccc27ecd77d62d165d064fd4617e30e72c68d66fc"
+    },
+    {
+      "task_id": "interval_gaps",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "e042ebfdfe22b1557bff5286965952aab05679c8a1f27bae8098057db8c00c42"
+    },
+    {
+      "task_id": "interval_gaps",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "e042ebfdfe22b1557bff5286965952aab05679c8a1f27bae8098057db8c00c42"
+    },
+    {
+      "task_id": "inclusive_range",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "4c0c3c37dc1249ca42896586a9f7303352382db89433c260723c4d4410431226"
+    },
+    {
+      "task_id": "inclusive_range",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "4c0c3c37dc1249ca42896586a9f7303352382db89433c260723c4d4410431226"
+    },
+    {
+      "task_id": "clamp",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383"
+    },
+    {
+      "task_id": "clamp",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383"
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb"
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb"
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68"
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68"
+    },
+    {
+      "task_id": "parse_bool",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "600d06d9a8ed656ae1b8033fc1960bd86e923ab7d8fbc04eaf0d1a43cc43c759"
+    },
+    {
+      "task_id": "parse_bool",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "600d06d9a8ed656ae1b8033fc1960bd86e923ab7d8fbc04eaf0d1a43cc43c759"
+    },
+    {
+      "task_id": "valid_identifier",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "f5d65a9c6bf5996f2d268cdcdd68dcf740b9182bc385a1074a50a8f4a1ce22a1"
+    },
+    {
+      "task_id": "valid_identifier",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "f5d65a9c6bf5996f2d268cdcdd68dcf740b9182bc385a1074a50a8f4a1ce22a1"
+    },
+    {
+      "task_id": "normalize_hex",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "24db326336bec01abcdcfdd11dbf3ce6195ce137a3a1fa6bb0250669183537c9"
+    },
+    {
+      "task_id": "normalize_hex",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "24db326336bec01abcdcfdd11dbf3ce6195ce137a3a1fa6bb0250669183537c9"
+    },
+    {
+      "task_id": "ceil_div",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "3eb34c0a8c5bbdf6759bfe28dc2a541485aa31d1e1e132e9c40f0918b9109a4e"
+    },
+    {
+      "task_id": "ceil_div",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "3eb34c0a8c5bbdf6759bfe28dc2a541485aa31d1e1e132e9c40f0918b9109a4e"
+    },
+    {
+      "task_id": "shipping_cost",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "884d8c5c99de31451dddc8ddc0d8b248ba3b47cd2e34819394547a48ecd6e64a"
+    },
+    {
+      "task_id": "shipping_cost",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "884d8c5c99de31451dddc8ddc0d8b248ba3b47cd2e34819394547a48ecd6e64a"
+    },
+    {
+      "task_id": "weighted_average",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "75a7fa0f9d9933f0832ce6211e8837963d365067d9fc7bc04f294a2a5f6016c2"
+    },
+    {
+      "task_id": "weighted_average",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "75a7fa0f9d9933f0832ce6211e8837963d365067d9fc7bc04f294a2a5f6016c2"
+    },
+    {
+      "task_id": "stable_unique",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "4ae3dc552f0994eef4760e727a966a075aeb488596a249a8b7edeed15d4a23f1"
+    },
+    {
+      "task_id": "stable_unique",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "4ae3dc552f0994eef4760e727a966a075aeb488596a249a8b7edeed15d4a23f1"
+    },
+    {
+      "task_id": "chunks",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "975004d18f52736fe6b35e4701fcd709b670cd85cae75feed31ceb81c73712ab"
+    },
+    {
+      "task_id": "chunks",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "975004d18f52736fe6b35e4701fcd709b670cd85cae75feed31ceb81c73712ab"
+    },
+    {
+      "task_id": "rotate",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "c719ad8a8541741e2f826ccf9ab7a6b92c02dbd264a36add3d09e5784aa9d7ff"
+    },
+    {
+      "task_id": "rotate",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "c719ad8a8541741e2f826ccf9ab7a6b92c02dbd264a36add3d09e5784aa9d7ff"
+    },
+    {
+      "task_id": "top_k",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "370d16436fbecc86ad2aa449c8eb305a92154f846249fbb58d3c675fbf980441"
+    },
+    {
+      "task_id": "top_k",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "370d16436fbecc86ad2aa449c8eb305a92154f846249fbb58d3c675fbf980441"
+    },
+    {
+      "task_id": "slugify",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "314b05a38d275349af4646324b2c4936d6e6ffee2785fa6502fe133fea9aac4f"
+    },
+    {
+      "task_id": "slugify",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "314b05a38d275349af4646324b2c4936d6e6ffee2785fa6502fe133fea9aac4f"
+    },
+    {
+      "task_id": "truncate",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "60498d7a2e5ba3a90d29b193f436ef6970fa9f0487626190b8f592a3448bac76"
+    },
+    {
+      "task_id": "truncate",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "60498d7a2e5ba3a90d29b193f436ef6970fa9f0487626190b8f592a3448bac76"
+    },
+    {
+      "task_id": "mask_email",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "b518aa389f3991e535b3431e35e4ea9b59998df8cb46f03d06123074e2a23972"
+    },
+    {
+      "task_id": "mask_email",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "b518aa389f3991e535b3431e35e4ea9b59998df8cb46f03d06123074e2a23972"
+    },
+    {
+      "task_id": "collapse_whitespace",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "7ee12d9442ec057a839b5ef6c66275a0abf2aa0c8b2e463965a20b1cb4c5a55d"
+    },
+    {
+      "task_id": "collapse_whitespace",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "7ee12d9442ec057a839b5ef6c66275a0abf2aa0c8b2e463965a20b1cb4c5a55d"
+    },
+    {
+      "task_id": "overlaps",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "d090e501875c6f0c68847d7ccc27ecd77d62d165d064fd4617e30e72c68d66fc"
+    },
+    {
+      "task_id": "overlaps",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "d090e501875c6f0c68847d7ccc27ecd77d62d165d064fd4617e30e72c68d66fc"
+    },
+    {
+      "task_id": "interval_gaps",
+      "split": "holdout",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "e042ebfdfe22b1557bff5286965952aab05679c8a1f27bae8098057db8c00c42"
+    },
+    {
+      "task_id": "interval_gaps",
+      "split": "holdout",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "e042ebfdfe22b1557bff5286965952aab05679c8a1f27bae8098057db8c00c42"
+    },
+    {
+      "task_id": "inclusive_range",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 1,
+      "prompt_sha256": "4c0c3c37dc1249ca42896586a9f7303352382db89433c260723c4d4410431226"
+    },
+    {
+      "task_id": "inclusive_range",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 1,
+      "prompt_sha256": "4c0c3c37dc1249ca42896586a9f7303352382db89433c260723c4d4410431226"
+    }
+  ],
+  "live_model_calls": 0
+}

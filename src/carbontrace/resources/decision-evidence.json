@@ -1,0 +1,303 @@
+{
+  "source_report_sha256": "be2c0077bda69abd8ba475178ea5fd1b595ccb4dfbb65bbfd152b67c0ae6854f",
+  "benchmark_sha256": "61b9ad4fa3d3bde63554c5f958ae52edaf91134de5a742bc104daf5d5985c25e",
+  "observed_on": "2026-10-17 (Asia/Kolkata)",
+  "cost_basis": "catalog estimate before credits/tax/FX; all dispatched generations accounted for",
+  "usage_note": "Provider-reported input/candidate/total tokens. Omitted thinking/cache/tool scalar counters interpreted as zero under the approved protojson_full_v3 policy; raw nullable usage is preserved in the source report.",
+  "records": [
+    {
+      "task_id": "clamp",
+      "model_id": "gemini-3.5-flash-lite",
+      "model_version": "gemini-3.5-flash-lite",
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+      "suite_sha256": "2318d399d245c7da48f8ed41f39524811bfa3da1ffd1ce3bfe32deb38d8c61a2",
+      "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+      "reference": {
+        "status": "passed",
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "mutations": {
+        "lower": {
+          "status": "failed",
+          "tests": 8,
+          "failures": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "upper": {
+          "status": "failed",
+          "tests": 8,
+          "failures": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "reversed": {
+          "status": "failed",
+          "tests": 8,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "inside": {
+          "status": "failed",
+          "tests": 8,
+          "failures": 2,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "input_tokens": 162,
+      "candidate_tokens": 313,
+      "thinking_tokens": 0,
+      "catalog_cost_usd": "0.0008311"
+    },
+    {
+      "task_id": "clamp",
+      "model_id": "gemini-3.7-flash",
+      "model_version": "gemini-3.7-flash",
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+      "suite_sha256": "9b2fd262996f2c13becbccad7d331d9c22fba79cf01378ec06da277669e50366",
+      "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+      "reference": {
+        "status": "passed",
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "mutations": {
+        "lower": {
+          "status": "failed",
+          "tests": 6,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "upper": {
+          "status": "failed",
+          "tests": 6,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "reversed": {
+          "status": "failed",
+          "tests": 6,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "inside": {
+          "status": "failed",
+          "tests": 6,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "input_tokens": 162,
+      "candidate_tokens": 416,
+      "thinking_tokens": 0,
+      "catalog_cost_usd": "0.0016815"
+    },
+    {
+      "task_id": "discount",
+      "model_id": "gemini-3.5-flash-lite",
+      "model_version": "gemini-3.5-flash-lite",
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "suite_sha256": "422d068f7529ad2b39251722b400de3196f9ec0ca4fcc802d6aba02f1d309912",
+      "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+      "reference": {
+        "status": "passed",
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "mutations": {
+        "quantity": {
+          "status": "failed",
+          "tests": 10,
+          "failures": 5,
+          "errors": 0,
+          "skipped": 0
+        },
+        "discount": {
+          "status": "failed",
+          "tests": 10,
+          "failures": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "rounding": {
+          "status": "failed",
+          "tests": 10,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "validation": {
+          "status": "failed",
+          "tests": 10,
+          "failures": 5,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "input_tokens": 196,
+      "candidate_tokens": 533,
+      "thinking_tokens": 0,
+      "catalog_cost_usd": "0.0013913"
+    },
+    {
+      "task_id": "discount",
+      "model_id": "gemini-3.7-flash",
+      "model_version": "gemini-3.7-flash",
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "suite_sha256": "de5231db79e3b7f88f36e34953a4dc0d278a6bae7e13d28fddc84e90716b99a6",
+      "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+      "reference": {
+        "status": "passed",
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "mutations": {
+        "quantity": {
+          "status": "failed",
+          "tests": 6,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "discount": {
+          "status": "failed",
+          "tests": 6,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "rounding": {
+          "status": "failed",
+          "tests": 6,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "validation": {
+          "status": "failed",
+          "tests": 6,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "input_tokens": 196,
+      "candidate_tokens": 612,
+      "thinking_tokens": 0,
+      "catalog_cost_usd": "0.002442"
+    },
+    {
+      "task_id": "merge",
+      "model_id": "gemini-3.5-flash-lite",
+      "model_version": "gemini-3.5-flash-lite",
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "suite_sha256": "b2bbcaf79c02287894ba184bd00f6472911564a952ad4c6146bf1d4b8f8dfdf2",
+      "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+      "reference": {
+        "status": "passed",
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "mutations": {
+        "sorting": {
+          "status": "failed",
+          "tests": 10,
+          "failures": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "touching": {
+          "status": "failed",
+          "tests": 10,
+          "failures": 2,
+          "errors": 0,
+          "skipped": 0
+        },
+        "containment": {
+          "status": "failed",
+          "tests": 10,
+          "failures": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "validation": {
+          "status": "failed",
+          "tests": 10,
+          "failures": 2,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "input_tokens": 229,
+      "candidate_tokens": 426,
+      "thinking_tokens": 0,
+      "catalog_cost_usd": "0.0011337"
+    },
+    {
+      "task_id": "merge",
+      "model_id": "gemini-3.7-flash",
+      "model_version": "gemini-3.7-flash",
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "suite_sha256": "49bc318f0768dc9bff852ae62493dc3cb6456bdecb07434cda8426973bae1aae",
+      "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+      "reference": {
+        "status": "passed",
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "mutations": {
+        "sorting": {
+          "status": "failed",
+          "tests": 13,
+          "failures": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "touching": {
+          "status": "failed",
+          "tests": 13,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "containment": {
+          "status": "failed",
+          "tests": 13,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "validation": {
+          "status": "failed",
+          "tests": 13,
+          "failures": 2,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "input_tokens": 229,
+      "candidate_tokens": 654,
+      "thinking_tokens": 0,
+      "catalog_cost_usd": "0.00262425"
+    }
+  ]
+}

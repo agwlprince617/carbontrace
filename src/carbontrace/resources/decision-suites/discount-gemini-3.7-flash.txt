@@ -1,0 +1,55 @@
+import pytest
+from subject import discounted_total
+
+
+def test_normal_case():
+    assert discounted_total(1000, 2, 10) == 1800
+    assert discounted_total(250, 4, 15) == 850
+
+
+def test_rounding_down():
+    # 99 cents * 1 item * 90% remaining = 89.1 -> 89
+    assert discounted_total(99, 1, 10) == 89
+    # 105 cents * 1 item * 75% remaining = 78.75 -> 78
+    assert discounted_total(105, 1, 25) == 78
+
+
+def test_boundary_values():
+    # Zero price
+    assert discounted_total(0, 1, 10) == 0
+    assert discounted_total(0, 5, 0) == 0
+    assert discounted_total(0, 5, 100) == 0
+
+    # Minimum quantity
+    assert discounted_total(100, 1, 0) == 100
+
+    # Zero discount (0%)
+    assert discounted_total(500, 2, 0) == 1000
+
+    # Full discount (100%)
+    assert discounted_total(500, 2, 100) == 0
+
+
+def test_invalid_price_cents():
+    with pytest.raises(ValueError, match="invalid order"):
+        discounted_total(-1, 1, 10)
+    with pytest.raises(ValueError, match="invalid order"):
+        discounted_total(-100, 2, 0)
+
+
+def test_invalid_quantity():
+    with pytest.raises(ValueError, match="invalid order"):
+        discounted_total(100, 0, 10)
+    with pytest.raises(ValueError, match="invalid order"):
+        discounted_total(100, -1, 10)
+
+
+def test_invalid_discount():
+    with pytest.raises(ValueError, match="invalid order"):
+        discounted_total(100, 1, -1)
+    with pytest.raises(ValueError, match="invalid order"):
+        discounted_total(100, 1, 101)
+    with pytest.raises(ValueError, match="invalid order"):
+        discounted_total(100, 1, -50)
+    with pytest.raises(ValueError, match="invalid order"):
+        discounted_total(100, 1, 150)

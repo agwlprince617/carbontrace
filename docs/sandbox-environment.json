@@ -1,0 +1,10 @@
+{
+  "runtime": "Podman 5.8.2, rootless, macOS arm64 with libkrun Linux VM",
+  "connection": "podman-machine-default",
+  "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+  "base_image": "docker.io/library/python:3.12-slim",
+  "resolved_base_digest": "sha256:16bf2b5c59a08523519d3c8589deca849285dee1d62a3653e124c3dba340f15e",
+  "pytest": "9.1.1",
+  "live_model_calls": 0,
+  "note": "Local verification environment. Other builds must record their resolved image IDs. No provider credentials are included."
+}

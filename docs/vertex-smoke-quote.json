@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "kind": "vertex_smoke_quote",
+  "status": "awaiting explicit human approval; not executable",
+  "project": "carbontrace-511814",
+  "location": "global",
+  "service": "aiplatform.googleapis.com",
+  "api_version": "v1",
+  "billing_mode": "Standard PayGo",
+  "prepared_at_utc": "2026-10-16T16:17:39Z",
+  "benchmark_sha256": "61b9ad4fa3d3bde63554c5f958ae52edaf91134de5a742bc104daf5d5985c25e",
+  "models": {
+    "compact": {
+      "id": "gemini-3.5-flash-lite",
+      "input_usd_per_million": "0.30",
+      "generated_usd_per_million": "2.50",
+      "calls": 3
+    },
+    "strong": {
+      "id": "gemini-3.8-flash",
+      "input_usd_per_million": "1.50",
+      "generated_usd_per_million": "7.50",
+      "calls": 3
+    }
+  },
+  "configuration": {
+    "thinking_level": "LOW",
+    "requested_max_output_tokens": 4096,
+    "candidate_count": 1,
+    "sampling": "provider defaults; do not claim temperature control",
+    "tools": [],
+    "automatic_continuation": false,
+    "automatic_retries": 0,
+    "application_retries": 0,
+    "generation_timeout_seconds": 60
+  },
+  "limits": {
+    "generation_calls": 6,
+    "count_tokens_calls": 6,
+    "model_metadata_reads": 2,
+    "input_tokens_per_request": 4096,
+    "accounting_allowance_generated_tokens_per_request": 8192,
+    "proposed_allowance_usd_before_tax_fx": "0.50",
+    "allowance_is_hard_provider_billing_cap": false
+  },
+  "cost": {
+    "currency": "USD",
+    "basis": "Uncached catalog prices before promotional credits; no tax or FX",
+    "requested_limit_estimate_usd": "0.1449984",
+    "stress_allowance_estimate_usd": "0.2678784",
+    "count_tokens_fee_usd": "0",
+    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+  },
+  "requests": [
+    {
+      "task_id": "clamp",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+      "model_id": "gemini-3.5-flash-lite",
+      "prompt_utf8_bytes": 767
+    },
+    {
+      "task_id": "clamp",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+      "model_id": "gemini-3.8-flash",
+      "prompt_utf8_bytes": 767
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "model_id": "gemini-3.5-flash-lite",
+      "prompt_utf8_bytes": 850
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb",
+      "model_id": "gemini-3.8-flash",
+      "prompt_utf8_bytes": 850
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "model_id": "gemini-3.5-flash-lite",
+      "prompt_utf8_bytes": 1021
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68",
+      "model_id": "gemini-3.8-flash",
+      "prompt_utf8_bytes": 1021
+    }
+  ],
+  "stop_conditions": [
+    "Missing or mismatched approval/plan hash",
+    "Authentication, model metadata, or CountTokens failure",
+    "Model version or request configuration changes",
+    "Input count missing or above 4096",
+    "Any missing, inconsistent, or negative usage field",
+    "Observed thinking plus candidate tokens above requested 4096",
+    "Timeout, transport error, or unknown billable usage",
+    "Any observed budget breach; never silently retry or switch models"
+  ],
+  "setup": {
+    "api_enabled": false,
+    "local_gcloud_found": false,
+    "adc_file_found": false,
+    "billing": "paid, INR; console shows zero current-month cost with reporting delay",
+    "budget_present": false,
+    "project_model_access": "not verified; public catalog support only"
+  },
+  "excluded": [
+    "80-call benchmark",
+    "Cloud Run or VM deployment",
+    "Cloud Storage/BigQuery databases",
+    "paid grading",
+    "grounding",
+    "service-account keys",
+    "IAM expansion",
+    "budget notifications without approval"
+  ],
+  "live_model_calls": 0,
+  "plan_sha256": "b12276de602c9314c206828d3a8154f306e1a3c26d7c7c227d7ec05c259fcd8f"
+}

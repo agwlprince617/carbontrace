@@ -1,0 +1,65 @@
+{
+  "status": "draft; not approved or executable",
+  "stage": "smoke",
+  "benchmark_sha256": "61b9ad4fa3d3bde63554c5f958ae52edaf91134de5a742bc104daf5d5985c25e",
+  "generation_calls": 6,
+  "models": {
+    "compact": null,
+    "strong": null
+  },
+  "max_input_tokens_per_request": 4096,
+  "max_generated_tokens_including_thinking": 4096,
+  "automatic_retries": 0,
+  "paid_grading_calls": 0,
+  "cost_estimate": null,
+  "cost_status": "Pending exact available model IDs, current official pricing, and token-budget enforcement. Show estimate and obtain explicit approval before any live call.",
+  "quality_gate": "Reference passes, no skipped/error/empty tests, all four seeded faults detected; infrastructure failures remain inconclusive.",
+  "evaluation": "Use the same prompt and settings for both models; evaluate separately, then replay compact-first escalation including every failed generation. Freeze settings on development items before holdout runs.",
+  "reuse": "Reuse smoke results only when model version, configuration, prompt hash, benchmark hash, and usage record match the final protocol.",
+  "interpretation": "Exploratory benchmark only. Two repeats are insufficient to establish statistical significance or real carbon savings.",
+  "requests": [
+    {
+      "task_id": "clamp",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383"
+    },
+    {
+      "task_id": "clamp",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383"
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb"
+    },
+    {
+      "task_id": "discount",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "9c0d85077464d2fb93d4a4349f61a3c05ed66c3ec12cc2eea7456b4136f614eb"
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "compact",
+      "repeat": 0,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68"
+    },
+    {
+      "task_id": "merge",
+      "split": "development",
+      "model_role": "strong",
+      "repeat": 0,
+      "prompt_sha256": "a2aae99ba3d2e9013fa88726dffc849566f05e02274a274081e3f867616e3b68"
+    }
+  ],
+  "live_model_calls": 0
+}

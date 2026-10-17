@@ -1,0 +1,8 @@
+{
+  "plan_sha256": "7aa444d8bedcfd2c2ca8e73facc7d277d1a404d207e2ffb4a775c78cf2ecad16",
+  "decision": "approved",
+  "human_reply": "Approve six-generation comparison",
+  "source": "Explicit human answer to the priced approval question in this chat, 2026-10-17",
+  "scope": "One fresh six-generation comparison: Gemini 3.5 Flash-Lite and Gemini 3.7 Flash across clamp, discount and merge. At most six token-count checks and two metadata reads after sandbox/auth checks. LOW thinking, maximum 4096 generated tokens, zero retries, no paid grading or deployment. Conservative estimate USD 0.09; stress estimate USD 0.17; allowance USD 0.50 before tax/FX, not a hard Google billing cap. Source and every seeded fault checked in the existing rootless local runner. Omitted thinking/cache/tool scalar counters use documented proto3 zero defaults; primary counters remain mandatory and raw values are retained.",
+  "note": "Records actual out-of-band user consent. It does not authorize a second attempt, model substitution or a changed quote."
+}

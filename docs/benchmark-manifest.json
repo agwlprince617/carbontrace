@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "python-unit-tests-v1",
+  "sha256": "61b9ad4fa3d3bde63554c5f958ae52edaf91134de5a742bc104daf5d5985c25e",
+  "review_status": "machine-validated; pending human review",
+  "total_functions": 20,
+  "development_functions": 14,
+  "holdout_functions": 6,
+  "items": [
+    {
+      "id": "clamp",
+      "category": "Validation",
+      "split": "development",
+      "sha256": "0652a0f347b40823d8d265e8529e2c88ba5af61bfb257f3527d62c6e0a398fc5",
+      "oracle_cases": 6,
+      "mutations": 4
+    },
+    {
+      "id": "discount",
+      "category": "Arithmetic",
+      "split": "development",
+      "sha256": "eb7470019a21be0d15789c77d3f1eec9c1d07b83018c69c9ffb00ff32dc657a3",
+      "oracle_cases": 6,
+      "mutations": 4
+    },
+    {
+      "id": "merge",
+      "category": "Intervals",
+      "split": "development",
+      "sha256": "1920678726d216bcbbb6c6f71a0370fb433a725004c7e6fbe2d16cfcf6dec906",
+      "oracle_cases": 6,
+      "mutations": 4
+    },
+    {
+      "id": "parse_bool",
+      "category": "Validation",
+      "split": "development",
+      "sha256": "f3d305f6eb24ff1f9c1854e9d934c249db09380c683eda0e180753f226af5a5c",
+      "oracle_cases": 6,
+      "mutations": 4
+    },
+    {
+      "id": "valid_identifier",
+      "category": "Validation",
+      "split": "development",
+      "sha256": "a07deb307295a2bf7f01a8457901539b698246e97d55699b2f273d5d30ad9037",
+      "oracle_cases": 7,
+      "mutations": 4
+    },
+    {
+      "id": "normalize_hex",
+      "category": "Validation",
+      "split": "holdout",
+      "sha256": "15370d8e44d118501ba93d71be0f6021b5e6444c2c48825d093af5f6313f3148",
+      "oracle_cases": 5,
+      "mutations": 4
+    },
+    {
+      "id": "ceil_div",
+      "category": "Arithmetic",
+      "split": "development",
+      "sha256": "7b3f9a243428cfd6ac7753ff0bf1b590e653ccf10787379908b8f063dcc579ff",
+      "oracle_cases": 5,
+      "mutations": 4
+    },
+    {
+      "id": "shipping_cost",
+      "category": "Arithmetic",
+      "split": "development",
+      "sha256": "349820b61e168a319f89e44500c3df7508c077ae7e8af683b4617cefd9c1857c",
+      "oracle_cases": 7,
+      "mutations": 4
+    },
+    {
+      "id": "weighted_average",
+      "category": "Arithmetic",
+      "split": "holdout",
+      "sha256": "0d7bf403df00e8aa044bb0b6036b72bbba9ec32bf6fcfd391ad8690bedb4c430",
+      "oracle_cases": 6,
+      "mutations": 4
+    },
+    {
+      "id": "stable_unique",
+      "category": "Collections",
+      "split": "development",
+      "sha256": "82d36702c6eb3a7bccfb4845eb7394d709ab76bca2d5a26f00fac793d8fe6dc2",
+      "oracle_cases": 5,
+      "mutations": 4
+    },
+    {
+      "id": "chunks",
+      "category": "Collections",
+      "split": "development",
+      "sha256": "f0329042b07891149c549be572c9a7b8751720e39c617436ead483ee764f2e3e",
+      "oracle_cases": 5,
+      "mutations": 4
+    },
+    {
+      "id": "rotate",
+      "category": "Collections",
+      "split": "holdout",
+      "sha256": "b64b9d903f6813253c985df80cb8f635537d64b10696b35c7be84b46986f0e3d",
+      "oracle_cases": 5,
+      "mutations": 4
+    },
+    {
+      "id": "top_k",
+      "category": "Collections",
+      "split": "development",
+      "sha256": "ff4a15bf1fa33ee32c4b9bec5ba936f89785b6ce7dbb8c93de504c0d596018f6",
+      "oracle_cases": 5,
+      "mutations": 4
+    },
+    {
+      "id": "slugify",
+      "category": "Strings",
+      "split": "development",
+      "sha256": "7022c44d9d41ddbf1ef5c552a356ba349a690497f4ee9d4b3bf3084a8941f8c9",
+      "oracle_cases": 6,
+      "mutations": 4
+    },
+    {
+      "id": "truncate",
+      "category": "Strings",
+      "split": "development",
+      "sha256": "334b123284e6dfa81b7a8137bdff58206db912490620d1e5a544c7521a2a7929",
+      "oracle_cases": 6,
+      "mutations": 4
+    },
+    {
+      "id": "mask_email",
+      "category": "Strings",
+      "split": "holdout",
+      "sha256": "d2e178e953cdc10cf9697295ef11a01a1bc9ee640be9685ef9b6da376cc4250f",
+      "oracle_cases": 6,
+      "mutations": 4
+    },
+    {
+      "id": "collapse_whitespace",
+      "category": "Strings",
+      "split": "development",
+      "sha256": "9260a3108ae02763fe8887c245af7386066b4ef2ffbfa80409a821ef711fbeb4",
+      "oracle_cases": 5,
+      "mutations": 4
+    },
+    {
+      "id": "overlaps",
+      "category": "Intervals",
+      "split": "holdout",
+      "sha256": "e6ef5e02032d42720c8c413316725ecb2a7980e1bf03b2a269f23de88fb7f8af",
+      "oracle_cases": 5,
+      "mutations": 4
+    },
+    {
+      "id": "interval_gaps",
+      "category": "Intervals",
+      "split": "holdout",
+      "sha256": "12b6f2925b8be68e5c747512cc494780c059989186f3114d6ce29411b5217d31",
+      "oracle_cases": 6,
+      "mutations": 4
+    },
+    {
+      "id": "inclusive_range",
+      "category": "Intervals",
+      "split": "development",
+      "sha256": "030a19ce53ea0f44034a476c98be793fcd00e10247f22acba392283b787502b1",
+      "oracle_cases": 6,
+      "mutations": 4
+    }
+  ],
+  "live_model_calls": 0
+}

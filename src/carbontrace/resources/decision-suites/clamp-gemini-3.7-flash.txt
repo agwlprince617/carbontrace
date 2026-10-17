@@ -1,0 +1,44 @@
+import pytest
+from subject import clamp
+
+
+def test_clamp_interior_value():
+    assert clamp(5, 1, 10) == 5
+    assert clamp(0, -5, 5) == 0
+    assert clamp(-2, -10, 0) == -2
+
+
+def test_clamp_below_lower_bound():
+    assert clamp(0, 1, 10) == 1
+    assert clamp(-10, -5, 5) == -5
+    assert clamp(-100, 0, 50) == 0
+
+
+def test_clamp_above_upper_bound():
+    assert clamp(15, 1, 10) == 10
+    assert clamp(6, -5, 5) == 5
+    assert clamp(100, 0, 50) == 50
+
+
+def test_clamp_exact_boundaries():
+    assert clamp(1, 1, 10) == 1
+    assert clamp(10, 1, 10) == 10
+    assert clamp(-5, -5, 5) == -5
+    assert clamp(5, -5, 5) == 5
+
+
+def test_clamp_equal_bounds():
+    assert clamp(5, 5, 5) == 5
+    assert clamp(0, 5, 5) == 5
+    assert clamp(10, 5, 5) == 5
+
+
+def test_clamp_reversed_bounds_raises_value_error():
+    with pytest.raises(ValueError):
+        clamp(5, 10, 1)
+
+    with pytest.raises(ValueError):
+        clamp(0, 1, -1)
+
+    with pytest.raises(ValueError):
+        clamp(-5, -2, -8)

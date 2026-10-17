@@ -1,0 +1,32 @@
+import pytest
+import math
+from subject import clamp
+
+def test_clamp_within_bounds():
+    assert clamp(5, 0, 10) == 5
+
+def test_clamp_below_lower():
+    assert clamp(-5, 0, 10) == 0
+
+def test_clamp_above_upper():
+    assert clamp(15, 0, 10) == 10
+
+def test_clamp_at_lower_boundary():
+    assert clamp(0, 0, 10) == 0
+
+def test_clamp_at_upper_boundary():
+    assert clamp(10, 0, 10) == 10
+
+def test_clamp_equal_bounds():
+    assert clamp(5, 5, 5) == 5
+    assert clamp(0, 5, 5) == 5
+    assert clamp(10, 5, 5) == 5
+
+def test_clamp_negative_bounds():
+    assert clamp(-5, -10, -1) == -5
+    assert clamp(-15, -10, -1) == -10
+    assert clamp(0, -10, -1) == -1
+
+def test_clamp_reversed_bounds_raises_value_error():
+    with pytest.raises(ValueError):
+        clamp(5, 10, 0)

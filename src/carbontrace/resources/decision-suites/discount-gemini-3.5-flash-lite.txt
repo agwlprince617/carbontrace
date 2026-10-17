@@ -1,0 +1,53 @@
+import pytest
+import math
+from subject import discounted_total
+
+
+def test_discounted_total_normal_case():
+    assert discounted_total(1000, 2, 10) == 1800
+
+
+def test_discounted_total_zero_discount():
+    assert discounted_total(500, 3, 0) == 1500
+
+
+def test_discounted_total_full_discount():
+    assert discounted_total(500, 3, 100) == 0
+
+
+def test_discounted_total_rounding_down():
+    # 100 * 1 * (100 - 15) // 100 = 85
+    # 33 cents * 1 * 50% = 16.5 -> rounds down to 16
+    assert discounted_total(33, 1, 50) == 16
+
+
+def test_discounted_total_boundaries():
+    assert discounted_total(0, 1, 0) == 0
+    assert discounted_total(100, 1, 0) == 100
+    assert discounted_total(100, 1, 100) == 0
+    assert discounted_total(1000000, 999999, 50) == 499999500000
+
+
+def test_discounted_total_invalid_price():
+    with pytest.raises(ValueError):
+        discounted_total(-1, 1, 10)
+
+
+def test_discounted_total_invalid_quantity_zero():
+    with pytest.raises(ValueError):
+        discounted_total(100, 0, 10)
+
+
+def test_discounted_total_invalid_quantity_negative():
+    with pytest.raises(ValueError):
+        discounted_total(100, -5, 10)
+
+
+def test_discounted_total_invalid_discount_negative():
+    with pytest.raises(ValueError):
+        discounted_total(100, 1, -1)
+
+
+def test_discounted_total_invalid_discount_excessive():
+    with pytest.raises(ValueError):
+        discounted_total(100, 1, 101)

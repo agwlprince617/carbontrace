@@ -1,0 +1,9 @@
+{
+  "plan_sha256": "6145bd52e78c3ec890d80a1c5adeaf84836126f9284b2b114c70d9c5632c8607",
+  "decision": "approved",
+  "human_reply": "Approve remaining five generations",
+  "source": "Explicit human reply to the priced five-generation continuation question in this chat, 2026-10-16",
+  "scope": "Only the five unsent generations, reusing the saved first response; Google documented zero defaults for omitted thinking/cache/tool counters, with raw values retained and main counters/reconciled totals required. Five free token counts and two metadata reads; unchanged models and generation settings; zero retries or deployment. Additional estimate USD 0.134; stress estimate USD 0.247. USD 0.50 allowance covers the entire six-response pilot before tax/FX and is not a hard billing cap.",
+  "prior_plan_sha256": "3572cb926c4309fe3c27e7adc9dadc40980351cb56c29787f8fd25d0ea8c9a18",
+  "note": "Records actual human authorization. Prior stopped ledgers are retained and cannot be replayed; this does not authorize a further attempt."
+}

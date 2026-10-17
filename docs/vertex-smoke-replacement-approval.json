@@ -1,0 +1,9 @@
+{
+  "plan_sha256": "3572cb926c4309fe3c27e7adc9dadc40980351cb56c29787f8fd25d0ea8c9a18",
+  "decision": "approved",
+  "human_reply": "Approve replacement six-generation test",
+  "source": "Explicit human reply to the replacement-run priced approval question in this chat, 2026-10-16",
+  "scope": "One replacement attempt after the original stopped on the first metadata request with zero generations. At most six generations, six free token counts, two metadata reads; Gemini 3.5 Flash-Lite and Gemini 3.8 Flash, same frozen prompts/configuration. Zero retries and no deployment. Estimate USD 0.15; stress estimate USD 0.27; allowance USD 0.50 before tax/FX, not a hard billing cap.",
+  "supersedes": "b12276de602c9314c206828d3a8154f306e1a3c26d7c7c227d7ec05c259fcd8f",
+  "note": "The original stopped ledger remains intact. This records actual out-of-band human consent and does not authorize subsequent attempts."
+}

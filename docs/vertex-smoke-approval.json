@@ -1,0 +1,8 @@
+{
+  "plan_sha256": "b12276de602c9314c206828d3a8154f306e1a3c26d7c7c227d7ec05c259fcd8f",
+  "decision": "approved",
+  "human_reply": "Approve setup and six-generation test",
+  "source": "Explicit human reply to the priced-plan approval question in this chat, 2026-10-16",
+  "scope": "Enable aiplatform.googleapis.com in carbontrace-511814, install official local tools, user-completed Google sign-in, at most six generations plus six free CountTokens checks and two metadata reads. No retries/deployment. Proposed allowance USD 0.50 before tax/FX; not a hard billing cap.",
+  "note": "Records out-of-band approval. Does not start a client, unlock a web endpoint, or authorize another run. Local ledger refuses automatic replay."
+}
