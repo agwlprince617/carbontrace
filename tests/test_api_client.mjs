@@ -4,6 +4,12 @@ import { LocalConnectionError, requestLocal } from "../src/carbontrace/static/ap
 
 afterEach(() => mock.restoreAll());
 
+test("hosted connection guidance does not require a local terminal", () => {
+  const error = new LocalConnectionError(false, true);
+  assert.match(error.message, /reconnecting/);
+  assert.doesNotMatch(error.message, /VS Code|start local app/);
+});
+
 test("a disconnected local server offers recovery and never retries", async () => {
   const fetch = mock.method(globalThis, "fetch", async () => { throw new TypeError("Failed to fetch"); });
   await assert.rejects(requestLocal("/api/preflight", { method: "POST", body: "draft" }), (error) => {

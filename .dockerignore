@@ -1,0 +1,9 @@
+# Allow only the deployment inputs, never local tools, credentials, or data.
+**
+!Dockerfile
+!requirements-cloudrun.txt
+!src/
+!src/**
+**/__pycache__/
+**/*.pyc
+**/.DS_Store

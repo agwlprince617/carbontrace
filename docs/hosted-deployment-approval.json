@@ -1,0 +1,9 @@
+{
+  "approved": true,
+  "plan_sha256": "b8446e13271b928d78684e95a6cc5e60de2ee55ca12322fa61ac9b3d2974401b",
+  "user_answer": "Approve US$1.50 hosted integration plan",
+  "allowance_usd": "1.50",
+  "hard_provider_cap": false,
+  "scope": "One build, one hosted-live update, specified storage/secret/IAM setup, a globally shared six-reservation pool and up to two included Clamp verification generations; no automatic retries.",
+  "approved_at": "2026-10-18T04:43:51.869695+00:00"
+}

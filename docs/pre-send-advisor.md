@@ -4,6 +4,12 @@ The **Before you send** tab is an offline pre-send advisor for a single visible
 test-generation request. It compares Gemini 3.5 Flash-Lite and Gemini 3.7 Flash.
 The existing fixture lab and saved fixture comparisons remain available separately.
 
+This is now the default screen, with a prominent evidence-scoped decision card and
+an option to prepare execution for only the chosen model. See the current
+[pre-call demonstration and single-model execution guide](precall-decision.md).
+Planning does not save the draft; preparing an execution quote saves it only after
+explicit local-storage consent and still makes no provider calls.
+
 ![CarbonTrace pre-send advisor with published CLEER reference](pre-send-37-comparison.jpg)
 
 ## Try the workflow

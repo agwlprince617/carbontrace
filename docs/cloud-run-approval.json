@@ -1,0 +1,9 @@
+{
+  "approved_at": "2026-10-17T19:14:11.041643+00:00",
+  "user_answer": "Approve the US$1 deployment plan",
+  "source_sha256": "020220bb664bc13b58c18183e41ce4f349c558f43da07ab796bf12e59a1dc3cd",
+  "plan": "cloud-run-plan.json",
+  "allowance_usd": "1.00",
+  "hard_provider_cap": false,
+  "scope": "One build and one public hosted-preview deployment; exact APIs, identities, scoped IAM and resources in the plan. Zero inference. Stop on billing, permission or build failure."
+}

@@ -1,0 +1,14 @@
+# Explicit small build worker; invoke only after deployment cost approval.
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --tag
+      - ${_IMAGE}
+      - .
+images:
+  - ${_IMAGE}
+timeout: 600s
+options:
+  machineType: E2_MEDIUM
+  logging: CLOUD_LOGGING_ONLY

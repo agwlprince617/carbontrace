@@ -1,0 +1,23 @@
+{
+  "verified_at": "2026-10-17T19:23:51.758767+00:00",
+  "url": "https://carbontrace-demo-683634661093.us-central1.run.app",
+  "unauthenticated_requests": true,
+  "checks": {
+    "GET /": 200,
+    "GET /static/app.js": 200,
+    "GET /api/health": 200,
+    "POST /api/preflight": 200,
+    "GET /api/demo-comparison": 200,
+    "GET /api/demo-comparison/export": 200,
+    "POST /api/research/compare": 200,
+    "POST /api/selected-runs/prepare": 423,
+    "POST /api/live-comparisons/prepare": 423,
+    "POST /api/live-runs": 423,
+    "POST /api/compare": 423,
+    "GET /api/history": 423,
+    "GET /api/live-comparisons/bb3f0181799b4f61a6f596285f9eec93/export": 423
+  },
+  "new_model_calls": 0,
+  "new_token_count_calls": 0,
+  "status": "passed"
+}

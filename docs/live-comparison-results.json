@@ -1,0 +1,211 @@
+{
+  "status": "completed",
+  "verified_at": "2026-10-17T23:50:59.215313+05:30",
+  "run_id": "bb3f0181799b4f61a6f596285f9eec93",
+  "plan_sha256": "317e3391ea97c87e11a4192974abf5ee76e33fe687ec08b2d67306bfc9eb686a",
+  "prompt_sha256": "c4974a30db1a0b96b8a971fb0add322183be8257e514239afa89631f4d1d44f8",
+  "result_file_sha256": "a8890ae2926e1976921ebb7b4680fee631b0a233e0ca49e6a9d2805455a69faa",
+  "started_at": "2026-10-17T18:19:07.530690+00:00",
+  "operations": [
+    {
+      "kind": "metadata",
+      "model_id": "gemini-3.5-flash-lite",
+      "status": "completed",
+      "name": "publishers/google/models/gemini-3.5-flash-lite"
+    },
+    {
+      "kind": "count",
+      "model_id": "gemini-3.5-flash-lite",
+      "status": "completed",
+      "input_tokens": 161
+    },
+    {
+      "kind": "metadata",
+      "model_id": "gemini-3.7-flash",
+      "status": "completed",
+      "name": "publishers/google/models/gemini-3.7-flash"
+    },
+    {
+      "kind": "count",
+      "model_id": "gemini-3.7-flash",
+      "status": "completed",
+      "input_tokens": 161
+    },
+    {
+      "kind": "generate",
+      "model_id": "gemini-3.5-flash-lite",
+      "status": "completed"
+    },
+    {
+      "kind": "generate",
+      "model_id": "gemini-3.7-flash",
+      "status": "completed"
+    }
+  ],
+  "responses": [
+    {
+      "model_id": "gemini-3.5-flash-lite",
+      "model_version": "gemini-3.5-flash-lite",
+      "finish_reason": "STOP",
+      "usage": {
+        "input_tokens": 161,
+        "candidate_tokens": 246,
+        "thinking_tokens": null,
+        "cached_tokens": null,
+        "total_tokens": 407,
+        "tool_tokens": null
+      },
+      "effective_usage": {
+        "input_tokens": 161,
+        "candidate_tokens": 246,
+        "thinking_tokens": 0,
+        "cached_tokens": 0,
+        "total_tokens": 407,
+        "tool_tokens": 0
+      },
+      "catalog_cost_usd": "0.0006633",
+      "elapsed_seconds": 1.3291219999955501,
+      "suite_sha256": "fd612908b166634e855775f9e3c8917ba2cb6a9abaa0a3cbb2baa15c4e9f16a8",
+      "quality": {
+        "task_id": "clamp",
+        "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+        "suite_sha256": "fd612908b166634e855775f9e3c8917ba2cb6a9abaa0a3cbb2baa15c4e9f16a8",
+        "reference": {
+          "status": "passed",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "detail": ""
+        },
+        "mutations": {
+          "lower": {
+            "status": "failed",
+            "tests": 7,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "upper": {
+            "status": "failed",
+            "tests": 7,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "reversed": {
+            "status": "failed",
+            "tests": 7,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "inside": {
+            "status": "failed",
+            "tests": 7,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          }
+        },
+        "detected": 4,
+        "total_mutations": 4,
+        "accepted": true,
+        "live_model_calls": 0,
+        "status": "evaluated"
+      }
+    },
+    {
+      "model_id": "gemini-3.7-flash",
+      "model_version": "gemini-3.7-flash",
+      "finish_reason": "STOP",
+      "usage": {
+        "input_tokens": 161,
+        "candidate_tokens": 504,
+        "thinking_tokens": null,
+        "cached_tokens": null,
+        "total_tokens": 665,
+        "tool_tokens": null
+      },
+      "effective_usage": {
+        "input_tokens": 161,
+        "candidate_tokens": 504,
+        "thinking_tokens": 0,
+        "cached_tokens": 0,
+        "total_tokens": 665,
+        "tool_tokens": 0
+      },
+      "catalog_cost_usd": "0.0040215",
+      "elapsed_seconds": 4.5755541660037125,
+      "suite_sha256": "6c8386eaf01b14a910a611c1a42e535702f575f42a9044f91c99088e8f8962e6",
+      "quality": {
+        "task_id": "clamp",
+        "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+        "suite_sha256": "6c8386eaf01b14a910a611c1a42e535702f575f42a9044f91c99088e8f8962e6",
+        "reference": {
+          "status": "passed",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "detail": ""
+        },
+        "mutations": {
+          "lower": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "upper": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 3,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "reversed": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "inside": {
+            "status": "failed",
+            "tests": 6,
+            "failures": 1,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          }
+        },
+        "detected": 4,
+        "total_mutations": 4,
+        "accepted": true,
+        "live_model_calls": 0,
+        "status": "evaluated"
+      }
+    }
+  ],
+  "known_catalog_cost_usd": "0.0046848",
+  "billing_uncertain": false,
+  "recommended_model": "gemini-3.5-flash-lite",
+  "actual_carbon_g": null,
+  "notes": [
+    "Exact approved plan; two generations, two counts, two metadata reads, zero retries.",
+    "Usage-based catalog cost before credits/tax/FX; not a verified invoice.",
+    "Raw thinking/cache/tool omissions preserved; interpreted zero under protojson_full_v3.",
+    "One response per model on one reviewed task; not a general model-quality comparison.",
+    "CLEER benchmark separate from measured usage; no request-carbon measurement.",
+    "Raw prompt/code/results remain in ignored local data/."
+  ]
+}

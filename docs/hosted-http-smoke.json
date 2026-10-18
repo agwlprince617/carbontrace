@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-10-18T04:50:21.305863+00:00",
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/hosted/status",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/demo-comparison",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/demo-comparison/export",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/research/catalog",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/live-runs",
+      "status": 423
+    },
+    {
+      "method": "POST",
+      "path": "/api/selected-runs/prepare",
+      "status": 423
+    },
+    {
+      "method": "POST",
+      "path": "/api/compare",
+      "status": 423
+    },
+    {
+      "method": "GET",
+      "path": "/api/history",
+      "status": 423
+    },
+    {
+      "method": "GET",
+      "path": "/api/live-comparisons/private/export",
+      "status": 423
+    },
+    {
+      "method": "GET",
+      "path": "/api/hosted/runs/{approved-run-id}",
+      "status": 200,
+      "count": 2
+    }
+  ],
+  "pool": {
+    "limit": 6,
+    "remaining": 4,
+    "expires_at": "2026-10-25T23:59:00+00:00",
+    "scope": "shared across all visitors; failed reservations are consumed"
+  },
+  "new_generations_during_http_checks": 0
+}

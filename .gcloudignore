@@ -1,0 +1,11 @@
+**
+!Dockerfile
+!.dockerignore
+!.gcloudignore
+!requirements-cloudrun.txt
+!cloudbuild.yaml
+!src/
+!src/**
+**/__pycache__/
+**/*.pyc
+**/.DS_Store

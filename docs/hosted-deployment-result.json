@@ -1,0 +1,38 @@
+{
+  "verified_at": "2026-10-18T04:50:21.307012+00:00",
+  "project": "carbontrace-511814",
+  "region": "us-central1",
+  "service": "carbontrace-demo",
+  "url": "https://carbontrace-demo-683634661093.us-central1.run.app/",
+  "revision": "carbontrace-demo-00002-8j8",
+  "build_id": "3f0ea70f-bb78-4571-895d-a58f878bf1fd",
+  "image": "us-central1-docker.pkg.dev/carbontrace-511814/carbontrace/web@sha256:3a7c89524132a6e21dea66c3e273eb96addda438e816a63b8fe1f0a5603f4b16",
+  "source_sha256": "334a0557c53204a06bd50b3285b5736c8f9c93b15a59fb3da31be6dd59195e9b",
+  "plan_sha256": "b8446e13271b928d78684e95a6cc5e60de2ee55ca12322fa61ac9b3d2974401b",
+  "runtime": {
+    "mode": "hosted-live",
+    "cpu": 1,
+    "memory_mib": 512,
+    "min_instances": 0,
+    "max_instances": 1,
+    "concurrency": 16,
+    "request_timeout_seconds": 180,
+    "cpu_throttling": true,
+    "startup_cpu_boost": false,
+    "public": true
+  },
+  "runtime_project_roles": [
+    "projects/carbontrace-511814/roles/carbontraceDemoPredict"
+  ],
+  "bucket_public_access_prevention": "enforced",
+  "bucket_uniform_iam": true,
+  "budget_object_excluded_from_receipt_lifecycle": true,
+  "pool_remaining_after_two_verified_runs": 4,
+  "verified_generation_count": 2,
+  "verified_token_count_count": 2,
+  "verified_metadata_read_count": 0,
+  "catalog_cost_estimate_usd": "0.0040691",
+  "actual_invoice": "not queried",
+  "actual_energy_and_carbon": "unmeasured",
+  "fresh_quality": "not_evaluated"
+}

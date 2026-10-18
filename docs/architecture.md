@@ -41,7 +41,7 @@ flowchart LR
 **Status:** implemented for local v0.1; available for user review.
 **Context:** the prototype needs a real evaluator and an inspectable interface.
 **Decision:** FastAPI + Jinja + buildless original CSS/JS; independent package and
-lockfile. No EcoLogits dependency or copied source.
+lockfile. Original implementation without copied source.
 **Alternatives:** a separate React client adds a second build toolchain; a static
 mock cannot provide actual local function checks or SQLite persistence.
 **Consequences:** one environment and no frontend build; the interface is less

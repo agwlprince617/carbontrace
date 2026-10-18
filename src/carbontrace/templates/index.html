@@ -4,37 +4,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Compare unit-test generation policies with local quality checks and transparent resource assumptions.">
-  <title>CarbonTrace — Environmental comparison</title>
+  <title>CarbonTrace — Before you send</title>
   <link rel="icon" href="/static/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/app.css">
   <script src="/static/app.js" type="module"></script>
 </head>
-<body>
+<body data-deployment-mode="{{ deployment_mode }}">
   <aside class="sidebar">
     <a class="brand" href="/" aria-label="CarbonTrace home"><img src="/static/mark.svg" alt="" width="32" height="32"><span>CarbonTrace<span class="brand-dot">.</span></span></a>
     <div class="workspace-label">WORKSPACE</div>
     <nav aria-label="Main navigation">
-      <button class="nav-item active" id="nav-research"><span class="nav-symbol">⌁</span> Environmental comparison</button>
-      <button class="nav-item" id="nav-advisor"><span class="nav-symbol">↗</span> Before you send</button>
-      <button class="nav-item" id="nav-decision"><span class="nav-symbol">✓</span> Task decision</button>
-      <button class="nav-item" id="nav-lab"><span class="nav-symbol">◈</span> Unit test lab</button>
-      <button class="nav-item" id="nav-history"><span class="nav-symbol">≡</span> Saved comparisons</button>
-      <button class="nav-item" id="nav-method"><span class="nav-symbol">⌁</span> Methodology</button>
+      <button class="nav-item active" id="nav-advisor"><span class="nav-symbol">↗</span> Before you send</button>
+      <button class="nav-item" id="nav-live"><span class="nav-symbol">▶</span> Run &amp; validate</button>
+      <button class="nav-item" id="nav-research"><span class="nav-symbol">⌁</span> Environmental evidence</button>
     </nav>
-    <div class="sidebar-note"><span class="little-signal"></span><strong>Built for evidence.</strong><p>Quality first.<br>Every attempt counts.<br>Assumptions stay visible.</p></div>
-    <div class="sidebar-bottom"><span class="avatar">CT</span><div>CarbonTrace project<small>Local development · v{{ version }}</small></div></div>
+    <div class="sidebar-note"><span class="little-signal"></span><strong>Built for evidence.</strong><p>Choose thoughtfully.<br>Check the evidence.</p></div>
+    <div class="sidebar-bottom"><span class="avatar">CT</span><div>CarbonTrace project<small>Demo · v{{ version }}</small></div></div>
   </aside>
   <main>
-    <header class="topbar"><div><span class="muted">Workspace</span><span class="slash">/</span><span id="page-label">Before you send</span></div><div class="topbar-right"><span class="offline-pill"><span></span> Local preview</span><button class="text-button" id="live-readiness">Live readiness ↗</button></div></header>
+    <header class="topbar"><div><span class="muted">Workspace</span><span class="slash">/</span><span id="page-label">Before you send</span></div><div class="topbar-right"><span class="offline-pill"><span></span> {{ "Hosted demo" if hosted_preview else "Demo workspace" }}</span><button class="text-button" id="live-readiness">Connection status ↗</button></div></header>
     <div class="page-wrap">
       <section class="hero" id="hero">
-        <div><div class="eyebrow"><span class="eyebrow-line"></span> RESOURCE-AWARE TEST GENERATION</div><h1>Right-size the model.<br><span>Before you send.</span></h1><p>Explore the cost, quality evidence, and environmental unknowns<br class="wide-break"> of your next test-generation request.</p></div>
+        <div><div class="eyebrow"><span class="eyebrow-line"></span> RESOURCE-AWARE TEST GENERATION</div><h1>Right-size the model.<br><span>Before you send.</span></h1><p>Compare cost, quality evidence and environmental context<br class="wide-break"> before choosing a model.</p></div>
         <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 220 156"><path class="orbital" d="M28 110C36 12 175 7 191 89S68 168 28 110Z"/><path class="orbital second" d="M44 38C146-9 228 86 145 134S-14 106 44 38Z"/><path class="orbital third" d="M103 13C188 31 160 156 84 140S18-5 103 13Z"/><circle cx="110" cy="78" r="30" class="orb-center"/><path d="m97 80 9 9 17-23" class="orb-check"/><circle cx="186" cy="63" r="6" class="satellite"/><circle cx="52" cy="124" r="4" class="satellite small"/></svg><span>LESS WASTE. SAME STANDARD.</span></div>
       </section>
-      <div class="notice"><span class="notice-icon">i</span><p><strong>Plan locally.</strong> CLEER comparison uses published session estimates. Custom-prompt carbon remains unmeasured; its optional illustration is separate. This interface makes no model calls.</p><span class="notice-tag">NO INFERENCE</span></div>
+      <div class="notice"><span class="notice-icon">i</span><p><strong>Choose before you call.</strong> Environmental figures are published workload estimates, not measurements of your prompt.</p><span class="notice-tag">EVIDENCE FIRST</span></div>
       <div id="error" class="error-box" role="alert" hidden><p id="error-message"></p><button id="reconnect-button" class="outline-button" type="button" hidden>Reconnect local app</button></div>
-      <section id="research-view" aria-label="Published environmental comparison">
-        <div class="card research-intro"><span class="eyebrow">CLEER · PUBLISHED WORKLOAD DATA</span><h2>Compare the same standardized workload.</h2><p>Choose two models and a published session type. Energy uses the pinned CLEER dataset; operational carbon uses your electricity assumption. These figures do not describe the prompt pasted in the planner or establish equal task quality.</p></div>
+      <section id="research-view" aria-label="Published environmental comparison" hidden>
+        <div class="card research-intro"><span class="eyebrow">CLEER · PUBLISHED WORKLOAD DATA</span><h2>Compare the same standardized workload.</h2><p>Compare published energy for the same workload. Carbon uses your electricity assumption; task quality is assessed separately.</p></div>
         <form class="card research-form" id="research-form">
           <label for="research-model-a">Model A<select id="research-model-a" disabled></select></label>
           <label for="research-model-b">Model B<select id="research-model-b" disabled></select></label>
@@ -45,9 +42,9 @@
         </form>
         <p class="research-status" id="research-status" role="status">Loading the local research snapshot…</p>
         <p class="research-workload-note" id="research-workload-note"></p>
-        <div class="section-heading"><h2>Published energy + explicit carbon scenario</h2><button class="outline-button" id="research-export" type="button" disabled>Export research comparison ↓</button></div>
+        <div class="section-heading"><h2>Published environmental estimates</h2><button class="outline-button" id="research-export" type="button" disabled>Export research comparison ↓</button></div>
         <div class="model-previews" id="research-results" aria-live="polite"></div>
-        <section class="card research-method" aria-labelledby="research-method-title"><h2 id="research-method-title">Source, calculation, and limits</h2><p id="research-citation"></p><div class="research-links"><a id="research-report-link" target="_blank" rel="noreferrer">CLEER Technical Report ↗</a><a id="research-data-link" target="_blank" rel="noreferrer">Pinned dataset ↗</a><a id="research-schema-link" target="_blank" rel="noreferrer">Workload definition ↗</a><a id="research-license-link" target="_blank" rel="noreferrer">Data licence ↗</a></div><div class="carbon-formula"><code>Total Wh = published mean Wh/session × standardized sessions</code><code>Operational gCO₂e = total Wh ÷ 1000 × assumed gCO₂e/kWh</code></div><p>Published energy is already facility energy, including overheads. PUE is not applied a second time. The electricity factor is your scenario, not a claim about where either request is served. Operational carbon excludes training and embodied hardware; a zero factor does not establish a zero total footprint.</p><p id="research-uncertainty"></p><details><summary>What makes this comparison defensible? <span>⌄</span></summary><ul id="research-limitations"></ul><p>Records are used unchanged for energy mean and SD; totals are calculated by CarbonTrace. Published carbon and cost columns are not used. Source SD is not a confidence interval, and model uncertainty need not average away as session count grows.</p></details></section>
+        <details class="card research-method" aria-labelledby="research-method-title"><summary id="research-method-title">Source, calculation, and limits <span>⌄</span></summary><p id="research-citation"></p><div class="research-links"><a id="research-report-link" target="_blank" rel="noreferrer">CLEER Technical Report ↗</a><a id="research-data-link" target="_blank" rel="noreferrer">Pinned dataset ↗</a><a id="research-schema-link" target="_blank" rel="noreferrer">Workload definition ↗</a><a id="research-license-link" target="_blank" rel="noreferrer">Data licence ↗</a></div><div class="carbon-formula"><code>Total Wh = published mean Wh/session × standardized sessions</code><code>Operational gCO₂e = total Wh ÷ 1000 × assumed gCO₂e/kWh</code></div><p>Published energy is already facility energy, including overheads. PUE is not applied a second time. The electricity factor is your scenario, not a claim about where either request is served. Operational carbon excludes training and embodied hardware; a zero factor does not establish a zero total footprint.</p><p id="research-uncertainty"></p><details><summary>What makes this comparison defensible? <span>⌄</span></summary><ul id="research-limitations"></ul><p>Records are used unchanged for energy mean and SD; totals are calculated by CarbonTrace. Published carbon and cost columns are not used. Source SD is not a confidence interval, and model uncertainty need not average away as session count grows.</p></details></details>
       </section>
       <section id="decision-view" aria-label="Task decision evidence" hidden>
         <div class="card research-intro"><span class="eyebrow">PYTEST GENERATION · SAVED RESPONSE EVIDENCE</span><h2>Choose a model after checking its tests.</h2><p>Inspect one fixed function, the generated suite's reference and seeded-bug checks, and its recorded token usage. CLEER provides a separate environmental reference. A paired recommendation needs evaluated responses from both exact models.</p></div>
@@ -57,14 +54,46 @@
         <div id="decision-results" aria-live="polite" hidden><section class="card research-method workflow-replay" aria-labelledby="workflow-title"><div class="workflow-heading"><div><span class="eyebrow">GOOGLE CLOUD GEMINI</span><h2 id="workflow-title">Saved Gemini workflow</h2></div><span class="micro-pill">RECORDED RUN · NO NEW CALLS</span></div><p id="workflow-summary"></p><ol id="workflow-steps" class="workflow-steps"></ol><details><summary>Inspect the exact prompt sent to both models <span>⌄</span></summary><pre id="workflow-prompt" class="workflow-code"></pre></details><h3 class="workflow-response-heading">Inspect the recorded model responses</h3><div id="workflow-responses" class="workflow-responses"></div><p id="workflow-boundary"></p></section><div id="decision-conclusion" class="card decision-conclusion"></div><details class="card research-method"><summary>Fixed function and requirements <span>⌄</span></summary><p id="decision-requirements"></p><pre class="decision-code" id="decision-source"></pre></details><div id="decision-models" class="model-previews"></div><section class="card research-method"><h2>Sources and interpretation</h2><p id="decision-attribution"></p><div class="research-links"><a id="decision-report-link" target="_blank" rel="noreferrer">CLEER report ↗</a><a id="decision-data-link" target="_blank" rel="noreferrer">Pinned dataset ↗</a><a id="decision-license-link" target="_blank" rel="noreferrer">Data licence ↗</a></div><p id="decision-cost-note"></p><p id="decision-usage-note"></p><p id="decision-carbon-note"></p><details><summary>Interpretation limits <span>⌄</span></summary><ul id="decision-limitations"></ul></details><details><summary>Evidence fingerprints <span>⌄</span></summary><p class="decision-hashes" id="decision-fingerprints"></p></details></section></div>
         <div class="card research-intro"><h2>How this decision was checked</h2><p>The approved experiment generated one suite per model for each of the same three development functions. All six suites passed their reference and detected all four seeded faults for their task in the pinned rootless runner. This is a small development pilot, not a general quality ranking or measured carbon saving. No new model calls or generated-code execution can start from this page.</p></div>
       </section>
-      <section id="advisor-view" aria-label="Pre-send model advisor" hidden>
+      <section id="live-view" aria-label="Live Gemini comparison" hidden>
+        {% if hosted_live %}<section id="hosted-panel" class="card research-method" hidden>
+          <span class="eyebrow">HOSTED GEMINI · ONE SELECTED MODEL</span><h2 id="hosted-title">Review before sending</h2>
+          <p id="hosted-pool" role="status"></p><p id="hosted-cost"></p>
+          <div id="hosted-approval"><label class="checkbox-label"><input id="hosted-consent" type="checkbox"> Approve this request with a US$0.10 allowance. Send the text to Google Cloud and store the request and response privately, with deletion scheduled after seven days.</label><p class="field-note">An estimate, not a hard billing cap. One generation; no automatic retries.</p><button id="hosted-execute" class="primary-button" type="button">Approve &amp; run selected model →</button></div>
+          <details><summary>Exact approved request</summary><pre id="hosted-payload" class="workflow-code"></pre><p id="hosted-hash" class="decision-hashes"></p></details>
+          <p id="hosted-status" role="status"></p><div id="hosted-result" hidden><p id="hosted-metrics"></p><pre id="hosted-output" class="workflow-code"></pre><p>Fresh output has not been quality checked. Actual energy and carbon are unmeasured; CLEER remains a separate published reference.</p></div>
+          <button id="hosted-refresh" class="outline-button" type="button" hidden>Read saved receipt</button>
+        </section>{% endif %}
+        <div class="live-entry-actions"><a class="outline-button" href="/?live=recorded">View recorded Gemini comparison ↗</a></div>
+        <button id="live-new-pair" {% if hosted_preview %}hidden{% endif %} class="outline-button" type="button">New paired experiment</button>
+        <div class="card research-intro" id="live-intro" {% if hosted_preview %}hidden{% endif %}><span class="eyebrow">OPTIONAL VALIDATION · TWO EXACT MODELS</span><h2>Validate your model choice.</h2><p>Prepare the same request for both Gemini models. Execution needs separate approval in the local runner.</p></div>
+        <form id="live-form" class="card live-composer" {% if hosted_preview %}hidden{% endif %}>
+          <label for="live-example">Quality contract<select id="live-example"><option value="">Custom code · quality not evaluated</option><option value="clamp">Reviewed example · Clamp a value</option><option value="discount">Reviewed example · Apply an order discount</option><option value="merge">Reviewed example · Merge closed intervals</option></select></label>
+          <p class="field-note">Reviewed examples have four seeded faults. Custom code is returned as text only.</p>
+          <label for="live-instruction">Your test-generation instruction<textarea id="live-instruction" rows="3" maxlength="32768" required spellcheck="false">Write clear pytest tests, covering normal inputs, boundary conditions and the documented error behaviour. Return Python code only.</textarea></label>
+          <label for="live-source">Source code / request text<textarea id="live-source" rows="10" maxlength="32768" required spellcheck="false" placeholder="Paste a small Python function here, or choose a reviewed example above."></textarea></label>
+          <details><summary>Additional visible context</summary><label for="live-context">Context sent to both models<textarea id="live-context" rows="3" maxlength="32768" spellcheck="false"></textarea></label></details>
+          <div class="live-options"><label for="live-workload">Separate CLEER reference workload<select id="live-workload" required><option value="">Choose a reference workload…</option></select></label><label for="live-grid">Assumed electricity · gCO₂e/kWh<input id="live-grid" type="number" min="0" max="2000" value="400" step="any" required></label></div>
+          <p class="field-note" id="live-workload-note">The selected benchmark does not classify this request or measure its emissions.</p>
+          <label class="checkbox-label"><input id="live-save-consent" type="checkbox" required> Save this request and resulting responses locally when I prepare the quote.</label>
+          <p class="field-note">Preparation is free. Approved execution sends this text to Google Cloud and uses your billing.</p>
+          <button class="primary-button" id="live-prepare">Review request &amp; cost <span>↗</span></button>
+        </form>
+        <p class="research-status" id="live-status" role="status">No run selected.</p>
+        <div id="live-plan" hidden>
+          <section class="card research-method"><div class="workflow-heading"><div><span class="eyebrow">01 · FROZEN REQUEST</span><h2 id="live-plan-title">Review the frozen comparison</h2></div><span class="micro-pill" id="live-run-state">AWAITING APPROVAL</span></div><p id="live-model-list"></p><p id="live-precall-note" hidden></p><p id="live-cost-summary"></p><p id="live-quality-note"></p><details><summary>Execution limits <span>⌄</span></summary><p id="live-limits"></p></details><a href="https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing" target="_blank" rel="noreferrer">Google Cloud pricing ↗</a><details><summary>Exact payload and evidence fingerprint</summary><pre id="live-frozen-payload" class="workflow-code"></pre><p id="live-plan-hash" class="decision-hashes"></p></details>
+          <details class="runner-details"><summary>Local runner setup <span>⌄</span></summary><p>Execution requires the project’s local CLI and approval of the quoted cost. Hosted execution is not connected. See the README for setup; use this run ID.</p><pre id="live-run-command" class="workflow-code"></pre><p id="live-slot-note"></p></details><div class="live-actions"><button id="live-refresh" type="button" class="outline-button">Refresh results</button><label class="checkbox-label"><input id="live-follow" type="checkbox" checked> Follow progress</label><a id="live-reopen" class="outline-button">Link to this run ↗</a><a id="live-export" class="outline-button" download>Export evidence ↓</a></div><p class="field-note">Export includes your prompt, code and responses.</p></section>
+          <section class="card research-method"><span class="eyebrow">02 · ACTUAL EXECUTION</span><h2>Gemini results</h2><p id="live-result-summary">Awaiting terminal approval. No model response has been received for this request.</p><details><summary>Provider operation log <span>⌄</span></summary><ol id="live-operations" class="live-operations"></ol></details><div id="live-responses" class="workflow-responses"></div><p id="live-choice"></p></section>
+          <section class="card research-method"><span class="eyebrow">03 · SEPARATE PUBLISHED REFERENCE</span><h2>CLEER environmental context</h2><p id="live-research-note"></p><div id="live-research-models" class="workflow-responses"></div><p>Published session estimates; this run’s actual energy and carbon are unmeasured.</p><details><summary>Source &amp; licence <span>⌄</span></summary><p id="live-research-source"></p><div class="research-links"><a id="live-research-report" target="_blank" rel="noreferrer">Technical report ↗</a><a id="live-research-data" target="_blank" rel="noreferrer">Pinned dataset ↗</a><a id="live-research-license" target="_blank" rel="noreferrer">Data licence ↗</a></div></details></section>
+        </div>
+      </section>
+      <section id="advisor-view" aria-label="Pre-send model advisor">
         <div class="advisor-grid">
           <form class="card composer" id="advisor-form">
             <div class="card-heading"><div><span class="step-number">01</span><h2>Your next request</h2></div><span class="micro-pill">PYTEST</span></div>
-            <p class="advisor-intro">Paste your own prompt and source code, or start with a development example. The planner reads code as text; it does not execute it or generate tests.</p>
+            <p class="advisor-intro">Paste a prompt and code, or choose an example.</p>
             <label class="advisor-label" for="advisor-example">Request or development example</label>
             <div class="example-picker"><select id="advisor-example" disabled></select><button class="outline-button" type="button" id="load-example" disabled>Reset example</button></div>
-            <p class="field-note">All 14 development examples support local previews. Only three have saved model responses; the others have no matching quality evidence.</p>
+            <p class="field-note">Saved quality evidence is available for three examples.</p>
             <label class="advisor-label" for="advisor-prompt">Prompt + code</label>
             <textarea id="advisor-prompt" rows="13" maxlength="32768" required spellcheck="false" aria-describedby="draft-note"></textarea>
             <details class="context-details"><summary>+ Add visible context <span>⌄</span></summary><label class="advisor-label" for="advisor-context">Additional context included in this request</label><textarea id="advisor-context" rows="4" maxlength="32768" spellcheck="false" placeholder="For example, a dependency contract or coding convention…"></textarea></details>
@@ -72,22 +101,23 @@
             <select id="advisor-model"><option value="strong">Gemini 3.7 Flash</option><option value="compact">Gemini 3.5 Flash-Lite</option></select>
             <label class="advisor-label" for="advisor-workload">CLEER environmental reference workload</label>
             <select id="advisor-workload" aria-describedby="advisor-workload-help"><option value="">Choose a reference workload…</option></select>
-            <p class="field-note" id="advisor-workload-help">Choose explicitly. Prompt length does not determine a CLEER workload; this reference is not a prediction for your draft.</p>
+            <p class="field-note" id="advisor-workload-help">Choose a benchmark for context, not a prediction of this prompt.</p>
             <p class="field-note" id="advisor-workload-description"></p>
-            <label class="advisor-label" for="advisor-reference-grid">Reference electricity assumption · gCO₂e/kWh</label>
+            <details class="planning-settings"><summary>Cost &amp; electricity assumptions <span>⌄</span></summary><label class="advisor-label" for="advisor-reference-grid">Reference electricity assumption · gCO₂e/kWh</label>
             <input id="advisor-reference-grid" type="number" value="400" min="0" max="2000" step="any" required>
             <fieldset class="output-budget"><legend>Generated tokens · output + reasoning</legend><label for="generated-low">Lower scenario<input id="generated-low" type="number" min="1" max="4096" step="1" value="256" required></label><label for="generated-high">Upper scenario<input id="generated-high" type="number" min="1" max="4096" step="1" value="1024" required></label></fieldset>
-            <p class="field-note">Choose scenarios to compare. These are not a response prediction or an enforced spending limit.</p>
+            <p class="field-note">Assumed output size, not a prediction or spending cap.</p></details>
             <button class="primary-button" id="preview-button" type="submit"><span>Preview model trade-offs</span><span>↗</span></button>
-            <label class="checkbox-label"><input type="checkbox" id="advisor-auto-update" checked> Auto-update estimates locally as I type</label>
+            <label class="checkbox-label"><input type="checkbox" id="advisor-auto-update" checked> Update as I type</label>
             <p class="field-note" id="estimate-status" role="status">Local planning only · no model calls.</p>
-            <p class="composer-footnote" id="draft-note">Your draft is processed locally and is not saved. Nothing is sent to a model.</p>
+            <button type="button" class="outline-button" id="advisor-to-live" {% if hosted_preview %}hidden{% endif %}>Compare both models ↗</button>
+            <p class="composer-footnote" id="draft-note">{% if hosted_preview %}Preview sends text to this server, not Gemini, without saving it. Avoid secrets.{% else %}Preview uses text only. No model calls or draft storage.{% endif %}</p>
           </form>
           <div class="advisor-results">
             <div class="section-heading"><div><span class="step-number">02</span><h2>Review your choices</h2></div><button type="button" class="outline-button" id="export-plan" disabled>Export plan ↓</button></div>
             <div id="advisor-pending" class="card advisor-pending" hidden><span>↻</span><h3>Your draft has changed.</h3><p>Refresh the preview to see scenarios for this version.</p></div>
             <div id="advisor-output" aria-live="polite" aria-busy="false" hidden>
-              <div class="advisor-guidance"><span class="guidance-icon">↗</span><div><span class="eyebrow" id="advisor-evidence-label">HISTORICAL EVIDENCE</span><p id="advisor-guidance"></p></div></div>
+              <section class="card precall-card" id="precall-card"><span class="eyebrow">PRE-CALL DECISION · ZERO MODEL CALLS</span><h2 id="precall-headline"></h2><span class="micro-pill" id="advisor-evidence-label"></span><p id="advisor-guidance" hidden></p><ul id="precall-reasons"></ul><details><summary>Decision limits <span>⌄</span></summary><p id="precall-caveat"></p></details><p id="precall-selection"></p><button type="button" class="outline-button" id="use-suggestion" hidden>Use suggested model</button>{% if hosted_live %}<button type="button" class="primary-button" id="hosted-prepare">Review selected model run ↗</button><p class="field-note">Small shared allowance · approve the price before sending.</p>{% endif %}<div {% if hosted_preview %}hidden{% endif %}><label class="checkbox-label"><input type="checkbox" id="advisor-live-consent"> Save this draft to prepare a run.</label><button type="button" class="primary-button" id="prepare-selected">Prepare selected model only ↗</button><p class="field-note">Prepare a quote first. Execution requires separate local approval.</p></div></section>
               <div class="model-previews" id="model-previews"></div>
               <section id="advisor-reference" class="card carbon-availability" aria-labelledby="advisor-reference-title">
                 <div class="carbon-heading"><div class="carbon-symbol">⌁</div><div><h3 id="advisor-reference-title">CLEER environmental reference</h3><span class="evidence-unavailable" id="advisor-reference-status">Choose a reference workload</span></div></div>
@@ -95,7 +125,7 @@
                 <div id="advisor-reference-results" class="carbon-scenario-results"></div>
                 <details id="advisor-reference-method" hidden><summary>Source, calculation, and limits <span>⌄</span></summary><p id="advisor-reference-citation"></p><div class="research-links"><a id="advisor-reference-report-link" target="_blank" rel="noreferrer">Technical report ↗</a><a id="advisor-reference-data-link" target="_blank" rel="noreferrer">Pinned dataset ↗</a><a id="advisor-reference-schema-link" target="_blank" rel="noreferrer">Workload definitions ↗</a><a id="advisor-reference-license-link" target="_blank" rel="noreferrer">Data licence ↗</a></div><div class="carbon-formula"><code>Reference operational gCO₂e = published facility Wh/session ÷ 1000 × assumed gCO₂e/kWh</code></div><p id="advisor-reference-basis"></p><ul id="advisor-reference-limitations"></ul><p id="advisor-reference-modifications"></p></details>
               </section>
-              <section class="card carbon-availability" aria-labelledby="carbon-title">
+              <details class="card carbon-availability hardware-lab" hidden><summary>Explore a hypothetical hardware scenario <span>⌄</span></summary>
                 <div class="carbon-heading"><div class="carbon-symbol">⌁</div><div><h3 id="carbon-title">Optional hardware illustration · your draft</h3><span class="evidence-unavailable" id="carbon-status">Illustrative scenario · not measured</span></div></div>
                 <p id="carbon-scenario-note"></p>
                 <div id="carbon-scenario-results" class="carbon-scenario-results"></div>
@@ -122,12 +152,12 @@
                   <p>Validate the prediction against representative request lengths and workloads, publish its error and source dates, and count all attempts and retries. Training, hardware manufacture, networking, and user devices need separate lifecycle accounting; this demo covers operational electricity only.</p>
                   <p><a href="https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference/" target="_blank" rel="noreferrer">Google’s published measurement approach ↗</a> is useful methodology context. Its Gemini Apps aggregate does not calibrate these two API model scenarios.</p>
                 </details>
-              </section>
+              </details>
               <details class="card estimate-details"><summary>How to read this preview <span>⌄</span></summary><dl><dt>Prompt size</dt><dd id="token-method"></dd><dt>Response size</dt><dd id="generated-method"></dd><dt>Price snapshot</dt><dd id="price-method"></dd><dt>Scope</dt><dd id="scope-method"></dd><dt>Export</dt><dd>Includes a prompt hash and estimates. Prompt and context text are excluded.</dd></dl></details>
             </div>
           </div>
         </div>
-        <div class="advisor-boundary"><span>ONE VISIBLE REQUEST</span><p>An agent may add hidden context, call tools, or make more requests. This preview does not estimate an entire coding session.</p></div>
+        <div class="advisor-boundary"><span>ONE VISIBLE REQUEST</span><p>One visible request. Hidden context, tools and later agent steps are outside this preview.</p></div>
       </section>
       <section id="lab-view" hidden>
         <div class="notice"><span class="notice-icon">i</span><p><strong>Fixture lab.</strong> Suites below are hand-authored fixtures; usage and durations are illustrative. Their local quality checks are separate from the real saved pilot evidence in the advisor.</p><span class="notice-tag">FIXTURE REPLAY</span></div>
@@ -158,6 +188,6 @@
       <footer><span><span class="footer-dot"></span> Original CarbonTrace implementation</span><span>Local quality evidence. Transparent assumptions.</span></footer>
     </div>
   </main>
-  <dialog id="live-dialog"><button id="close-dialog" class="dialog-close" aria-label="Close live readiness">×</button><span class="eyebrow">LIVE READINESS</span><h2>Live runs use an approved plan.</h2><p>This web lab uses offline fixtures. Live experiments use the separate local runner after Google sign-in and approval of a priced plan.</p><div class="project-reference"><span>Cloud project reference</span><code>carbontrace-511814</code></div><ol><li>Confirm model availability and API access.</li><li>Review current pricing, request counts, token limits, and retry allowance.</li><li>Approve the estimated run cost before execution.</li></ol><p class="dialog-note">A browser toggle or environment variable cannot enable live inference.</p><button id="dialog-done" class="primary-button">Continue offline <span>→</span></button></dialog>
+  <dialog id="live-dialog"><button id="close-dialog" class="dialog-close" aria-label="Close live readiness">×</button><span class="eyebrow">CONNECTION STATUS</span><h2>Preview now. Approve before execution.</h2><p>Planning and recorded evidence need no model calls. {% if hosted_live %}Fresh Gemini runs share six reservations across all visitors. Each request needs priced approval.{% elif hosted_preview %}Fresh Gemini execution is disabled in this public preview.{% else %}New Gemini runs require the local CLI; hosted execution is not connected.{% endif %}</p><div class="project-reference"><span>Cloud project reference</span><code>carbontrace-511814</code></div><button id="dialog-done" class="primary-button">Back to demo <span>→</span></button></dialog>
 </body>
 </html>

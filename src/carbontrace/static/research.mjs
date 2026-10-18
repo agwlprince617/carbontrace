@@ -28,7 +28,7 @@ function render(result) {
   for(const [id,key] of [["research-report-link","report_url"],["research-data-link","source_url"],["research-schema-link","schema_url"],["research-license-link","license_url"]]) get(id).href=source[key];
   get("research-uncertainty").textContent=result.uncertainty_note;
   get("research-limitations").replaceChildren(...source.limitations.map(text=>{ const li=document.createElement("li"); li.textContent=text; return li; }));
-  get("research-status").textContent="Calculated locally from the pinned dataset · no model calls. No quality equivalence or provider-wide ranking is established.";
+  get("research-status").textContent="Calculated from the pinned dataset · no model calls. Equal task quality is not assumed.";
   get("research-export").disabled=false;
 }
 

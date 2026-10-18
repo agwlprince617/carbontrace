@@ -1,4 +1,140 @@
-# Local validation evidence
+# Validation evidence
+
+## Hosted integration deployment, 18 October 2026
+
+- One approved build succeeded and one new revision deployed. Source snapshot
+  334a0557c532 and image digest 3a7c89524132 match the deployment receipt.
+- Both approved browser generations completed with raw/effective usage preserved.
+  Each used one token count and one generation, with zero metadata reads or retries.
+  Flash-Lite: 162 input / 359 output tokens. Flash: 162 input / 384 output tokens.
+  Combined conservative catalog estimate USD 0.0040691, not the actual invoice.
+- The shared ledger moved from six to four remaining reservations. Receipt reads
+  matched the saved evidence. Old local-write/private-record endpoints stay blocked.
+- Private bucket IAM, public access prevention, seven-day receipt lifecycle, retained
+  budget object, single inference permission, 180-second request timeout and max
+  one instance were checked. No generated Python ran on Cloud Run.
+- [Deployment receipt](hosted-deployment-result.json),
+  [HTTP checks](hosted-http-smoke.json), [real responses](hosted-live-results.json).
+
+## Hosted Gemini integration preparation, 18 October 2026
+
+- 335 Python tests pass; 22 opt-in container checks skipped; coverage 97.50%.
+  Strict mypy, Black, Ruff, JavaScript syntax and seven client checks pass.
+- Offline fake-provider tests verify both selected models, signed exact approval,
+  quote expiry, concurrent six-run limits across ledger instances, replay without
+  dispatch, missing-meter failure, provider errors, storage failure before client
+  creation, usage reconciliation and private Cloud Storage preconditions.
+- Browser verification confirmed the priced hosted quote and unchecked-consent
+  block. Its storage and provider adapters were replaced with offline fixtures;
+  the screenshot is a local UI preview, not proof of a cloud generation.
+- Frozen deployment source: `334a0557c53204a06bd50b3285b5736c8f9c93b15a59fb3da31be6dd59195e9b`;
+  52 allowlisted files. Operator and source hashes are checked before credentials.
+- Publication scan found no credential-pattern matches in 139 non-ignored files
+  or the one reachable Git commit; local data, tools and credentials are excluded.
+  Repeat the audit for final deployment receipts before publication.
+- No new cloud mutations, model calls or token-count calls were made during this
+  preparation. Deployment, two verification generations and the shared public
+  allowance await the exact approval in [the deployment plan](hosted-deployment-plan.json).
+
+![Locally verified hosted quote](hosted-quote-preview.jpg)
+
+## Cloud Run deployment
+
+- Build fcd84a01-18c2-481b-aec4-1bcec985b3aa succeeded once; revision carbontrace-demo-00001-mq2
+  serves the approved image digest and source snapshot. No rebuild or retry.
+- The public HTTPS site passed 13 unauthenticated HTTP checks. Planning, research,
+  recorded results and export return 200; quote creation, fixture persistence,
+  live execution and local private records return 423.
+- Chrome verified custom drafts lose quality matches, explicit model adoption,
+  both recorded 4/4 quality gates, published comparison and absence of local
+  execution controls. Runtime has no project roles; scaling is 0–1 instances.
+- No Gemini or token-count calls were made. Actual invoice was not queried.
+  [Receipt](cloud-run-result.json), [checks](cloud-run-smoke.json).
+
+## Cloud Run preparation (before deployment)
+
+- 323 Python tests pass; 22 opt-in container tests skipped; coverage 98.21%.
+  Strict mypy, Black, Ruff, JavaScript syntax and seven client checks pass.
+- Hosted mode performs no store initialization, permits stateless previews and
+  recorded evidence, blocks quote creation, fixture persistence and local records,
+  accepts Cloud Run hostnames and cannot switch to local mode on Cloud Run.
+- The server uses `0.0.0.0` and the supplied `PORT`. Cloud upload allowlist was
+  inspected with the official CLI; credentials/tools/local data are excluded.
+- Chrome verified the hosted-mode planner, model adoption and recorded results;
+  local execution controls are absent. No build, deployment or inference occurred.
+- The Docker image has not yet been built; its first Cloud Build and deployed
+  smoke check are subject to the deployment cost approval in `cloud-run.md`.
+
+## Demo workspace cleanup
+
+- Three navigation entries: Before you send, Run & validate, Environmental evidence.
+- Shortened visible copy; methods, runner setup and raw provenance are expandable.
+- Run API responses no longer disclose the configured filesystem path. A packaged
+  read-only real comparison works with an empty local store and preserves the
+  original quote/result hash. Export retains the same recorded evidence.
+- 315 Python tests pass, 22 opt-in container tests skipped, coverage 98.19%.
+  Strict mypy, Black, Ruff, JavaScript syntax and six client tests pass.
+- Chrome checked custom draft invalidation, a new single-model quote, all three
+  navigation entries and the recorded comparison. No model calls or deployment.
+
+## Pre-call decision and selected-model execution refinement
+
+- 313 Python tests pass with 98.19% statement coverage; 22 opt-in container checks
+  remain skipped. Strict mypy, Black, Ruff, JavaScript syntax and six client tests
+  pass. No provider calls, token-count calls or generated-code execution occurred.
+- Unknown/edited context cannot borrow saved task quality; missing evidence blocks
+  a comparative recommendation and failed quality overrides a lower cost/reference.
+- Both selected model paths dispatch exactly one metadata read, one count and one
+  generation in offline synthetic tests. Payload/context bytes are unchanged and
+  correct per-model rates are used. No uncalled-model quality claim is produced.
+- The old paired quote still hashes to `317e3391ea97…`; completed results remain
+  readable. Quotes are versioned; single-model preparation neither grants execution
+  approval nor consumes a run slot.
+- Chrome verified the new default, explicit suggestion adoption, removal of the
+  suggestion after editing, one-model quote limits and exact downloaded export.
+  [Demo guide](precall-decision.md), [decision screenshot](precall-decision-preview.jpg).
+
+## Completed browser-prepared live comparison, 2026-10-17
+
+- The user executed the exact approved plan `317e3391ea97…` manually. Both Gemini
+  responses passed the reference and detected all four Clamp faults in the pinned
+  rootless runner: Flash-Lite 7 reference tests, Flash 6; no errors or skips.
+- Exactly two metadata reads, two token counts and two generations completed.
+  Actual input tokens were 161 each; output candidates were 246 and 504. Suite
+  hashes, quality provenance, model versions and usage arithmetic were independently
+  checked locally without any further provider or generated-code execution.
+- Combined recorded-usage catalog cost USD 0.0046848, before credits/tax/FX; billing
+  uncertainty is false. Actual request energy/carbon remain unmeasured. One local
+  demo slot is consumed and its plan cannot be replayed.
+- Chrome verified completed states, actual returned suites, both quality gates,
+  separate environmental references and the task-scoped Flash-Lite candidate.
+  The completed browser export matches the saved plan/results exactly.
+  [Results](live-comparison-results.md), [sanitized report](live-comparison-results.json),
+  [verified screenshot](live-comparison-results.jpg).
+
+## Bounded custom live-comparison implementation, 2026-10-17
+
+- 303 Python tests pass with 98.13% statement coverage; 22 opt-in container checks
+  remain skipped. Strict mypy, Black, Ruff, JavaScript syntax and six client tests
+  pass. New provider/evaluator tests use synthetic doubles with socket connections
+  blocked; no fresh model or token-count calls were made for implementation.
+- Exact quote hashing, both pre-generation counts, zero-retry stop conditions,
+  missing/inconsistent usage, uncertain billing, source/quality provenance, expired
+  quotes, one-shot replay rejection and the three-run local limit are covered.
+- The browser prepares and reads local plans; only the interactive terminal runner
+  can use credentials. The existing web live endpoint remains HTTP 423. Custom
+  source is never executed; reviewed examples retain strict isolated quality gates.
+- Chrome verified quote preparation, explicit local storage, frozen-run recovery
+  and source-edit invalidation, the Before you send shortcut and the actual JSON
+  export matching the frozen plan. The older screenshot is retained privately because it displayed a local directory.
+- The first Clamp quote was explicitly approved (plan SHA256
+  `317e3391ea97c87e11a4192974abf5ee76e33fe687ec08b2d67306bfc9eb686a`).
+  Rootless pinned-image and owned-fixture checks passed. Automatic approval review
+  rejected terminal confirmation input and cancellation because sandbox approval
+  is disabled. No metadata, token-count or generation request was dispatched by
+  that blocked attempt; the quote and slots were unconsumed at handoff. The user
+  subsequently completed it manually, as recorded above. At handoff the VM was
+  confirmed stopped; Podman reported that gvproxy cleanup was not permitted.
 
 ## Recorded Gemini workflow, 2026-10-17
 

@@ -1,219 +1,118 @@
 # CarbonTrace
 
-An original, offline-first **environmental comparison and pre-send model advisor**.
-Compare published CLEER session estimates, or plan token/cost scenarios and
-historical quality evidence before choosing a test-generation model.
-The supporting quality lab demonstrates compact-first escalation when a suite
-misses required seeded faults. Every attempted generation counts.
+**Choose an appropriate AI model before sending your request.** CarbonTrace helps
+developers compare cost scenarios, task-specific quality evidence and published
+environmental benchmarks when generating Python unit tests.
 
-This is a new standalone application. It does **not** depend on, import, copy, or
-vendor EcoLogits code, regression coefficients, model architecture guesses, or its
-model catalog. The earlier EcoLogits checkout is a separate research reference.
+[Open the Cloud Run demo](https://carbontrace-demo-683634661093.us-central1.run.app/)
 
-## What works now
+## Try the demo
 
-- A [task-decision view](docs/task-decision.md) that combines original saved suite
-  checks and provider usage with a separate CLEER reference. Missing paired
-  evidence blocks a recommendation; a failing suite cannot win on energy alone.
-- A recorded Gemini workflow inside Task decision: exact shared prompt, completed
-  cloud operations, generation settings, inline checked suites, isolated quality
-  results and model choice. Viewing this completed run makes no new provider calls.
-- A completed [six-response 3.5/3.7 comparison](docs/decision-trial-results.md):
-  every suite passed the reference and detected four seeded faults for its task.
-  Recorded-usage catalog total USD 0.01010385; checked suites are downloadable as
-  text. This is limited development evidence, not measured carbon savings.
+1. **Before you send:** choose the Clamp example, select a CLEER workload, and
+   inspect the model suggestion. The preview makes no Gemini calls. Edit the prompt
+   to see why the original task's evidence no longer supports a recommendation.
+2. **Run & validate:** inspect the included recorded Gemini comparison. Hosted live
+   execution lets you review one selected model's frozen request and price, then
+   explicitly approve that run.
+3. **Environmental evidence:** compare published standardized workloads and inspect
+   the technical report, original dataset, uncertainty and electricity assumptions.
 
-- A default environmental comparison for the 51 models and six standardized
-  workloads actually present in a pinned CLEER dataset. Original energy means
-  and SDs, volume arithmetic, explicit operational-carbon assumptions, attribution,
-  limitations, and provenance are visible and exportable. See
-  [the research guide](docs/cleer-comparison.md). Data is CC BY-NC 4.0; commercial
-  reuse needs separate permission from its publisher.
+The public application now runs fresh Gemini requests. Four of the six shared
+reservations remained after verification on 18 October 2026. The pool expires
+25 October 2026 at 23:59 UTC. The demo project funds these runs. See
+[the verified integration](docs/hosted-live.md).
 
-- A pre-send prompt/context editor, output-plus-reasoning scenarios, model
-  selection for the plan, and JSON export without draft text or live execution.
-- CLEER references inside the pre-send panel, using an explicitly selected
-  workload and electricity assumption. Published energy and source uncertainty
-  stay independent of custom-prompt tokens; unavailable model coverage stays null.
-- An explicit custom prompt/code workflow with automatic local updates after a
-  typing pause, a manual-preview option, visible assumption values, and a worked
-  impact calculation. These are local scenarios, not live provider measurements.
-- An explicit distinction between identical-prompt pilot observations and rough
-  planning scenarios for edited prompts. Editable illustrative carbon scenarios
-  show their assumptions; actual provider carbon stays unmeasured.
-  See [the advisor guide](docs/pre-send-advisor.md).
-- Twenty original Python functions in five families, with 80 seeded defects.
-  Fourteen development exercises are available in the local web interface;
-  six held-out functions are reserved for final model evaluation.
-- Actual local assertion checks against the correct and defective functions.
-- Two scripted fixture profiles; an explicit escalation example that increases
-  total illustrative usage rather than always claiming a saving.
-- A configurable minimum fault-detection threshold plus correct-function checks.
-- Runnable pytest-suite and reference-function downloads.
-- SQLite history, complete JSON evidence exports, and an offline CLI.
-- An original optional operational-energy scenario calculator, including interval
-  arithmetic and every failed/escalated attempt.
-- The web live endpoint stays blocked. An explicit one-shot CLI supports the
-  approved Gemini smoke plan using Google Gen AI SDK 2.31.0; imports and tests
-  make no live calls.
-- A container-only CLI for candidate pytest suites, with rootless Podman,
-  no network, resource limits, bounded output, and cleanup on timeout.
-- A frozen benchmark manifest and six-call / 80-call offline run plans.
+## What the numbers mean
 
-## Evidence boundaries
+| Evidence | What CarbonTrace can say |
+| --- | --- |
+| Pre-call token and cost scenarios | Unknown prompts use a rough input estimate; output and reasoning length are assumptions. Identical pilot prompts can reuse historical input counts. |
+| Saved quality results | Six real Gemini responses across three development functions passed the reference and detected four seeded faults each in an isolated runner. This small pilot does not establish general model quality. |
+| Fresh hosted responses | Actual provider tokens, model version, elapsed time and a catalog-based cost estimate. Returned code is text only and is not quality evaluated. |
+| CLEER environmental references | Published modelled energy for a standardized session; operational carbon uses an explicit electricity assumption. These are not measurements of the visitor's prompt. |
 
-**Observed pilot:** six real Gemini responses were evaluated in containers across
-three development functions. The advisor shows their historical quality and usage
-only when labelled as such; these observations do not predict a new response.
+Actual request energy and carbon remain **unmeasured**. CarbonTrace does not derive
+carbon from token counts, API price or response latency, and does not claim measured
+carbon savings. Recommendations require matching quality evidence; custom prompts
+without such evidence remain a manual choice.
 
-**Pre-send scenarios:** identical payloads can reuse a previously observed input
-count. Other drafts use a rough UTF-8 heuristic. Generated-token scenarios are
-user assumptions; cost uses a dated catalog snapshot before credits, tax and FX.
+## Google Cloud integration
 
-**Fixture lab:** candidate suites are hand-authored, duration is assumed (compact
-2 s; thorough 8 s), and tokens use `ceil(characters / 4)` per fixture input/output.
-This is not a tokenizer, provider telemetry, or evidence about Gemini capability.
+The FastAPI application runs as a non-root container on **Cloud Run**. Gemini
+requests use **Google Gen AI SDK 2.31.0** and the Cloud Run service identity through
+Google Cloud's Agent Platform API, without browser API keys. Cloud Build and
+Artifact Registry build and store the image.
 
-The custom-prompt advisor's **illustrative carbon scenario is disabled by default**.
-It remains explicitly opt-in, separate from the CLEER workload comparison.
-API callers must
-explicitly supply `carbon_scenario` to obtain scenario numbers. Actual provider
-carbon remains null and separate from the assumed results in exports. This does
-not establish Gemini emissions or real savings. See [methodology](docs/methodology.md).
-The dataset has a frozen
-split; the three-function real-model pilot is exploratory and still needs
-independent quality review. Provider energy remains unmeasured.
+The hosted runner uses signed, ten-minute quotes and a private **Cloud Storage**
+ledger. Six reservations are shared globally, including verification calls. Atomic
+storage preconditions prevent races and repeated dispatch; restarts and deployments
+do not replenish the pool. Failed reservations are consumed. Each generation has
+one candidate, LOW thinking, a 4,096-token output request, no tools and no automatic
+retries. Token counting rejects inputs over 4,096 tokens before generation.
+
+**Secret Manager** holds the quote-signing key. Runtime permissions are scoped to
+inference, the private ledger bucket and that secret. Visitor approval sends the
+exact text to Google Cloud. Requests and responses are stored privately, with
+deletion scheduled after seven days; run IDs act as unguessable receipt links.
+The budget counter is retained so deleting old receipts cannot reset the pool.
+
+Run counts and output settings are safeguards, **not a hard Google billing cap**.
+The free planner and recorded results remain available after the pool expires or
+is exhausted. Hosted execution never runs generated Python. Local evaluation uses
+the separate [isolated container runner](docs/sandbox.md).
 
 ## Run locally
 
-Requires Python 3.11+ and uv; tested with Python 3.14.5.
+Requires Python 3.11+ and uv; verified with Python 3.14.5.
 
-```sh
+~~~sh
 uv sync --locked --cache-dir .uv-cache --no-managed-python
 mkdir -p .tmp
 .venv/bin/uvicorn carbontrace.app:create_app --factory --host 127.0.0.1 --port 8765
-```
+~~~
 
-Open **http://127.0.0.1:8765**. VS Code has a configured interpreter and two
-tasks under **Terminal → Run Task**: start the app and run tests. Stop the server
-with Ctrl+C. No credentials or Google Cloud changes are needed.
+Open http://127.0.0.1:8765/. Local planning and recorded results require no cloud
+credentials. VS Code tasks provide app startup and verification. Cloud deployments
+and model calls require a reviewed cost estimate and explicit approval.
 
-Start in **Environmental comparison**: select two models and a standard workload,
-set the number of sessions and electricity assumption, then calculate and export.
-These are published workload estimates, not measurements of an arbitrary prompt.
-Gemini 3.8 Flash has no record in the snapshot and remains explicitly unavailable.
-
-In **Before you send**, load **Clamp a value**, and compare the model cost
-scenarios and saved quality evidence. Edit the prompt to see exact-match evidence
-removed, then export a local plan. This interface does not send requests to models.
-
-In **Task decision**, select a development function and a CLEER reference workload,
-then click **Show saved Gemini workflow**. Inspect the exact prompt, recorded API
-steps, generated tests, isolated quality results and task-scoped model choice.
-This replays the included completed evidence and requires no cloud credentials.
-
-In **Unit test lab**, try **Clamp a value** for a passing compact fixture, then **Merge closed
-intervals** for escalation. Inspect the fault evidence, download both suites,
-and open saved comparisons. Energy remains uncalibrated unless you explicitly
-enable an illustrative scenario.
-
-To run a downloaded suite, save its accompanying function as `subject.py` in the
-same folder and run `python -m pytest test_<exercise>_<profile>.py` using an
-environment with pytest. Only project-authored fixtures are executed by our tests.
-Never run uploaded/model-generated Python on the host. Use the separate
-[container runner](docs/sandbox.md) for those suites.
-
-Export the three original demonstrations without starting a server:
-
-```sh
-.venv/bin/python -m carbontrace --output data/demo-evidence.json
-```
-
-Prepare the benchmark manifest and six-call draft without model access:
-
-```sh
-.venv/bin/python -m carbontrace.benchmark manifest --output data/benchmark-manifest.json
-.venv/bin/python -m carbontrace.benchmark plan --output data/smoke-plan.json
-```
-
-Add `--full` to the plan command for the proposed 80-call exploratory run.
-Neither command calls a model. Exact model IDs and cost estimates remain pending;
-these files cannot authorize spending. See [the evaluation protocol](docs/benchmark-protocol.md).
+The container defaults to hosted-preview, which blocks persistent local routes and
+execution. Hosted-live additionally requires the configured private ledger,
+signing secret and fixed pool expiry; it has no in-memory spending fallback.
+Never place credentials in source, browser code or the container image.
 
 ## Verify
 
-```sh
-.venv/bin/pytest --cov=carbontrace --cov-report=term-missing --basetemp=.tmp/pytest
-.venv/bin/mypy --strict src tests
+~~~sh
+TMPDIR="$PWD/.tmp" .venv/bin/pytest --cov=carbontrace --cov-report=term-missing
+.venv/bin/mypy src tests
 .venv/bin/black --check src tests
 .venv/bin/ruff check src tests
 node --check src/carbontrace/static/app.js
+node --check src/carbontrace/static/hosted-live.mjs
 node --test tests/test_api_client.mjs
-```
+~~~
 
-The tests block real socket connections in-process and use temporary databases.
-Six subprocess checks verify our own exported pytest suites actually run.
-Container integration tests are opt-in; setup and commands are in
-[sandbox.md](docs/sandbox.md). They verify every reference/mutant bundle plus
-effective filesystem, network, user, memory, and process restrictions.
+Tests block real socket connections and use fake provider responses and temporary
+storage. They cover quote tampering, approval, concurrent global reservations,
+restart persistence, failures before dispatch and replay prevention. Container
+integration checks are opt-in. Tests do not invoke Gemini.
 
-## Structure
+## Sources and implementation
 
-```text
-src/carbontrace/
-  app.py             local HTTP interface and fail-closed live endpoint
-  benchmarks.py      original demo catalog plus expanded exercises
-  expanded_catalog.py explicit cases, seeded fault catalog, frozen split
-  extra_functions.py seventeen original functions and their seeded defects
-  benchmark.py       manifest, source-only prompts, draft plans, evaluation CLI
-  sandbox.py         restricted rootless-container runner; no host fallback
-  live_smoke.py      approved one-shot Gemini CLI, usage validation, cost ledger
-  preflight.py       offline pre-send cost scenarios and historical quality evidence
-  decision.py        quality-gated saved model comparison and checked suite access
-  workflow.py        hash-checked trace of the completed Gemini experiment
-  resources/         sanitized original pilot and dated price snapshot
-  quality.py         assertions, mutation detection, pytest rendering
-  engine.py          baseline and escalation policy comparison
-  impact.py          original allocated-power scenario arithmetic
-  domain.py          validated request/result contracts
-  store.py           local SQLite persistence
-  static/            original CSS, JavaScript, and SVG mark
-  templates/         server-rendered interface
-tests/               offline contracts, policy, arithmetic, export, HTTP tests
-docs/                methodology, architecture decisions, next integration steps
-```
+CarbonTrace is an original implementation. Research data is independently
+attributed: the pinned **CLEER** dataset contains 51 models and six workloads at
+revision c0253b43c50f91e538fecdcd0355a99c62359b78.
+[Technical report](https://reports.sustainableaigroup.com/CLEER-Tech-Report/),
+[dataset and calculation notes](docs/cleer-comparison.md), and
+[CC BY-NC 4.0 data licence](src/carbontrace/resources/CLEER-DATA-LICENSE.txt).
+Non-commercial research/demo reuse retains attribution; commercial reuse requires
+appropriate permission from the data publisher.
 
-Local history is in `data/evidence.sqlite3` (ignored by Git). Override the directory
-with `CARBONTRACE_DATA_DIR`. The development server accepts localhost/loopback
-hostnames only. It is not configured for public hosting or multi-user access.
-Cloud Run deployment will need explicit host configuration and durable external
-storage; local SQLite is not a deployment persistence strategy.
+The included research data retains its separate licence. Important modules are preflight.py (decision logic),
+research.py (published comparisons), hosted.py (signed approval and global
+allowance), and hosted_cloud.py (Google Cloud adapters).
 
-Keep the local server running while using the browser. If the page reports that it
-cannot reach CarbonTrace, run the VS Code task **CarbonTrace: start local app**,
-then click **Reconnect local app**. Reconnecting preserves the draft already in
-the page. Selecting any of the 14 development examples automatically loads its
-local preview; **Reset example** restores it after edits. Only clamp, discount,
-and merge have saved live-pilot observations. Other examples remain usable for
-planning and fixture checks, with quality marked unestablished.
-
-## Next milestone
-
-See [the live integration plan](docs/next-steps.md) and [observed smoke results](docs/smoke-results.md).
-The [six-response pilot](docs/pilot-comparison.md) is complete. Both models passed
-the gate on all three functions. Compact-first policy replay used 79.4% less
-estimated inference cost on those examples, with no escalation. The experiment's
-catalog estimate is USD 0.0183916 before credits/tax/FX. This small development
-pilot does not establish carbon savings or a general model ranking.
-No credentials are needed for the offline benchmark.
-
-The [Vertex AI setup review](docs/vertex-setup.md) and
-[priced six-generation proposal](docs/vertex-smoke-quote.json) record the current
-setup findings and cost estimate. The user approved the six-generation plan;
-the API is enabled, local tools and credentials are ready, and six responses have
-been evaluated. Both stopped ledgers and the completed continuation ledger remain
-intact. No further live work is authorized. See [live CLI operation](docs/live-smoke.md).
-
-The Cloud project `carbontrace-511814` is a reference identifier only. This app
-does not read credentials or call it on startup. The approved local CLI loads
-user ADC only when explicitly executed; the web interface stays offline.
+Further evidence: [demo flow](docs/demo-flow.md),
+[six-response pilot](docs/decision-trial-results.md),
+[recorded live comparison](docs/live-comparison-results.md),
+[methodology](docs/methodology.md), and [deployment](docs/cloud-run.md).

@@ -192,6 +192,102 @@ class CarbonAvailability(Contract):
     )
 
 
+class PrecallDecision(Contract):
+    """Actionable before execution; unfamiliar drafts never inherit task quality."""
+
+    status: Literal[
+        "supported_candidate", "insufficient_quality_evidence", "no_passing_candidate"
+    ]
+    evidence_scope: Literal[
+        "exact_paired_prompt", "partial_exact_prompt", "unmatched_draft"
+    ]
+    recommended_role: Role | None = None
+    recommended_model_id: str | None = None
+    headline: str
+    reasons: list[str]
+    selected_matches_recommendation: bool | None = None
+    caveat: str = (
+        "Historical task evidence supports a candidate, not a guarantee for a new response. Actual prompt energy/carbon are unmeasured. No model call was made."
+    )
+
+
+def precall_decision(
+    models: list[ModelPreview], selected: Role, reference: ResearchResult | None
+) -> PrecallDecision:
+    """Require both exact prompt observations before making a comparative choice."""
+    matched = [m for m in models if m.quality.matched_observation is not None]
+    if len(matched) != len(models):
+        return PrecallDecision(
+            status="insufficient_quality_evidence",
+            evidence_scope="partial_exact_prompt" if matched else "unmatched_draft",
+            headline="Choose a model manually: quality evidence is insufficient.",
+            reasons=[
+                "This draft has no matching quality evidence for both exact models. Editing the prompt or context removes the saved match.",
+                "Token/cost scenarios can guide a budget decision, but cannot establish task quality.",
+                "A CLEER workload is separate published context; it does not classify or predict this prompt.",
+            ],
+        )
+    passed = [
+        m
+        for m in matched
+        if (o := m.quality.matched_observation) is not None
+        and o.accepted
+        and o.tests > 0
+        and o.total_mutations > 0
+        and o.detected == o.total_mutations
+    ]
+    if not passed:
+        return PrecallDecision(
+            status="no_passing_candidate",
+            evidence_scope="exact_paired_prompt",
+            headline="Neither saved candidate met the quality requirement.",
+            reasons=[
+                "A low price or environmental reference cannot override a failed quality gate."
+            ],
+        )
+    energy = (
+        {
+            row.model_name: row.total_energy_wh
+            for row in reference.models
+            if row.available and row.total_energy_wh is not None
+        }
+        if reference
+        else {}
+    )
+    names = {"compact": "Gemini 3.5 Flash-Lite", "strong": "Gemini 3.7 Flash"}
+    use_energy = all(names[m.role] in energy for m in passed)
+    chosen = min(
+        passed,
+        key=lambda m: (
+            energy[names[m.role]] if use_energy else m.cost_usd.high,
+            m.cost_usd.high,
+            m.cost_usd.low,
+        ),
+    )
+    reasons = [
+        (
+            "Both saved suites met this exact task's gate. Validate any new suite."
+            if len(passed) == len(models)
+            else "Only the passing saved candidate is eligible; a failing model cannot win on price or energy."
+        ),
+        f"At your chosen token scenarios, this model's estimated cost is US${chosen.cost_usd.low}–US${chosen.cost_usd.high}; output size is assumed.",
+    ]
+    reasons.append(
+        "Among eligible candidates, this model has the lower published facility-energy reference for your selected CLEER workload. This is not measured request-carbon savings."
+        if use_energy and len(passed) > 1
+        else "No environmental ranking was needed to select a candidate; without a workload reference, cost scenarios break ties between passing candidates."
+    )
+    return PrecallDecision(
+        status="supported_candidate",
+        evidence_scope="exact_paired_prompt",
+        recommended_role=chosen.role,
+        recommended_model_id=chosen.model_id,
+        headline=f"Suggested candidate: {names[chosen.role]}",
+        reasons=reasons,
+        selected_matches_recommendation=selected == chosen.role,
+    )
+
+
 class PreflightResult(Contract):
     """Exportable, credential-free preview; includes no prompt text or execution."""
 
@@ -221,6 +317,7 @@ class PreflightResult(Contract):
     )
     guidance: str
     scope_note: str
+    decision: PrecallDecision
 
 
 def build_preflight(request: PreflightRequest) -> PreflightResult:
@@ -320,8 +417,18 @@ def build_preflight(request: PreflightRequest) -> PreflightResult:
                 ),
             )
         )
-    matched = any(row.quality.matched_observation is not None for row in previews)
-    both_matched = all(row.quality.matched_observation is not None for row in previews)
+    reference = (
+        compare_research(
+            ResearchRequest(
+                workload=request.research_reference.workload,
+                sessions=1,
+                grid_g_per_kwh=request.research_reference.grid_g_per_kwh,
+            )
+        )
+        if request.research_reference
+        else None
+    )
+    decision = precall_decision(previews, request.selected_model, reference)
     return PreflightResult(
         prompt_sha256=digest,
         visible_utf8_bytes=len(payload),
@@ -336,28 +443,9 @@ def build_preflight(request: PreflightRequest) -> PreflightResult:
         source_report_sha256=evidence.source_report_sha256,
         models=previews,
         carbon=CarbonAvailability(),
-        research_reference=(
-            compare_research(
-                ResearchRequest(
-                    model_a="Gemini 3.5 Flash-Lite",
-                    model_b="Gemini 3.7 Flash",
-                    workload=request.research_reference.workload,
-                    sessions=1,
-                    grid_g_per_kwh=request.research_reference.grid_g_per_kwh,
-                )
-            )
-            if request.research_reference is not None
-            else None
-        ),
+        research_reference=reference,
         carbon_scenario=request.carbon_scenario,
-        guidance=(
-            "Both saved suites met this exact task's gate. Flash-Lite is a lower-price candidate with a lower CLEER energy reference for the published workloads. Validate any new suite; this is not measured request-carbon savings or a general quality ranking."
-            if both_matched
-            else (
-                "Flash-Lite met the gate on a saved response to this exact pilot prompt. The comparison model has no matching quality results. Validate any new suite; this is not a quality ranking."
-                if matched
-                else "This draft has no matching quality evidence. Price scenarios alone do not establish which model will meet the task."
-            )
-        ),
+        decision=decision,
+        guidance=" ".join(decision.reasons),
         scope_note="One visible request only. Hidden agent context, later tool calls, retries, and quality-gate runtime are excluded. Your draft is not saved by this endpoint.",
     )

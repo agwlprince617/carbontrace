@@ -1,0 +1,370 @@
+{
+  "provenance": "real hosted Gemini browser requests",
+  "deployment_revision": "carbontrace-demo-00002-8j8",
+  "generation_count": 2,
+  "pool_remaining_at_verification": 4,
+  "results": [
+    {
+      "id": "b02106076c3a4f1da8e555dd2528d76f",
+      "status": "completed",
+      "quote": {
+        "id": "b02106076c3a4f1da8e555dd2528d76f",
+        "created_at": "2026-10-18T04:48:11.164360+00:00",
+        "expires_at": "2026-10-18T04:58:11.164360+00:00",
+        "draft": {
+          "prompt": "Write a pytest test suite for the Python function below. Return only Python code, without Markdown fences. Import the function from subject. Use only pytest, math, and subject imports. Include normal cases, boundaries, and required invalid-input exceptions. Do not read files, inspect implementation internals, use private attributes, perform I/O, or skip tests. Requirements apply to the annotated input types.\n\nRequirements: Keep an integer inside inclusive bounds. Reject reversed bounds and preserve interior values.\n\ndef clamp(value: int, lower: int, upper: int) -> int:\n    \"\"\"Clamp an integer to inclusive bounds; reject reversed bounds.\"\"\"\n    if lower > upper:\n        raise ValueError(\"lower must not exceed upper\")\n    return min(max(value, lower), upper)\n",
+          "context": "",
+          "selected_model": "compact",
+          "generated_low": 256,
+          "generated_high": 1024,
+          "carbon_scenario": null,
+          "research_reference": {
+            "workload": "chat.light",
+            "grid_g_per_kwh": "400"
+          }
+        },
+        "exact_payload": "Write a pytest test suite for the Python function below. Return only Python code, without Markdown fences. Import the function from subject. Use only pytest, math, and subject imports. Include normal cases, boundaries, and required invalid-input exceptions. Do not read files, inspect implementation internals, use private attributes, perform I/O, or skip tests. Requirements apply to the annotated input types.\n\nRequirements: Keep an integer inside inclusive bounds. Reject reversed bounds and preserve interior values.\n\ndef clamp(value: int, lower: int, upper: int) -> int:\n    \"\"\"Clamp an integer to inclusive bounds; reject reversed bounds.\"\"\"\n    if lower > upper:\n        raise ValueError(\"lower must not exceed upper\")\n    return min(max(value, lower), upper)\n",
+        "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+        "project": "carbontrace-511814",
+        "location": "global",
+        "api_version": "v1",
+        "models": [
+          {
+            "model_id": "gemini-3.5-flash-lite",
+            "model_name": "Gemini 3.5 Flash-Lite",
+            "input_usd_per_million": "0.30",
+            "generated_usd_per_million": "2.50"
+          }
+        ],
+        "generation_calls": 1,
+        "token_count_calls": 1,
+        "metadata_reads": 0,
+        "maximum_input_tokens": 4096,
+        "maximum_generated_tokens": 4096,
+        "stress_generated_tokens": 8192,
+        "thinking_level": "LOW",
+        "candidate_count": 1,
+        "automatic_retries": 0,
+        "automatic_continuation": false,
+        "tools": false,
+        "usage_policy": "protojson_full_v3",
+        "pricing_checked": "2026-10-18",
+        "pricing_url": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+        "allowance_usd": "0.10",
+        "estimated_cost_usd": "0.0114688",
+        "stress_cost_usd": "0.0217088",
+        "cost_note": "Global Standard PayGo catalog estimate before credits/tax/FX. Flash promotional credits excluded. Output requests and allowance are not a hard Google billing cap.",
+        "quality_note": "Fresh output is text only; quality has not been evaluated.",
+        "privacy_note": "Approved request and response are stored privately and scheduled for deletion after seven days. Do not submit secrets.",
+        "research": {
+          "mode": "published_workload_scenario",
+          "live_model_calls": 0,
+          "source": {
+            "publisher": "Sustainable AI Group",
+            "title": "CLEER Dataset",
+            "dataset_generated_at": "2026-09-09",
+            "dataset_engine": "CLEER-Text-0826",
+            "related_report_version": "CLEER-Text-0926 (29 September 2026)",
+            "commit": "c0253b43c50f91e538fecdcd0355a99c62359b78",
+            "source_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/v1/cleer-dashboard-data.csv",
+            "schema_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/v1/schema.md",
+            "report_url": "https://reports.sustainableaigroup.com/CLEER-Tech-Report/",
+            "license_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/LICENSE",
+            "license": "CC BY-NC 4.0",
+            "adapted_csv_sha256": "fa698cdb9f43a54288888a915b4784ac354e990a85a5331ac9c861360b1c4ce8",
+            "modifications": "CSV line endings normalized to LF. Published energy mean/SD unchanged. CarbonTrace scales energy means by session count and separately calculates operational electricity emissions under the user's grid assumption. Published carbon/cost fields are not used.",
+            "limitations": [
+              "Standardized sessions only. No published per-token intensities or workload token recipes; not an estimate for the pasted prompt.",
+              "Closed-model figures are modelled, not provider energy measurements. Equal workload does not establish equal quality.",
+              "Reported SD describes source model variation, not a validated confidence interval. Session-count scaling does not imply independent errors.",
+              "Dataset declares engine 0826; linked report is 0926. Versions are preserved separately, not represented as identical.",
+              "Upstream metadata lists 52 models; this pinned CSV contains 51. Only actual CSV records are offered.",
+              "CarbonTrace reports operational electricity emissions only, excluding embodied hardware, training, construction, networking, and end-user devices.",
+              "Dataset carbon columns are excluded: their scope differs and their operational factor does not match the declared metadata scenario.",
+              "Data is licensed for non-commercial use with attribution; commercial reuse requires separate written permission from Sustainable AI Group."
+            ]
+          },
+          "request": {
+            "model_a": "Gemini 3.5 Flash-Lite",
+            "model_b": "Gemini 3.7 Flash",
+            "workload": "chat.light",
+            "sessions": 1,
+            "grid_g_per_kwh": "400"
+          },
+          "models": [
+            {
+              "model_name": "Gemini 3.5 Flash-Lite",
+              "available": true,
+              "evidence": {
+                "model_name": "Gemini 3.5 Flash-Lite",
+                "workload": "chat.light",
+                "description": "A quick single question. A definition, a short explanation, or a one-off task, answered and done in a single exchange.",
+                "estimation_basis": "CLEER TPU calibration",
+                "energy_wh_mean": "0.062106712990",
+                "energy_wh_sd": "0.047052759722"
+              },
+              "total_energy_wh": "0.062106712990",
+              "operational_carbon_g": "0.02484268519600",
+              "note": "Published workload estimate; quality for your task is not established."
+            },
+            {
+              "model_name": "Gemini 3.7 Flash",
+              "available": true,
+              "evidence": {
+                "model_name": "Gemini 3.7 Flash",
+                "workload": "chat.light",
+                "description": "A quick single question. A definition, a short explanation, or a one-off task, answered and done in a single exchange.",
+                "estimation_basis": "CLEER TPU calibration",
+                "energy_wh_mean": "0.141987097860",
+                "energy_wh_sd": "0.106774389007"
+              },
+              "total_energy_wh": "0.141987097860",
+              "operational_carbon_g": "0.05679483914400",
+              "note": "Published workload estimate; quality for your task is not established."
+            }
+          ],
+          "uncertainty_note": "Per-session SD is preserved from the source. No aggregate confidence interval is calculated; model uncertainty need not average away across sessions.",
+          "carbon_basis": "Published facility Wh \u00d7 sessions \u00f7 1000 \u00d7 user-assumed gCO2e/kWh. Facility energy already includes overheads: PUE is not applied again. This is operational electricity only, not CLEER's published lifecycle carbon. A zero electricity factor does not establish a zero total footprint."
+        },
+        "schema_version": 3,
+        "execution_mode": "hosted_selected_model",
+        "quality_task": null,
+        "precall_decision": {
+          "status": "supported_candidate",
+          "evidence_scope": "exact_paired_prompt",
+          "recommended_role": "compact",
+          "recommended_model_id": "gemini-3.5-flash-lite",
+          "headline": "Suggested candidate: Gemini 3.5 Flash-Lite",
+          "reasons": [
+            "Both saved suites met this exact task's gate. Validate any new suite.",
+            "At your chosen token scenarios, this model's estimated cost is US$0.0006886\u2013US$0.0026086; output size is assumed.",
+            "Among eligible candidates, this model has the lower published facility-energy reference for your selected CLEER workload. This is not measured request-carbon savings."
+          ],
+          "selected_matches_recommendation": true,
+          "caveat": "Historical task evidence supports a candidate, not a guarantee for a new response. Actual prompt energy/carbon are unmeasured. No model call was made."
+        },
+        "pool_epoch": "carbontrace-public-demo-20261018-v1",
+        "pool_limit": 6,
+        "pool_expires_at": "2026-10-25T23:59:00+00:00",
+        "plan_sha256": "100136e3eddedaf4319a228783fa45b26c801e30ad08baa23598d461f59e66bc"
+      },
+      "started_at": "2026-10-18T04:48:27.866765+00:00",
+      "operations": [
+        "count_tokens_dispatched",
+        "generate_dispatched"
+      ],
+      "response": {
+        "text": "import pytest\nimport math\nfrom subject import clamp\n\ndef test_clamp_within_bounds():\n    assert clamp(5, 0, 10) == 5\n\ndef test_clamp_below_lower():\n    assert clamp(-5, 0, 10) == 0\n\ndef test_clamp_above_upper():\n    assert clamp(15, 0, 10) == 10\n\ndef test_clamp_at_lower_boundary():\n    assert clamp(0, 0, 10) == 0\n\ndef test_clamp_at_upper_boundary():\n    assert clamp(10, 0, 10) == 10\n\ndef test_clamp_equal_bounds():\n    assert clamp(5, 5, 5) == 5\n    assert clamp(0, 5, 5) == 5\n    assert clamp(10, 5, 5) == 5\n\ndef test_clamp_negative_bounds():\n    assert clamp(-5, -10, -1) == -5\n    assert clamp(-15, -10, -1) == -10\n    assert clamp(0, -10, -1) == -1\n\ndef test_clamp_reversed_bounds_raises_value_error():\n    with pytest.raises(ValueError):\n        clamp(5, 10, 0)\n\ndef test_clamp_invalid_bounds_equal_raises_none():\n    # Ensuring valid case when lower == upper doesn't raise\n    assert clamp(5, 5, 5) == 5",
+        "model_version": "gemini-3.5-flash-lite",
+        "finish_reason": "STOP",
+        "raw_usage": {
+          "input_tokens": 162,
+          "candidate_tokens": 359,
+          "thinking_tokens": null,
+          "cached_tokens": null,
+          "total_tokens": 521,
+          "tool_tokens": null
+        },
+        "elapsed_seconds": 1.2146261379999999,
+        "quality": "not_evaluated",
+        "effective_usage": {
+          "input_tokens": 162,
+          "candidate_tokens": 359,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 521,
+          "tool_tokens": 0
+        },
+        "estimated_cost_usd": "0.0009461",
+        "complete_output": true
+      },
+      "billing_uncertain": false,
+      "actual_energy_wh": null,
+      "actual_carbon_g": null,
+      "input_token_count": 162,
+      "finished_at": "2026-10-18T04:48:29.672678+00:00"
+    },
+    {
+      "id": "a2f2a9234088438a8683c7b013892f36",
+      "status": "completed",
+      "quote": {
+        "id": "a2f2a9234088438a8683c7b013892f36",
+        "created_at": "2026-10-18T04:49:00.849468+00:00",
+        "expires_at": "2026-10-18T04:59:00.849468+00:00",
+        "draft": {
+          "prompt": "Write a pytest test suite for the Python function below. Return only Python code, without Markdown fences. Import the function from subject. Use only pytest, math, and subject imports. Include normal cases, boundaries, and required invalid-input exceptions. Do not read files, inspect implementation internals, use private attributes, perform I/O, or skip tests. Requirements apply to the annotated input types.\n\nRequirements: Keep an integer inside inclusive bounds. Reject reversed bounds and preserve interior values.\n\ndef clamp(value: int, lower: int, upper: int) -> int:\n    \"\"\"Clamp an integer to inclusive bounds; reject reversed bounds.\"\"\"\n    if lower > upper:\n        raise ValueError(\"lower must not exceed upper\")\n    return min(max(value, lower), upper)\n",
+          "context": "",
+          "selected_model": "strong",
+          "generated_low": 256,
+          "generated_high": 1024,
+          "carbon_scenario": null,
+          "research_reference": {
+            "workload": "chat.light",
+            "grid_g_per_kwh": "400"
+          }
+        },
+        "exact_payload": "Write a pytest test suite for the Python function below. Return only Python code, without Markdown fences. Import the function from subject. Use only pytest, math, and subject imports. Include normal cases, boundaries, and required invalid-input exceptions. Do not read files, inspect implementation internals, use private attributes, perform I/O, or skip tests. Requirements apply to the annotated input types.\n\nRequirements: Keep an integer inside inclusive bounds. Reject reversed bounds and preserve interior values.\n\ndef clamp(value: int, lower: int, upper: int) -> int:\n    \"\"\"Clamp an integer to inclusive bounds; reject reversed bounds.\"\"\"\n    if lower > upper:\n        raise ValueError(\"lower must not exceed upper\")\n    return min(max(value, lower), upper)\n",
+        "prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+        "project": "carbontrace-511814",
+        "location": "global",
+        "api_version": "v1",
+        "models": [
+          {
+            "model_id": "gemini-3.7-flash",
+            "model_name": "Gemini 3.7 Flash",
+            "input_usd_per_million": "1.50",
+            "generated_usd_per_million": "7.50"
+          }
+        ],
+        "generation_calls": 1,
+        "token_count_calls": 1,
+        "metadata_reads": 0,
+        "maximum_input_tokens": 4096,
+        "maximum_generated_tokens": 4096,
+        "stress_generated_tokens": 8192,
+        "thinking_level": "LOW",
+        "candidate_count": 1,
+        "automatic_retries": 0,
+        "automatic_continuation": false,
+        "tools": false,
+        "usage_policy": "protojson_full_v3",
+        "pricing_checked": "2026-10-18",
+        "pricing_url": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+        "allowance_usd": "0.10",
+        "estimated_cost_usd": "0.036864",
+        "stress_cost_usd": "0.067584",
+        "cost_note": "Global Standard PayGo catalog estimate before credits/tax/FX. Flash promotional credits excluded. Output requests and allowance are not a hard Google billing cap.",
+        "quality_note": "Fresh output is text only; quality has not been evaluated.",
+        "privacy_note": "Approved request and response are stored privately and scheduled for deletion after seven days. Do not submit secrets.",
+        "research": {
+          "mode": "published_workload_scenario",
+          "live_model_calls": 0,
+          "source": {
+            "publisher": "Sustainable AI Group",
+            "title": "CLEER Dataset",
+            "dataset_generated_at": "2026-09-09",
+            "dataset_engine": "CLEER-Text-0826",
+            "related_report_version": "CLEER-Text-0926 (29 September 2026)",
+            "commit": "c0253b43c50f91e538fecdcd0355a99c62359b78",
+            "source_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/v1/cleer-dashboard-data.csv",
+            "schema_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/v1/schema.md",
+            "report_url": "https://reports.sustainableaigroup.com/CLEER-Tech-Report/",
+            "license_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/LICENSE",
+            "license": "CC BY-NC 4.0",
+            "adapted_csv_sha256": "fa698cdb9f43a54288888a915b4784ac354e990a85a5331ac9c861360b1c4ce8",
+            "modifications": "CSV line endings normalized to LF. Published energy mean/SD unchanged. CarbonTrace scales energy means by session count and separately calculates operational electricity emissions under the user's grid assumption. Published carbon/cost fields are not used.",
+            "limitations": [
+              "Standardized sessions only. No published per-token intensities or workload token recipes; not an estimate for the pasted prompt.",
+              "Closed-model figures are modelled, not provider energy measurements. Equal workload does not establish equal quality.",
+              "Reported SD describes source model variation, not a validated confidence interval. Session-count scaling does not imply independent errors.",
+              "Dataset declares engine 0826; linked report is 0926. Versions are preserved separately, not represented as identical.",
+              "Upstream metadata lists 52 models; this pinned CSV contains 51. Only actual CSV records are offered.",
+              "CarbonTrace reports operational electricity emissions only, excluding embodied hardware, training, construction, networking, and end-user devices.",
+              "Dataset carbon columns are excluded: their scope differs and their operational factor does not match the declared metadata scenario.",
+              "Data is licensed for non-commercial use with attribution; commercial reuse requires separate written permission from Sustainable AI Group."
+            ]
+          },
+          "request": {
+            "model_a": "Gemini 3.5 Flash-Lite",
+            "model_b": "Gemini 3.7 Flash",
+            "workload": "chat.light",
+            "sessions": 1,
+            "grid_g_per_kwh": "400"
+          },
+          "models": [
+            {
+              "model_name": "Gemini 3.5 Flash-Lite",
+              "available": true,
+              "evidence": {
+                "model_name": "Gemini 3.5 Flash-Lite",
+                "workload": "chat.light",
+                "description": "A quick single question. A definition, a short explanation, or a one-off task, answered and done in a single exchange.",
+                "estimation_basis": "CLEER TPU calibration",
+                "energy_wh_mean": "0.062106712990",
+                "energy_wh_sd": "0.047052759722"
+              },
+              "total_energy_wh": "0.062106712990",
+              "operational_carbon_g": "0.02484268519600",
+              "note": "Published workload estimate; quality for your task is not established."
+            },
+            {
+              "model_name": "Gemini 3.7 Flash",
+              "available": true,
+              "evidence": {
+                "model_name": "Gemini 3.7 Flash",
+                "workload": "chat.light",
+                "description": "A quick single question. A definition, a short explanation, or a one-off task, answered and done in a single exchange.",
+                "estimation_basis": "CLEER TPU calibration",
+                "energy_wh_mean": "0.141987097860",
+                "energy_wh_sd": "0.106774389007"
+              },
+              "total_energy_wh": "0.141987097860",
+              "operational_carbon_g": "0.05679483914400",
+              "note": "Published workload estimate; quality for your task is not established."
+            }
+          ],
+          "uncertainty_note": "Per-session SD is preserved from the source. No aggregate confidence interval is calculated; model uncertainty need not average away across sessions.",
+          "carbon_basis": "Published facility Wh \u00d7 sessions \u00f7 1000 \u00d7 user-assumed gCO2e/kWh. Facility energy already includes overheads: PUE is not applied again. This is operational electricity only, not CLEER's published lifecycle carbon. A zero electricity factor does not establish a zero total footprint."
+        },
+        "schema_version": 3,
+        "execution_mode": "hosted_selected_model",
+        "quality_task": null,
+        "precall_decision": {
+          "status": "supported_candidate",
+          "evidence_scope": "exact_paired_prompt",
+          "recommended_role": "compact",
+          "recommended_model_id": "gemini-3.5-flash-lite",
+          "headline": "Suggested candidate: Gemini 3.5 Flash-Lite",
+          "reasons": [
+            "Both saved suites met this exact task's gate. Validate any new suite.",
+            "At your chosen token scenarios, this model's estimated cost is US$0.0006886\u2013US$0.0026086; output size is assumed.",
+            "Among eligible candidates, this model has the lower published facility-energy reference for your selected CLEER workload. This is not measured request-carbon savings."
+          ],
+          "selected_matches_recommendation": false,
+          "caveat": "Historical task evidence supports a candidate, not a guarantee for a new response. Actual prompt energy/carbon are unmeasured. No model call was made."
+        },
+        "pool_epoch": "carbontrace-public-demo-20261018-v1",
+        "pool_limit": 6,
+        "pool_expires_at": "2026-10-25T23:59:00+00:00",
+        "plan_sha256": "435ead36f98914af4dc99fdbe871705a5fdd709da21d1abc50e8d8c8b56e392d"
+      },
+      "started_at": "2026-10-18T04:49:14.782572+00:00",
+      "operations": [
+        "count_tokens_dispatched",
+        "generate_dispatched"
+      ],
+      "response": {
+        "text": "import pytest\nfrom subject import clamp\n\n\ndef test_clamp_interior_values():\n    assert clamp(5, 0, 10) == 5\n    assert clamp(0, -5, 5) == 0\n    assert clamp(-2, -10, -1) == -2\n\n\ndef test_clamp_boundaries():\n    assert clamp(0, 0, 10) == 0\n    assert clamp(10, 0, 10) == 10\n    assert clamp(-5, -5, 5) == -5\n    assert clamp(5, -5, 5) == 5\n\n\ndef test_clamp_below_lower_bound():\n    assert clamp(-1, 0, 10) == 0\n    assert clamp(-100, -50, 50) == -50\n\n\ndef test_clamp_above_upper_bound():\n    assert clamp(11, 0, 10) == 10\n    assert clamp(100, -50, 50) == 50\n\n\ndef test_clamp_equal_bounds():\n    assert clamp(5, 5, 5) == 5\n    assert clamp(0, 5, 5) == 5\n    assert clamp(10, 5, 5) == 5\n\n\ndef test_clamp_reversed_bounds_raises_value_error():\n    with pytest.raises(ValueError):\n        clamp(5, 10, 0)\n    with pytest.raises(ValueError):\n        clamp(0, 1, 0)\n    with pytest.raises(ValueError):\n        clamp(-5, -2, -8)",
+        "model_version": "gemini-3.7-flash",
+        "finish_reason": "STOP",
+        "raw_usage": {
+          "input_tokens": 162,
+          "candidate_tokens": 384,
+          "thinking_tokens": null,
+          "cached_tokens": null,
+          "total_tokens": 546,
+          "tool_tokens": null
+        },
+        "elapsed_seconds": 2.7537185699999895,
+        "quality": "not_evaluated",
+        "effective_usage": {
+          "input_tokens": 162,
+          "candidate_tokens": 384,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 546,
+          "tool_tokens": 0
+        },
+        "estimated_cost_usd": "0.003123",
+        "complete_output": true
+      },
+      "billing_uncertain": false,
+      "actual_energy_wh": null,
+      "actual_carbon_g": null,
+      "input_token_count": 162,
+      "finished_at": "2026-10-18T04:49:17.882032+00:00"
+    }
+  ],
+  "actual_request_energy_and_carbon": "unmeasured",
+  "fresh_quality": "not_evaluated"
+}

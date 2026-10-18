@@ -70,8 +70,8 @@ additionally includes embodied emissions and a functional unit:
 [SCI specification](https://sci.greensoftware.foundation/).
 
 Our elementary unit conversions are independently implemented. We do not claim
-SCI conformance. EcoLogits was useful background research, but no implementation,
-model data, or regression coefficients were copied or imported into this project.
+SCI conformance. The application uses original calculation code; published CLEER
+workload data is separately attributed and licensed.
 
 ## 6. Before claiming real efficiency or savings
 

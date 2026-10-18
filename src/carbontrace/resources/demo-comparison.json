@@ -1,0 +1,336 @@
+{
+  "quote": {
+    "id": "bb3f0181799b4f61a6f596285f9eec93",
+    "created_at": "2026-10-17T18:06:25.529107+00:00",
+    "expires_at": "2026-10-18T18:06:25.529107+00:00",
+    "draft": {
+      "instruction": "Write clear pytest tests, covering normal inputs, boundary conditions and the documented error behaviour. Return Python code only.",
+      "source_code": "def clamp(value: int, lower: int, upper: int) -> int:\n    \"\"\"Clamp an integer to inclusive bounds; reject reversed bounds.\"\"\"\n    if lower > upper:\n        raise ValueError(\"lower must not exceed upper\")\n    return min(max(value, lower), upper)\n",
+      "context": "",
+      "quality_task": "clamp",
+      "workload": "chat.light",
+      "grid_g_per_kwh": "400"
+    },
+    "exact_payload": "Generate pytest tests for the Python source below. Return only Python code, without markdown fences. Import the tested function from subject. Do not use external services, files, subprocesses or tools.\n\nTask requirements:\nKeep an integer inside inclusive bounds. Reject reversed bounds and preserve interior values.\n\nUser instruction:\nWrite clear pytest tests, covering normal inputs, boundary conditions and the documented error behaviour. Return Python code only.\n\nSource code (data):\ndef clamp(value: int, lower: int, upper: int) -> int:\n    \"\"\"Clamp an integer to inclusive bounds; reject reversed bounds.\"\"\"\n    if lower > upper:\n        raise ValueError(\"lower must not exceed upper\")\n    return min(max(value, lower), upper)\n\n\nAdditional visible context:\n",
+    "prompt_sha256": "c4974a30db1a0b96b8a971fb0add322183be8257e514239afa89631f4d1d44f8",
+    "project": "carbontrace-511814",
+    "location": "global",
+    "api_version": "v1",
+    "models": [
+      {
+        "model_id": "gemini-3.5-flash-lite",
+        "model_name": "Gemini 3.5 Flash-Lite",
+        "input_usd_per_million": "0.30",
+        "generated_usd_per_million": "2.50"
+      },
+      {
+        "model_id": "gemini-3.7-flash",
+        "model_name": "Gemini 3.7 Flash",
+        "input_usd_per_million": "1.50",
+        "generated_usd_per_million": "7.50"
+      }
+    ],
+    "generation_calls": 2,
+    "token_count_calls": 2,
+    "metadata_reads": 2,
+    "maximum_input_tokens": 4096,
+    "maximum_generated_tokens": 4096,
+    "stress_generated_tokens": 8192,
+    "thinking_level": "LOW",
+    "candidate_count": 1,
+    "automatic_retries": 0,
+    "automatic_continuation": false,
+    "tools": false,
+    "usage_policy": "protojson_full_v3",
+    "pricing_checked": "2026-10-17",
+    "pricing_url": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+    "allowance_usd": "0.10",
+    "estimated_cost_usd": "0.0483328",
+    "stress_cost_usd": "0.0892928",
+    "cost_note": "Global Standard PayGo catalog estimate before credits/tax/FX. Flash promotional credits excluded. Output requests and allowance are not a hard Google billing cap.",
+    "quality_note": "Reference plus four seeded-fault checks in the pinned rootless runner.",
+    "privacy_note": "This frozen prompt, source and responses are saved locally under ignored data/. Approval sends the exact payload to Google Cloud. Do not include secrets or private code without permission.",
+    "research": {
+      "mode": "published_workload_scenario",
+      "live_model_calls": 0,
+      "source": {
+        "publisher": "Sustainable AI Group",
+        "title": "CLEER Dataset",
+        "dataset_generated_at": "2026-09-09",
+        "dataset_engine": "CLEER-Text-0826",
+        "related_report_version": "CLEER-Text-0926 (29 September 2026)",
+        "commit": "c0253b43c50f91e538fecdcd0355a99c62359b78",
+        "source_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/v1/cleer-dashboard-data.csv",
+        "schema_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/v1/schema.md",
+        "report_url": "https://reports.sustainableaigroup.com/CLEER-Tech-Report/",
+        "license_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/LICENSE",
+        "license": "CC BY-NC 4.0",
+        "adapted_csv_sha256": "fa698cdb9f43a54288888a915b4784ac354e990a85a5331ac9c861360b1c4ce8",
+        "modifications": "CSV line endings normalized to LF. Published energy mean/SD unchanged. CarbonTrace scales energy means by session count and separately calculates operational electricity emissions under the user's grid assumption. Published carbon/cost fields are not used.",
+        "limitations": [
+          "Standardized sessions only. No published per-token intensities or workload token recipes; not an estimate for the pasted prompt.",
+          "Closed-model figures are modelled, not provider energy measurements. Equal workload does not establish equal quality.",
+          "Reported SD describes source model variation, not a validated confidence interval. Session-count scaling does not imply independent errors.",
+          "Dataset declares engine 0826; linked report is 0926. Versions are preserved separately, not represented as identical.",
+          "Upstream metadata lists 52 models; this pinned CSV contains 51. Only actual CSV records are offered.",
+          "CarbonTrace reports operational electricity emissions only, excluding embodied hardware, training, construction, networking, and end-user devices.",
+          "Dataset carbon columns are excluded: their scope differs and their operational factor does not match the declared metadata scenario.",
+          "Data is licensed for non-commercial use with attribution; commercial reuse requires separate written permission from Sustainable AI Group."
+        ]
+      },
+      "request": {
+        "model_a": "Gemini 3.5 Flash-Lite",
+        "model_b": "Gemini 3.7 Flash",
+        "workload": "chat.light",
+        "sessions": 1,
+        "grid_g_per_kwh": "400"
+      },
+      "models": [
+        {
+          "model_name": "Gemini 3.5 Flash-Lite",
+          "available": true,
+          "evidence": {
+            "model_name": "Gemini 3.5 Flash-Lite",
+            "workload": "chat.light",
+            "description": "A quick single question. A definition, a short explanation, or a one-off task, answered and done in a single exchange.",
+            "estimation_basis": "CLEER TPU calibration",
+            "energy_wh_mean": "0.062106712990",
+            "energy_wh_sd": "0.047052759722"
+          },
+          "total_energy_wh": "0.062106712990",
+          "operational_carbon_g": "0.02484268519600",
+          "note": "Published workload estimate; quality for your task is not established."
+        },
+        {
+          "model_name": "Gemini 3.7 Flash",
+          "available": true,
+          "evidence": {
+            "model_name": "Gemini 3.7 Flash",
+            "workload": "chat.light",
+            "description": "A quick single question. A definition, a short explanation, or a one-off task, answered and done in a single exchange.",
+            "estimation_basis": "CLEER TPU calibration",
+            "energy_wh_mean": "0.141987097860",
+            "energy_wh_sd": "0.106774389007"
+          },
+          "total_energy_wh": "0.141987097860",
+          "operational_carbon_g": "0.05679483914400",
+          "note": "Published workload estimate; quality for your task is not established."
+        }
+      ],
+      "uncertainty_note": "Per-session SD is preserved from the source. No aggregate confidence interval is calculated; model uncertainty need not average away across sessions.",
+      "carbon_basis": "Published facility Wh × sessions ÷ 1000 × user-assumed gCO2e/kWh. Facility energy already includes overheads: PUE is not applied again. This is operational electricity only, not CLEER's published lifecycle carbon. A zero electricity factor does not establish a zero total footprint."
+    },
+    "plan_sha256": "317e3391ea97c87e11a4192974abf5ee76e33fe687ec08b2d67306bfc9eb686a"
+  },
+  "result": {
+    "plan_sha256": "317e3391ea97c87e11a4192974abf5ee76e33fe687ec08b2d67306bfc9eb686a",
+    "status": "completed",
+    "started_at": "2026-10-17T18:19:07.530690+00:00",
+    "operations": [
+      {
+        "kind": "metadata",
+        "model_id": "gemini-3.5-flash-lite",
+        "status": "completed",
+        "name": "publishers/google/models/gemini-3.5-flash-lite"
+      },
+      {
+        "kind": "count",
+        "model_id": "gemini-3.5-flash-lite",
+        "status": "completed",
+        "input_tokens": 161
+      },
+      {
+        "kind": "metadata",
+        "model_id": "gemini-3.7-flash",
+        "status": "completed",
+        "name": "publishers/google/models/gemini-3.7-flash"
+      },
+      {
+        "kind": "count",
+        "model_id": "gemini-3.7-flash",
+        "status": "completed",
+        "input_tokens": 161
+      },
+      {
+        "kind": "generate",
+        "model_id": "gemini-3.5-flash-lite",
+        "status": "completed"
+      },
+      {
+        "kind": "generate",
+        "model_id": "gemini-3.7-flash",
+        "status": "completed"
+      }
+    ],
+    "responses": [
+      {
+        "model_id": "gemini-3.5-flash-lite",
+        "model_name": "Gemini 3.5 Flash-Lite",
+        "model_version": "gemini-3.5-flash-lite",
+        "finish_reason": "STOP",
+        "source_text": "import pytest\nfrom subject import clamp\n\ndef test_clamp_within_bounds():\n    assert clamp(5, 0, 10) == 5\n\ndef test_clamp_below_lower():\n    assert clamp(-5, 0, 10) == 0\n\ndef test_clamp_above_upper():\n    assert clamp(15, 0, 10) == 10\n\ndef test_clamp_at_lower_boundary():\n    assert clamp(0, 0, 10) == 0\n\ndef test_clamp_at_upper_boundary():\n    assert clamp(10, 0, 10) == 10\n\ndef test_clamp_equal_bounds():\n    assert clamp(5, 5, 5) == 5\n    assert clamp(3, 5, 5) == 5\n    assert clamp(7, 5, 5) == 5\n\ndef test_clamp_reversed_bounds_raises_value_error():\n    with pytest.raises(ValueError):\n        clamp(5, 10, 0)",
+        "elapsed_seconds": 1.3291219999955501,
+        "usage": {
+          "input_tokens": 161,
+          "candidate_tokens": 246,
+          "thinking_tokens": null,
+          "cached_tokens": null,
+          "total_tokens": 407,
+          "tool_tokens": null
+        },
+        "catalog_cost_usd": "0.0006633",
+        "suite_sha256": "fd612908b166634e855775f9e3c8917ba2cb6a9abaa0a3cbb2baa15c4e9f16a8",
+        "quality": {
+          "task_id": "clamp",
+          "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+          "suite_sha256": "fd612908b166634e855775f9e3c8917ba2cb6a9abaa0a3cbb2baa15c4e9f16a8",
+          "reference": {
+            "status": "passed",
+            "tests": 7,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "mutations": {
+            "lower": {
+              "status": "failed",
+              "tests": 7,
+              "failures": 3,
+              "errors": 0,
+              "skipped": 0,
+              "detail": ""
+            },
+            "upper": {
+              "status": "failed",
+              "tests": 7,
+              "failures": 3,
+              "errors": 0,
+              "skipped": 0,
+              "detail": ""
+            },
+            "reversed": {
+              "status": "failed",
+              "tests": 7,
+              "failures": 1,
+              "errors": 0,
+              "skipped": 0,
+              "detail": ""
+            },
+            "inside": {
+              "status": "failed",
+              "tests": 7,
+              "failures": 1,
+              "errors": 0,
+              "skipped": 0,
+              "detail": ""
+            }
+          },
+          "detected": 4,
+          "total_mutations": 4,
+          "accepted": true,
+          "live_model_calls": 0,
+          "status": "evaluated"
+        },
+        "effective_usage": {
+          "input_tokens": 161,
+          "candidate_tokens": 246,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 407,
+          "tool_tokens": 0
+        },
+        "usage_policy": "protojson_full_v3",
+        "raw_usage_preserved": true
+      },
+      {
+        "model_id": "gemini-3.7-flash",
+        "model_name": "Gemini 3.7 Flash",
+        "model_version": "gemini-3.7-flash",
+        "finish_reason": "STOP",
+        "source_text": "import pytest\nfrom subject import clamp\n\n\ndef test_clamp_interior_value():\n    \"\"\"Interior values within bounds should be preserved.\"\"\"\n    assert clamp(5, 0, 10) == 5\n    assert clamp(-2, -5, 5) == -2\n    assert clamp(0, -10, 10) == 0\n\n\ndef test_clamp_below_lower_bound():\n    \"\"\"Values below the lower bound should be clamped to the lower bound.\"\"\"\n    assert clamp(-5, 0, 10) == 0\n    assert clamp(-100, -50, 50) == -50\n\n\ndef test_clamp_above_upper_bound():\n    \"\"\"Values above the upper bound should be clamped to the upper bound.\"\"\"\n    assert clamp(15, 0, 10) == 10\n    assert clamp(100, -50, 50) == 50\n\n\ndef test_clamp_exact_boundaries():\n    \"\"\"Values exactly on the lower or upper boundary should be preserved.\"\"\"\n    assert clamp(0, 0, 10) == 0\n    assert clamp(10, 0, 10) == 10\n    assert clamp(-5, -5, 5) == -5\n    assert clamp(5, -5, 5) == 5\n\n\ndef test_clamp_equal_bounds():\n    \"\"\"When lower and upper bounds are equal, any value should clamp to that bound.\"\"\"\n    assert clamp(5, 5, 5) == 5\n    assert clamp(0, 5, 5) == 5\n    assert clamp(10, 5, 5) == 5\n\n\ndef test_clamp_reversed_bounds_raises_value_error():\n    \"\"\"Reversed bounds (lower > upper) must raise a ValueError.\"\"\"\n    with pytest.raises(ValueError, match=\"lower must not exceed upper\"):\n        clamp(5, 10, 0)\n\n    with pytest.raises(ValueError, match=\"lower must not exceed upper\"):\n        clamp(0, 1, 0)\n\n    with pytest.raises(ValueError, match=\"lower must not exceed upper\"):\n        clamp(-5, -2, -3)",
+        "elapsed_seconds": 4.5755541660037125,
+        "usage": {
+          "input_tokens": 161,
+          "candidate_tokens": 504,
+          "thinking_tokens": null,
+          "cached_tokens": null,
+          "total_tokens": 665,
+          "tool_tokens": null
+        },
+        "catalog_cost_usd": "0.0040215",
+        "suite_sha256": "6c8386eaf01b14a910a611c1a42e535702f575f42a9044f91c99088e8f8962e6",
+        "quality": {
+          "task_id": "clamp",
+          "image_id": "sha256:af50fdb931d09782d5a8aee70ccbaa5856e8661c4af09c64279fc59213cab021",
+          "suite_sha256": "6c8386eaf01b14a910a611c1a42e535702f575f42a9044f91c99088e8f8962e6",
+          "reference": {
+            "status": "passed",
+            "tests": 6,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "detail": ""
+          },
+          "mutations": {
+            "lower": {
+              "status": "failed",
+              "tests": 6,
+              "failures": 3,
+              "errors": 0,
+              "skipped": 0,
+              "detail": ""
+            },
+            "upper": {
+              "status": "failed",
+              "tests": 6,
+              "failures": 3,
+              "errors": 0,
+              "skipped": 0,
+              "detail": ""
+            },
+            "reversed": {
+              "status": "failed",
+              "tests": 6,
+              "failures": 1,
+              "errors": 0,
+              "skipped": 0,
+              "detail": ""
+            },
+            "inside": {
+              "status": "failed",
+              "tests": 6,
+              "failures": 1,
+              "errors": 0,
+              "skipped": 0,
+              "detail": ""
+            }
+          },
+          "detected": 4,
+          "total_mutations": 4,
+          "accepted": true,
+          "live_model_calls": 0,
+          "status": "evaluated"
+        },
+        "effective_usage": {
+          "input_tokens": 161,
+          "candidate_tokens": 504,
+          "thinking_tokens": 0,
+          "cached_tokens": 0,
+          "total_tokens": 665,
+          "tool_tokens": 0
+        },
+        "usage_policy": "protojson_full_v3",
+        "raw_usage_preserved": true
+      }
+    ],
+    "known_catalog_cost_usd": "0.0046848",
+    "billing_uncertain": false,
+    "actual_carbon_g": null,
+    "recommended_model": "gemini-3.5-flash-lite"
+  },
+  "status": "completed",
+  "execution_mode": "recorded_evidence",
+  "new_calls_from_this_read": 0,
+  "read_only": true
+}

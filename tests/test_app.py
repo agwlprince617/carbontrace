@@ -25,6 +25,7 @@ def test_home_assets_and_project_status(client: TestClient) -> None:
         "research.mjs",
         "decision.mjs",
         "workflow.mjs",
+        "live-comparison.mjs",
         "mark.svg",
     ):
         assert client.get(f"/static/{asset}").status_code == 200
@@ -32,6 +33,28 @@ def test_home_assets_and_project_status(client: TestClient) -> None:
     assert health["live_enabled"] is False
     assert health["live_calls"] == 0
     assert health["project"] == "carbontrace-511814"
+
+
+def test_recorded_demo_is_portable_and_read_only(client: TestClient) -> None:
+    """Recorded live evidence works with an empty local run store."""
+    response = client.get("/api/demo-comparison")
+    assert response.status_code == 200
+    view = response.json()
+    assert view["read_only"] is True
+    assert view["execution_mode"] == "recorded_evidence"
+    assert view["status"] == "completed"
+    assert view["quote"]["plan_sha256"] == (
+        "317e3391ea97c87e11a4192974abf5ee76e33fe687ec08b2d67306bfc9eb686a"
+    )
+    assert view["result"]["plan_sha256"] == view["quote"]["plan_sha256"]
+    assert len(view["result"]["responses"]) == 2
+    assert view["result"]["known_catalog_cost_usd"] == "0.0046848"
+    assert "command" not in view and "approval_phrase" not in view
+    assert "/Users/" not in response.text
+    assert "/home/" not in response.text
+    assert client.get("/api/demo-comparison/export").json() == view
+    assert client.post("/api/demo-comparison").status_code == 405
+    assert client.get("/api/health").json()["live_calls"] == 0
 
 
 def test_compare_persist_retrieve_and_export(

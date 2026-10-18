@@ -1,6 +1,8 @@
 import { requestLocal as api } from "./api-client.mjs";
 import { loadResearch, wireResearch } from "./research.mjs";
 import { loadDecision, wireDecision } from "./decision.mjs";
+import { loadLive, wireLive, importDraft, openPrepared, showPrepared, showExistingOrRecorded } from "./live-comparison.mjs";
+import { prepareHosted, wireHosted } from "./hosted-live.mjs";
 
 const $ = (id) => document.getElementById(id);
 const state = { tasks: [], task: "clamp", result: null, profile: "compact" };
@@ -127,18 +129,36 @@ async function compare() {
   }
 }
 
+function hideLive() {
+  $("live-view").hidden=true;
+  $("nav-live").classList.remove("active");
+}
+
+async function showLive() {
+  document.title="CarbonTrace — Run and validate";
+  hideResearch(); clearError();
+  ["advisor-view","lab-view","history-view"].forEach(id=>$(id).hidden=true);
+  ["nav-advisor","nav-lab","nav-history"].forEach(id=>$(id)?.classList.remove("active"));
+  $("live-view").hidden=false; $("nav-live").classList.add("active");
+  $("page-label").textContent="Run & validate"; $("hero").hidden=false;
+  $("hero").querySelector("h1").innerHTML="Same request.<br><span>Actual Gemini results.</span>";
+  $("hero").querySelector("p").textContent="Inspect actual Gemini responses, usage and checked test results.";
+  try { await loadLive(); } catch(error) { showError(error); }
+}
+
 function hideDecision() {
+  hideLive();
   $("decision-view").hidden = true;
-  $("nav-decision").classList.remove("active");
+  $("nav-decision")?.classList.remove("active");
 }
 
 async function showDecision() {
   hideResearch();
   clearError();
   for (const id of ["advisor-view", "lab-view", "history-view"]) $(id).hidden = true;
-  for (const id of ["nav-advisor", "nav-lab", "nav-history"]) $(id).classList.remove("active");
+  for (const id of ["nav-advisor", "nav-lab", "nav-history"]) $(id)?.classList.remove("active");
   $("decision-view").hidden = false;
-  $("nav-decision").classList.add("active");
+  $("nav-decision")?.classList.add("active");
   $("page-label").textContent = "Task decision";
   $("hero").hidden = false;
   $("hero").querySelector("h1").innerHTML = "Check the tests.<br><span>Then choose the model.</span>";
@@ -151,17 +171,18 @@ function hideResearch() {
   $("research-view").hidden = true;
   $("nav-research").classList.remove("active");
   $("hero").querySelector("h1").innerHTML = "Right-size the model.<br><span>Before you send.</span>";
-  $("hero").querySelector("p").textContent = "Explore cost, quality evidence, and published environmental references before choosing your next test-generation model.";
+  $("hero").querySelector("p").textContent = "Compare cost, quality evidence and environmental context before choosing a model.";
 }
 
 function showResearch() {
+  document.title="CarbonTrace — Environmental evidence";
   hideDecision();
   clearError();
   ["advisor-view", "lab-view", "history-view"].forEach(id=>{ $(id).hidden = true; });
-  ["nav-advisor", "nav-lab", "nav-history"].forEach(id=>$(id).classList.remove("active"));
+  ["nav-advisor", "nav-lab", "nav-history"].forEach(id=>$(id)?.classList.remove("active"));
   $("research-view").hidden = false;
   $("nav-research").classList.add("active");
-  $("page-label").textContent = "Environmental comparison";
+  $("page-label").textContent = "Environmental evidence";
   $("hero").hidden = false;
   $("hero").querySelector("h1").innerHTML = "Compare AI impact.<br><span>With evidence.</span>";
   $("hero").querySelector("p").textContent = "Published workload energy, explicit electricity assumptions, and sources you can inspect.";
@@ -174,12 +195,13 @@ function showLab() {
   $("history-view").hidden = true;
   $("hero").hidden = false;
   $("page-label").textContent = "Unit test lab";
-  $("nav-lab").classList.add("active");
-  $("nav-history").classList.remove("active");
+  $("nav-lab")?.classList.add("active");
+  $("nav-history")?.classList.remove("active");
   $("nav-advisor").classList.remove("active");
 }
 
 function showAdvisor() {
+  document.title="CarbonTrace — Before you send";
   hideResearch();
   clearError();
   $("advisor-view").hidden = false;
@@ -188,11 +210,12 @@ function showAdvisor() {
   $("hero").hidden = false;
   $("page-label").textContent = "Before you send";
   $("nav-advisor").classList.add("active");
-  $("nav-lab").classList.remove("active");
-  $("nav-history").classList.remove("active");
+  $("nav-lab")?.classList.remove("active");
+  $("nav-history")?.classList.remove("active");
 }
 
 function invalidatePreview() {
+  $("advisor-live-consent").checked=false;
   clearTimeout(advisor.timer);
   advisor.timer = null;
   advisor.sequence += 1;
@@ -259,16 +282,16 @@ function renderWorkloadReference(reference) {
   $("advisor-reference-results").replaceChildren();
   if (!reference) {
     $("advisor-reference-status").textContent = "Choose a reference workload";
-    $("advisor-reference-note").textContent = "Choose a CLEER workload in the composer to see published environmental context. No workload is inferred from your prompt or tokens.";
+    $("advisor-reference-note").textContent = "Choose a benchmark to see published environmental context.";
     return;
   }
   const format = value => Number(value).toLocaleString("en-US", {maximumSignificantDigits: 5});
   $("advisor-reference-status").textContent = `${reference.request.workload.replace(".", " · ")} · one standardized session`;
-  $("advisor-reference-note").textContent = `Published benchmark context, not your prompt's footprint. Electricity assumption: ${format(reference.request.grid_g_per_kwh)} gCO₂e/kWh. Changing prompt text or token scenarios does not scale these reference values.`;
+  $("advisor-reference-note").textContent = `Published benchmark estimates · ${format(reference.request.grid_g_per_kwh)} gCO₂e/kWh assumed. Not your prompt’s footprint.`;
   $("advisor-reference-results").innerHTML = reference.models.map(model => {
     if (!model.available) return `<div class="scenario-model-impact"><span>${escapeHTML(model.model_name)}</span><strong class="reference-unavailable">No published estimate</strong><small>${escapeHTML(model.note)}</small></div>`;
     const evidence = model.evidence;
-    return `<div class="scenario-model-impact"><span>${escapeHTML(model.model_name)}</span><strong>${format(model.operational_carbon_g)} gCO₂e</strong><small>Operational carbon / reference session · assumed electricity</small><p>${format(evidence.energy_wh_mean)} Wh / reference session</p><small>Published energy SD: ${evidence.energy_wh_sd === null ? "Not reported" : format(evidence.energy_wh_sd) + " Wh"}. Not a confidence interval.</small><p>${escapeHTML(evidence.description)}</p><small>Source accelerator evidence: ${escapeHTML(evidence.estimation_basis)}. Facility overheads are modelled. Quality for your task is not established.</small></div>`;
+    return `<div class="scenario-model-impact"><span>${escapeHTML(model.model_name)}</span><strong>${format(model.operational_carbon_g)} gCO₂e</strong><small>Operational carbon / reference session · assumed electricity</small><p>${format(evidence.energy_wh_mean)} Wh / reference session</p><details><summary>Evidence details</summary><small>Published energy SD: ${evidence.energy_wh_sd === null ? "Not reported" : format(evidence.energy_wh_sd) + " Wh"}. Not a confidence interval.</small><p>${escapeHTML(evidence.description)}</p><small>Source accelerator evidence: ${escapeHTML(evidence.estimation_basis)}. Facility overheads are modelled. Quality for your task is not established.</small></details></div>`;
   }).join("");
   const source = reference.source;
   $("advisor-reference-citation").textContent = `${source.publisher}, ${source.title}, dataset ${source.dataset_generated_at}; engine ${source.dataset_engine}. Related report: ${source.related_report_version}. Revision ${source.commit.slice(0,12)}. ${source.license}, non-commercial use with attribution.`;
@@ -282,17 +305,25 @@ function renderPreview(result) {
   $("advisor-output").classList.remove("assumptions-only");
   advisor.result = result;
   renderWorkloadReference(result.research_reference);
+  const decision=result.decision;
+  $("precall-card").hidden=false;
+  $("precall-headline").textContent=decision.headline;
+  $("precall-reasons").innerHTML=decision.reasons.map(reason=>"<li>"+escapeHTML(reason)+"</li>").join("");
+  $("precall-caveat").textContent=decision.caveat;
+  $("use-suggestion").hidden=!decision.recommended_role || decision.selected_matches_recommendation;
+  $("precall-selection").textContent="Currently selected: "+result.models.find(m=>m.selected).model_id+(decision.selected_matches_recommendation===false ? ". Different from the suggestion." : ".");
+  $("prepare-selected").textContent="Prepare selected model ↗";
   const money = (value) => Number(value).toLocaleString("en-US", { minimumFractionDigits: 5, maximumFractionDigits: 7 });
   $("advisor-guidance").textContent = result.guidance;
   const matchedCount = result.models.filter((model) => model.quality.matched_observation).length;
   const matched = matchedCount > 0;
   const development = !$("advisor-context").value && advisor.examples.some((example) => example.prompt === $("advisor-prompt").value);
-  $("advisor-evidence-label").textContent = matched ? (matchedCount === result.models.length ? "MATCHING PILOT PROMPT · 1 RESPONSE / MODEL" : "MATCHING PILOT PROMPT · FLASH-LITE ONLY") : `${development ? "DEVELOPMENT EXAMPLE" : "CUSTOM DRAFT"} · QUALITY NOT ESTABLISHED`;
+  $("advisor-evidence-label").textContent = matched ? (matchedCount === result.models.length ? "MATCHING PILOT PROMPT · 1 RESPONSE / MODEL" : "MATCHING PILOT PROMPT · ONE MODEL") : `${development ? "DEVELOPMENT EXAMPLE" : "CUSTOM DRAFT"} · QUALITY NOT ESTABLISHED`;
   $("model-previews").innerHTML = result.models.map((model) => {
     const match = model.quality.matched_observation;
     const tokenLabel = model.input_tokens.low === model.input_tokens.high ? integer(model.input_tokens.low) : `${integer(model.input_tokens.low)}–${integer(model.input_tokens.high)}`;
     const qualityLabel = match ? `${match.detected}/${match.total_mutations} seeded faults detected` : "No matching quality evidence";
-    return `<article class="card model-preview ${model.selected ? "model-selected" : ""}"><div class="model-topline"><span>${model.role === "compact" ? "LOWER-PRICE CANDIDATE" : "COMPARISON MODEL"}</span><span class="model-choice">${model.selected ? "Selected" : "Alternative"}</span></div><h3>${model.role === "compact" ? "Gemini 3.5" : "Gemini 3.7"}<br><strong>${model.role === "compact" ? "Flash-Lite" : "Flash"}</strong></h3><div class="cost-preview"><span>Estimated API cost · USD</span><strong>${money(model.cost_usd.low)}<span>–</span>${money(model.cost_usd.high)}</strong><small>Under your token scenarios</small></div><div class="preview-input"><span>Visible input tokens</span><b>${tokenLabel}</b></div><p class="token-basis">${match ? "Previously observed for this identical prompt" : "Rough local planning scenarios"}</p><div class="preview-quality"><span class="quality-label">SAVED QUALITY EVIDENCE</span><strong>${escapeHTML(qualityLabel)}</strong><p>${match ? `${match.tests} tests passed in one saved suite.` : (model.quality.pilot_samples ? `Pilot: ${model.quality.pilot_accepted}/${model.quality.pilot_samples} accepted suites on other prompts.` : "")} ${escapeHTML(model.quality.note)}</p></div><button type="button" class="choose-model" data-model-role="${model.role}" aria-pressed="${model.selected}" ${model.selected ? "disabled" : ""}>${model.selected ? "Selected for this plan ✓" : "Select for this plan →"}</button></article>`;
+    return `<article class="card model-preview ${model.selected ? "model-selected" : ""}"><div class="model-topline"><span>${model.role === "compact" ? "LOWER-PRICE CANDIDATE" : "COMPARISON MODEL"}</span><span class="model-choice">${model.selected ? "Selected" : "Alternative"}</span></div><h3>${model.role === "compact" ? "Gemini 3.5" : "Gemini 3.7"}<br><strong>${model.role === "compact" ? "Flash-Lite" : "Flash"}</strong></h3><div class="cost-preview"><span>Estimated API cost · USD</span><strong>${money(model.cost_usd.low)}<span>–</span>${money(model.cost_usd.high)}</strong><small>Under your token scenarios</small></div><div class="preview-input"><span>Visible input tokens</span><b>${tokenLabel}</b></div><p class="token-basis">${match ? "Previously observed for this identical prompt" : "Rough local planning scenarios"}</p><div class="preview-quality"><span class="quality-label">SAVED QUALITY EVIDENCE</span><strong>${escapeHTML(qualityLabel)}</strong><p>${match ? `${match.tests} tests passed in one saved suite.` : (model.quality.pilot_samples ? `Pilot: ${model.quality.pilot_accepted}/${model.quality.pilot_samples} accepted suites on other prompts.` : "")} </p><details><summary>Evidence limits</summary><p>${escapeHTML(model.quality.note)}</p></details></div><button type="button" class="choose-model" data-model-role="${model.role}" aria-pressed="${model.selected}" ${model.selected ? "disabled" : ""}>${model.selected ? "Selected for this plan ✓" : "Select for this plan →"}</button></article>`;
   }).join("");
   document.querySelectorAll("[data-model-role]").forEach((button) => button.addEventListener("click", () => {
     $("advisor-model").value = button.dataset.modelRole;
@@ -316,7 +347,7 @@ function renderPreview(result) {
   $("advisor-output").hidden = false;
   $("advisor-pending").hidden = true;
   $("export-plan").disabled = false;
-  $("estimate-status").textContent = matched ? (matchedCount === result.models.length ? "Updated locally · saved input counts reused for both models. No model call." : "Updated locally · one saved input count reused; the other is approximated. No model call.") : "Updated locally · input tokens approximated from text size. No model call.";
+  $("estimate-status").textContent = matched ? (matchedCount === result.models.length ? "Preview updated · saved input counts reused for both models. No model call." : "Preview updated · one saved input count reused; the other is approximated. No model call.") : "Preview updated · input tokens approximated from text size. No model call.";
 }
 
 async function previewDraft(event, quiet = false) {
@@ -395,6 +426,8 @@ function advisorCarbonScenario() {
 }
 
 function invalidateCarbonPreview() {
+  $("precall-card").hidden=true;
+  $("advisor-live-consent").checked=false;
   // Keep the assumption editor visible while hiding obsolete numeric results.
   clearTimeout(advisor.timer);
   advisor.timer = null;
@@ -410,7 +443,38 @@ function invalidateCarbonPreview() {
   setPreviewBusy(false);
 }
 
+async function prepareSelected() {
+  if(!advisor.result || !$("advisor-form").reportValidity()) return;
+  if(!$("advisor-live-consent").checked) { showError(new Error("Confirm local draft storage in the decision card before preparing a quote.")); return; }
+  const snapshot=advisor.result, sequence=advisor.sequence;
+  const request={prompt:$("advisor-prompt").value,context:$("advisor-context").value,selected_model:$("advisor-model").value,generated_low:Number($("generated-low").value),generated_high:Number($("generated-high").value),research_reference:$("advisor-workload").value ? {workload:$("advisor-workload").value,grid_g_per_kwh:$("advisor-reference-grid").value} : null};
+  $("prepare-selected").disabled=true; clearError();
+  try {
+    const view=await api("/api/selected-runs/prepare",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(request)});
+    if(sequence!==advisor.sequence || advisor.result!==snapshot) return;
+    if(view.quote.prompt_sha256!==snapshot.prompt_sha256) throw new Error("Prepared payload differs from the reviewed draft.");
+    await showLive(); await showPrepared(view);
+  } catch(error) { showError(error); }
+  finally { $("prepare-selected").disabled=false; }
+}
+
 function wireAdvisor() {
+  wireHosted();
+  $("hosted-prepare")?.addEventListener("click", async () => {
+    if (!advisor.result || !$("advisor-form").reportValidity()) return;
+    const hash = advisor.result.prompt_sha256;
+    const request={prompt:$("advisor-prompt").value,context:$("advisor-context").value,selected_model:$("advisor-model").value,generated_low:Number($("generated-low").value),generated_high:Number($("generated-high").value),research_reference:$("advisor-workload").value ? {workload:$("advisor-workload").value,grid_g_per_kwh:$("advisor-reference-grid").value} : null};
+    $("hosted-prepare").disabled = true;
+    try { await showLive(); await prepareHosted(request, hash); }
+    catch (error) { showError(error); }
+    finally { $("hosted-prepare").disabled = false; }
+  });
+  $("prepare-selected").addEventListener("click",prepareSelected);
+  $("use-suggestion").addEventListener("click",()=>{
+    const role=advisor.result?.decision.recommended_role;
+    if(!role) return;
+    $("advisor-model").value=role; invalidatePreview(); previewDraft();
+  });
   $("advisor-form").addEventListener("submit", previewDraft);
   ["advisor-prompt", "advisor-context", "generated-low", "generated-high", "advisor-model", "advisor-workload", "advisor-reference-grid"].forEach((id) => $(id).addEventListener("input", () => {
     if (id === "advisor-workload") $("advisor-workload-description").textContent = advisor.workloads[$("advisor-workload").value] || "";
@@ -500,8 +564,8 @@ async function showHistory() {
     $("history-view").hidden = false;
     $("hero").hidden = true;
     $("page-label").textContent = "Saved comparisons";
-    $("nav-lab").classList.remove("active");
-    $("nav-history").classList.add("active");
+    $("nav-lab")?.classList.remove("active");
+    $("nav-history")?.classList.add("active");
     $("nav-advisor").classList.remove("active");
     $("history-list").innerHTML = records.length ? records.map((record) => `<div class="history-item"><div><strong>${escapeHTML(record.task_title)}</strong><small>${escapeHTML(new Date(record.created_at).toLocaleString())} · ${record.minimum_detection}% gate · offline fixture</small></div><span class="micro-pill">${record.outcome === "compact_accepted" ? "COMPACT ACCEPTED" : record.outcome === "escalated" ? "ESCALATED" : "QUALITY FAILED"}</span><button data-run="${escapeHTML(record.id)}">Open →</button></div>`).join("") : '<p class="history-empty">Your first comparison will appear here. Evidence stays on this computer.</p>';
     document.querySelectorAll("[data-run]").forEach((button) => button.addEventListener("click", async () => {
@@ -521,15 +585,18 @@ async function showHistory() {
 async function boot() {
   wireResearch(showError, clearError);
   wireDecision(showError, clearError);
+  wireLive(showError, clearError);
+  $("nav-live").addEventListener("click",async()=>{await showLive();try{await showExistingOrRecorded();}catch(error){showError(error);}});
+  $("advisor-to-live").addEventListener("click",async()=>{await showLive();importDraft($("advisor-prompt").value,$("advisor-context").value,$("advisor-workload").value,$("advisor-reference-grid").value);});
   wireAdvisor();
   $("reconnect-button").addEventListener("click", reconnect);
   $("compare-button").addEventListener("click", compare);
-  $("nav-lab").addEventListener("click", showLab);
+  $("nav-lab")?.addEventListener("click", showLab);
   $("nav-advisor").addEventListener("click", showAdvisor);
   $("nav-research").addEventListener("click", showResearch);
-  $("nav-decision").addEventListener("click", showDecision);
-  $("nav-history").addEventListener("click", showHistory);
-  $("nav-method").addEventListener("click", () => {
+  $("nav-decision")?.addEventListener("click", showDecision);
+  $("nav-history")?.addEventListener("click", showHistory);
+  $("nav-method")?.addEventListener("click", () => {
     showLab();
     $("scenario-details").open = true;
     $("scenario-section").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -539,9 +606,11 @@ async function boot() {
   $("live-readiness").addEventListener("click", () => $("live-dialog").showModal());
   ["close-dialog", "dialog-done"].forEach((id) => $(id).addEventListener("click", () => $("live-dialog").close()));
   try {
-    showResearch();
+    showAdvisor();
     await Promise.all([loadData(), loadResearch()]);
     await previewDraft();
+    const preparedId=new URLSearchParams(window.location.search).get("live");
+    if(preparedId) { await showLive(); await openPrepared(document.body.dataset.deploymentMode!=="local" ? "recorded" : preparedId); }
   } catch (error) { showError(error); }
 }
 

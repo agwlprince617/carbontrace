@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "status": "prepared_not_approved",
+  "project": "carbontrace-511814",
+  "project_number": "683634661093",
+  "region": "us-central1",
+  "service": "carbontrace-demo",
+  "previous_revision": "carbontrace-demo-00001-mq2",
+  "source_sha256": "334a0557c53204a06bd50b3285b5736c8f9c93b15a59fb3da31be6dd59195e9b",
+  "prepared_directory": ".tmp/cloudrun-live-source-334a0557c532",
+  "files": {
+    ".dockerignore": "1731902cee872b03112f3eae6368dfcf656d64af125d44df25d8e2aec69cca7d",
+    ".gcloudignore": "b4e1c835d554ca9a101306f9e3ed8a7f15d34ac860157fe3f00f152f7329fefe",
+    "Dockerfile": "74126b490cde45733b9c03d76a9be2ca3b3445850a7106a574522a1528fc8c1c",
+    "cloudbuild.yaml": "1e6a228265dd34c21a2a78eb9af6b581de9d37eb6bf303109eb2497d8e5e9682",
+    "requirements-cloudrun.txt": "02859a418fa9c7e56db5f6dfd6168a05be48d0195d36080446c4daefd41672bc",
+    "src/carbontrace/__init__.py": "6303f42d41176100eff0bf47f0706aebb6e174e732a30de01b2beb7c9b15cf64",
+    "src/carbontrace/__main__.py": "b837c1c2565fcbb5e7003e7fda270ef220e37cbb72c84db8372818f4fe926b49",
+    "src/carbontrace/app.py": "f129cc9c41992b1a4c3b421f57854fc1ef4dac58d0b98dd4058adba0c4d2a2e0",
+    "src/carbontrace/benchmark.py": "196c0061dc568b760b5766bf37b480987a55ca0a5dda12f81bd4cfb70799954d",
+    "src/carbontrace/benchmarks.py": "433e70648ab2582e11996d53a46e70b0fe038d9a268092344ae111c01bcf08a3",
+    "src/carbontrace/decision.py": "14d28bd4fed7c4c7ed9ce519a1371326a2b8fa3603347599a02ed1e7f57760ef",
+    "src/carbontrace/domain.py": "813acf839f3ecfa8fa1ae752f40f486b53137c01a306273bb49ea275aa2a441e",
+    "src/carbontrace/engine.py": "0e0a756d3e2328df14a56b60fabb8125fe4bbfce96c1f19bf1302d854a1483db",
+    "src/carbontrace/exercise.py": "8edc678d5a1b37e3919347e68b9edf253ca9d00021940494ad745771f6b0b9b3",
+    "src/carbontrace/expanded_catalog.py": "9873fc49236bbbf1ade803ddde6fbc01738f8df84960583323c6a7cc9702847e",
+    "src/carbontrace/extra_functions.py": "30e024ce3a8fb1212d80963d3672fafbcd0320f631ad8809fab808ccf6aea04a",
+    "src/carbontrace/hosted.py": "5ea12525f3dd97770a17f7ffa50db40ecf3461b80445ac977acbbbebe3132297",
+    "src/carbontrace/hosted_cloud.py": "10c5489aedff3b8e44100633823b8afa1251b4a9b23a589db8a644e5d6c64bfc",
+    "src/carbontrace/impact.py": "78ae9bd1e2a365b4a60a27e42d8b465cd1c1bda72efa130d41302be7338eda0d",
+    "src/carbontrace/live_compare_cli.py": "3bcc5d5b4612828a42307205001f6c110d285b2ee39d3fd42ca1a9a6feb554f0",
+    "src/carbontrace/live_comparison.py": "df19bbd2b447b57d976473fc5633e05bac47894a1cd8e4cc748fbf518abf250c",
+    "src/carbontrace/live_smoke.py": "fa13ee67f7e463697b339fd3ff3796f9c88f15546409522aaeafe5e9dfcd0e2c",
+    "src/carbontrace/preflight.py": "7568a09820a80732b7fe50cea06df454ea0d4ae053056d60e8c1840188e3955c",
+    "src/carbontrace/quality.py": "6e64da37529fb00be4fd4720867287e4b28198b9b113c4888b1adce5e18ebba5",
+    "src/carbontrace/research.py": "f96e6bc7ed8e5af17bebddb347d58ed29c13e04e52c6db6dc430eebc006655e2",
+    "src/carbontrace/resources/CLEER-DATA-LICENSE.txt": "3757c6d935c6f882829d7d07a4c69c57469b2874246490a9a11ad8ba5e3a5327",
+    "src/carbontrace/resources/cleer-workloads.csv": "fa698cdb9f43a54288888a915b4784ac354e990a85a5331ac9c861360b1c4ce8",
+    "src/carbontrace/resources/decision-evidence.json": "c42ee5be4564a63728986a17849c2e61bfdca35d3e748dc83aeb25adab66a1e8",
+    "src/carbontrace/resources/decision-suites/clamp-gemini-3.5-flash-lite.txt": "2318d399d245c7da48f8ed41f39524811bfa3da1ffd1ce3bfe32deb38d8c61a2",
+    "src/carbontrace/resources/decision-suites/clamp-gemini-3.7-flash.txt": "9b2fd262996f2c13becbccad7d331d9c22fba79cf01378ec06da277669e50366",
+    "src/carbontrace/resources/decision-suites/discount-gemini-3.5-flash-lite.txt": "422d068f7529ad2b39251722b400de3196f9ec0ca4fcc802d6aba02f1d309912",
+    "src/carbontrace/resources/decision-suites/discount-gemini-3.7-flash.txt": "de5231db79e3b7f88f36e34953a4dc0d278a6bae7e13d28fddc84e90716b99a6",
+    "src/carbontrace/resources/decision-suites/merge-gemini-3.5-flash-lite.txt": "b2bbcaf79c02287894ba184bd00f6472911564a952ad4c6146bf1d4b8f8dfdf2",
+    "src/carbontrace/resources/decision-suites/merge-gemini-3.7-flash.txt": "49bc318f0768dc9bff852ae62493dc3cb6456bdecb07434cda8426973bae1aae",
+    "src/carbontrace/resources/decision-workflow.json": "fbe75446ee6fdd6caf3fed15d0c56883626fe67aab7f8f3db259887194141347",
+    "src/carbontrace/resources/demo-comparison.json": "3debfbc6d9ba269acb889b3d2db554e10139b7fe509c2e5924574c16d866485b",
+    "src/carbontrace/resources/preflight-comparison.json": "182617be8d58458a4fe809459b6df2f9daa431957547a9975e56d9e4696c6aba",
+    "src/carbontrace/resources/preflight-evidence.json": "9b6f544f69c3f1c083ea9edb11baa0c257afa028f5d2b64359d45a483ffc7372",
+    "src/carbontrace/sandbox.py": "7f916e7fad44a38205639519026fd786bb02e722a54a349dbafcb6a818c04231",
+    "src/carbontrace/server.py": "b83be8b54b6946d0db41a1db7712d15f3acbbdd6dc0ff147a1f826518935395a",
+    "src/carbontrace/static/api-client.mjs": "0a57ee4bd9f64fcf889ec659812d1587a3a29fd131d5c4e8e1982f4a3071306d",
+    "src/carbontrace/static/app.css": "8e8a6e63cd65046c3186e165bf37280061c83466b7afa96c244395305f071af1",
+    "src/carbontrace/static/app.js": "b4ffa4252de97bddb0f3626054d59b2156687f271d0e8de520c9b8559a8d51df",
+    "src/carbontrace/static/decision.mjs": "12d9f61ff45c878cfe26605eb3cd05508df5f97ce2c1bd1e1fb0576d17cdb986",
+    "src/carbontrace/static/hosted-live.mjs": "ece01417cf735b24bced38a282b658352567e61fa89cb5536407d5a537d29c1b",
+    "src/carbontrace/static/live-comparison.mjs": "e981eff03fee6dcc6ec911565e24ef47cf04ee69db8074b221b8f2d6cdd9e3c4",
+    "src/carbontrace/static/mark.svg": "be57754d921b69f62bd97b2a6543b5fe1f3b75e64f7067003c79e88338c793bf",
+    "src/carbontrace/static/research.mjs": "6f75a62b6d2f7c260332517e77be4adab1cf6222928fa8e6617af3a8247d7b8c",
+    "src/carbontrace/static/workflow.mjs": "c02e7c3c6c94983efe0a83aefdd7d898bb5d9a41669bbc2a38cb5992b3b62e87",
+    "src/carbontrace/store.py": "2fda0058d4bea6be8314689d27b024a91a32a73d2b3da8c21e98ad41ffeab20b",
+    "src/carbontrace/templates/index.html": "6e6ee8e33ea041360a4205a93738338b1a3636c3c3b10a29071f3194d0805a8e",
+    "src/carbontrace/workflow.py": "6d983225d92be8ae92daed20c7a927d1342f36265e07da6ca45bd01f28ffd33d"
+  },
+  "operator_sha256": "2aa3ac5dde6ac53eaa34ee7ca93f8286118829cd2af0084c3b69290ed5e1fef1",
+  "image_tag": "us-central1-docker.pkg.dev/carbontrace-511814/carbontrace/web:hosted-334a0557c532",
+  "runtime_service_account": "carbontrace-web@carbontrace-511814.iam.gserviceaccount.com",
+  "build_service_account": "carbontrace-build@carbontrace-511814.iam.gserviceaccount.com",
+  "ledger_bucket": "carbontrace-511814-live-ledger",
+  "signing_secret": "carbontrace-demo-quote",
+  "api_enablement": [
+    "secretmanager.googleapis.com"
+  ],
+  "iam": [
+    {
+      "resource": "project",
+      "role": "projects/carbontrace-511814/roles/carbontraceDemoPredict",
+      "permissions": [
+        "aiplatform.endpoints.predict"
+      ]
+    },
+    {
+      "resource": "ledger_bucket",
+      "role": "roles/storage.objectUser"
+    },
+    {
+      "resource": "signing_secret",
+      "role": "roles/secretmanager.secretAccessor"
+    }
+  ],
+  "pool_epoch": "carbontrace-public-demo-20261018-v1",
+  "pool_limit": 6,
+  "pool_expires_at": "2026-10-25T23:59:00+00:00",
+  "runtime": {
+    "mode": "hosted-live",
+    "cpu": 1,
+    "memory_mib": 512,
+    "min_instances": 0,
+    "max_instances": 1,
+    "concurrency": 16,
+    "request_timeout_seconds": 180,
+    "cpu_throttling": true,
+    "startup_cpu_boost": false,
+    "public": true
+  },
+  "build_count": 1,
+  "build_timeout_seconds": 600,
+  "deployment_count": 1,
+  "automatic_retries": 0,
+  "smoke_generation_limit": 2,
+  "smoke_token_count_limit": 2,
+  "smoke_metadata_reads": 0,
+  "smoke_requests": [
+    {
+      "prompt": "Write a pytest test suite for the Python function below. Return only Python code, without Markdown fences. Import the function from subject. Use only pytest, math, and subject imports. Include normal cases, boundaries, and required invalid-input exceptions. Do not read files, inspect implementation internals, use private attributes, perform I/O, or skip tests. Requirements apply to the annotated input types.\n\nRequirements: Keep an integer inside inclusive bounds. Reject reversed bounds and preserve interior values.\n\ndef clamp(value: int, lower: int, upper: int) -> int:\n    \"\"\"Clamp an integer to inclusive bounds; reject reversed bounds.\"\"\"\n    if lower > upper:\n        raise ValueError(\"lower must not exceed upper\")\n    return min(max(value, lower), upper)\n",
+      "context": "",
+      "selected_model": "compact",
+      "generated_low": 256,
+      "generated_high": 1024,
+      "research_reference": {
+        "workload": "chat.light",
+        "grid_g_per_kwh": "400"
+      }
+    },
+    {
+      "prompt": "Write a pytest test suite for the Python function below. Return only Python code, without Markdown fences. Import the function from subject. Use only pytest, math, and subject imports. Include normal cases, boundaries, and required invalid-input exceptions. Do not read files, inspect implementation internals, use private attributes, perform I/O, or skip tests. Requirements apply to the annotated input types.\n\nRequirements: Keep an integer inside inclusive bounds. Reject reversed bounds and preserve interior values.\n\ndef clamp(value: int, lower: int, upper: int) -> int:\n    \"\"\"Clamp an integer to inclusive bounds; reject reversed bounds.\"\"\"\n    if lower > upper:\n        raise ValueError(\"lower must not exceed upper\")\n    return min(max(value, lower), upper)\n",
+      "context": "",
+      "selected_model": "strong",
+      "generated_low": 256,
+      "generated_high": 1024,
+      "research_reference": {
+        "workload": "chat.light",
+        "grid_g_per_kwh": "400"
+      }
+    }
+  ],
+  "smoke_prompt_sha256": "3aa1da47243106dafd399f5a1a7211d49159905f3c3d8792751077c3092c0383",
+  "generation_settings": {
+    "input_limit": 4096,
+    "requested_output_limit": 4096,
+    "thinking": "LOW",
+    "candidates": 1,
+    "tools": false,
+    "automatic_continuation": false
+  },
+  "cost_usd": {
+    "allowance": "1.50",
+    "infrastructure_light_demo_range": [
+      "0.25",
+      "1.00"
+    ],
+    "all_six_generation_estimate": "0.221184",
+    "all_six_generation_stress": "0.405504",
+    "two_included_smoke_estimate": "0.0483328",
+    "two_included_smoke_stress": "0.0892928",
+    "before_tax_fx": true,
+    "hard_provider_cap": false
+  },
+  "privacy": {
+    "receipt_delete_age_days": 7,
+    "meter_retained": true,
+    "private_bucket": true,
+    "public_access_prevention": true,
+    "soft_delete_seconds": 0
+  },
+  "stop_on": [
+    "billing failure",
+    "permission failure",
+    "build failure",
+    "failed generation; do not retry"
+  ],
+  "subsequent_steps": [
+    "Verify hosted integration",
+    "Audit and push repository; make public",
+    "Create PDF and editable presentation"
+  ],
+  "plan_sha256": "b8446e13271b928d78684e95a6cc5e60de2ee55ca12322fa61ac9b3d2974401b"
+}

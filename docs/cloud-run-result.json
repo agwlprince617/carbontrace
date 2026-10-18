@@ -1,0 +1,55 @@
+{
+  "status": "deployed_and_verified",
+  "verified_at": "2026-10-17T19:27:06.713310+00:00",
+  "url": "https://carbontrace-demo-683634661093.us-central1.run.app",
+  "project": "carbontrace-511814",
+  "region": "us-central1",
+  "service": "carbontrace-demo",
+  "revision": "carbontrace-demo-00001-mq2",
+  "source_sha256": "020220bb664bc13b58c18183e41ce4f349c558f43da07ab796bf12e59a1dc3cd",
+  "source_files": 49,
+  "image": "us-central1-docker.pkg.dev/carbontrace-511814/carbontrace/web@sha256:8ab4c2b621a1bf1d2fc7b3db2f5d9c9b09e380ccee4e7ac6b4076ceb67ba2d72",
+  "image_digest": "sha256:8ab4c2b621a1bf1d2fc7b3db2f5d9c9b09e380ccee4e7ac6b4076ceb67ba2d72",
+  "build": {
+    "id": "fcd84a01-18c2-481b-aec4-1bcec985b3aa",
+    "status": "SUCCESS",
+    "start_time": "2026-10-17T19:19:34.177582013Z",
+    "finish_time": "2026-10-17T19:20:17.308175Z",
+    "machine_type": "E2_MEDIUM",
+    "log_url": "https://console.cloud.google.com/cloud-build/builds;region=us-central1/fcd84a01-18c2-481b-aec4-1bcec985b3aa?project=683634661093",
+    "attempts": 1
+  },
+  "runtime": {
+    "service_account": "carbontrace-web@carbontrace-511814.iam.gserviceaccount.com",
+    "project_roles": [],
+    "cpu": "1",
+    "memory": "512Mi",
+    "min_instances": 0,
+    "max_instances": 1,
+    "concurrency": 16,
+    "timeout_seconds": 15,
+    "request_based_billing": true,
+    "startup_cpu_boost": false,
+    "public_invoker": true,
+    "mode": "hosted-preview"
+  },
+  "billing_active_verified": true,
+  "new_gemini_calls": 0,
+  "new_token_count_calls": 0,
+  "checks": "cloud-run-smoke.json",
+  "browser_verified": [
+    "custom prompt planning and missing-quality boundary",
+    "saved model suggestion adoption",
+    "recorded Gemini responses and both quality gates",
+    "published environmental comparison",
+    "local execution controls absent",
+    "no personal filesystem paths visible"
+  ],
+  "github_repository_visibility": "unchanged_private",
+  "source_commit_or_push_performed": false,
+  "cost": {
+    "approved_allowance_usd": "1.00",
+    "hard_provider_cap": false,
+    "actual_invoice_not_queried": true
+  }
+}
