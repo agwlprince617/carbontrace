@@ -1,0 +1,70 @@
+{
+  "status": "prepared_not_approved",
+  "prepared_at": "2026-10-18T06:29:40.758844+00:00",
+  "project": "carbontrace-511814",
+  "region": "us-central1",
+  "service": "carbontrace-demo",
+  "url": "https://carbontrace-demo-683634661093.us-central1.run.app/",
+  "baseline_resource_version": "AAZeFhbXIxA",
+  "baseline_revision": "carbontrace-demo-00002-8j8",
+  "existing_image": "us-central1-docker.pkg.dev/carbontrace-511814/carbontrace/web@sha256:3a7c89524132a6e21dea66c3e273eb96addda438e816a63b8fe1f0a5603f4b16",
+  "old_expiry": "2026-10-25T23:59:00+00:00",
+  "new_expiry": "2026-11-06T18:29:00+00:00",
+  "new_expiry_ist": "2026-11-06T23:59:00+05:30",
+  "mutation": {
+    "CARBONTRACE_POOL_EXPIRES": "2026-11-06T18:29:00+00:00"
+  },
+  "gcloud_update_arguments": [
+    "run",
+    "services",
+    "update",
+    "carbontrace-demo",
+    "--project=carbontrace-511814",
+    "--region=us-central1",
+    "--update-env-vars=CARBONTRACE_POOL_EXPIRES=2026-11-06T18:29:00+00:00",
+    "--format=json",
+    "--quiet"
+  ],
+  "builds": 0,
+  "service_updates": 1,
+  "new_apis_or_iam_or_secrets": false,
+  "pool_epoch": "carbontrace-public-demo-20261018-v1",
+  "pool_limit": 6,
+  "pool_remaining_at_preparation": 4,
+  "pool_reset_or_topup": false,
+  "agent_generation_calls": 0,
+  "agent_token_count_calls": 0,
+  "generation_retries": 0,
+  "runtime_preserved": {
+    "min_instances": 0,
+    "max_instances": 1,
+    "cpu": 1,
+    "memory_mib": 512
+  },
+  "additional_cost_usd": {
+    "estimated_light_usage_range": [
+      "0.10",
+      "1.00"
+    ],
+    "proposed_allowance": "1.00",
+    "assumptions": "One configuration update, zero rebuilds, low demo traffic, scale to zero, unchanged globally shared six-generation allowance. Hosting, storage, secret access, logs and network usage remain billable. Free-tier credits and actual invoice usage are not assumed.",
+    "stress_reference_10000_active_seconds": "0.2525",
+    "request_based_cpu_per_second": "0.000024",
+    "request_based_memory_per_gib_second": "0.0000025",
+    "new_generation_allowance": "0",
+    "before_tax_fx": true,
+    "hard_provider_billing_cap": false,
+    "pricing_source": "https://cloud.google.com/run/pricing"
+  },
+  "verification": "Read service metadata and HTTP health/status only, comparing the image, identity, runtime bounds and shared allowance before and after. Do not approve or dispatch a generation.",
+  "stop_on": [
+    "billing or permission failure",
+    "baseline revision changed",
+    "unexpected configuration change",
+    "update failure"
+  ],
+  "submission_upload": false,
+  "repository_push": false,
+  "post_expiry_behavior": "Fresh generations stop at expiry. The public planner and recorded results remain hosted; this update does not schedule service deletion.",
+  "plan_sha256": "12302e6f28824dce21271c6d33e2dc46a58543bb382602c8a2a423361a883978"
+}

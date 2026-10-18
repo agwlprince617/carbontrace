@@ -1,0 +1,12 @@
+{
+  "approved": true,
+  "plan_sha256": "3d3650c2d38a7d9b070d0369d1f753ca3d6e57ed98af6a48ced2614aecb8029a",
+  "user_answer": "Approve paired update and two-call verification",
+  "allowance_usd": "5.00",
+  "model_budget_usd": "4.00",
+  "build_and_hosting_allowance_usd": "1.00",
+  "budget_increase": false,
+  "hard_provider_billing_cap": false,
+  "approved_at": "2026-10-18T08:34:13.735436+00:00",
+  "scope": "One build and one Cloud Run image update, then up to two generations and two token counts for the exact frozen shipping-fee request. Same prior usage, model budget and 6 November 2026 23:59 IST expiry. Zero retries, generated-code execution, GitHub pushes or submission uploads."
+}

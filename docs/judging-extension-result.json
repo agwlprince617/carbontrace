@@ -1,0 +1,32 @@
+{
+  "verified_at": "2026-10-18T06:32:17.395315+00:00",
+  "plan_sha256": "12302e6f28824dce21271c6d33e2dc46a58543bb382602c8a2a423361a883978",
+  "project": "carbontrace-511814",
+  "service": "carbontrace-demo",
+  "url": "https://carbontrace-demo-683634661093.us-central1.run.app/",
+  "previous_revision": "carbontrace-demo-00002-8j8",
+  "revision": "carbontrace-demo-00003-fc4",
+  "image_unchanged": "us-central1-docker.pkg.dev/carbontrace-511814/carbontrace/web@sha256:3a7c89524132a6e21dea66c3e273eb96addda438e816a63b8fe1f0a5603f4b16",
+  "new_expiry": "2026-11-06T18:29:00+00:00",
+  "new_expiry_ist": "2026-11-06T23:59:00+05:30",
+  "pool_before": {
+    "limit": 6,
+    "remaining": 4,
+    "expires_at": "2026-10-25T23:59:00+00:00",
+    "scope": "shared across all visitors; failed reservations are consumed"
+  },
+  "pool_after": {
+    "limit": 6,
+    "remaining": 4,
+    "expires_at": "2026-11-06T18:29:00+00:00",
+    "scope": "shared across all visitors; failed reservations are consumed"
+  },
+  "runtime_preserved": true,
+  "builds": 0,
+  "service_updates": 1,
+  "agent_generation_calls": 0,
+  "agent_token_count_calls": 0,
+  "pool_reset_or_topup": false,
+  "submission_upload": false,
+  "repository_push": false
+}

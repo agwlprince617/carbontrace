@@ -21,3 +21,11 @@ build/
 *.pem
 *.key
 application_default_credentials.json
+
+# Temporary embedded-chart validation workbooks
+.chart-data-*/
+
+# Local presentation and submission materials
+/output/
+/docs/presentation-notes.md
+/docs/presentation-compliance.md

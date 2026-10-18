@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-10-18T08:37:48.504940+00:00",
+  "plan_sha256": "3d3650c2d38a7d9b070d0369d1f753ca3d6e57ed98af6a48ced2614aecb8029a",
+  "revision": "carbontrace-demo-00005-l9k",
+  "image": "us-central1-docker.pkg.dev/carbontrace-511814/carbontrace/web@sha256:26612cc1446a5810939b78c0b932c47c1c7b4035c1dc436b36e1056675496356",
+  "url": "https://carbontrace-demo-683634661093.us-central1.run.app/",
+  "budget": {
+    "budget_usd": "4",
+    "reserved_usd": "0.156877",
+    "remaining_usd": "3.843123",
+    "runs_reserved": 3,
+    "generations_reserved": 3,
+    "halted": false,
+    "expires_at": "2026-11-06T18:29:00+00:00",
+    "scope": "Sponsor-funded model budget shared across visitors. Stress reservations are retained, including failures; not an invoice or Google billing cap."
+  },
+  "runtime_preserved": true,
+  "builds": 1,
+  "service_updates": 1,
+  "agent_generation_calls": 0,
+  "agent_token_count_calls": 0,
+  "repository_push": false,
+  "submission_upload": false
+}

@@ -31,8 +31,8 @@ from carbontrace.decision import (
 from carbontrace.domain import CompareRequest, Comparison, TaskId
 from carbontrace.engine import build_comparison
 from carbontrace.hosted import (
-    POOL_LIMIT,
     HostedApproval,
+    HostedDraft,
     HostedError,
     PoolExhausted,
     check_approval,
@@ -171,19 +171,24 @@ def create_app(data_dir: Path | None = None) -> FastAPI:
     async def hosted_status(request: Request) -> dict[str, object]:
         require_hosted(request)
         config = hosted_cloud.settings()
-        remaining = await asyncio.to_thread(hosted_cloud.cloud_ledger().remaining)
+        budget = await asyncio.to_thread(hosted_cloud.cloud_ledger().status)
         return {
-            "limit": POOL_LIMIT,
-            "remaining": remaining,
+            **budget,
             "expires_at": config.expires_at.isoformat(),
-            "scope": "shared across all visitors; failed reservations are consumed",
+            "scope": "Sponsor-funded model budget shared across visitors. Stress reservations are retained, including failures; not an invoice or Google billing cap.",
         }
 
     @app.post("/api/hosted/quote")
-    async def hosted_quote(request: Request, draft: PreflightRequest) -> object:
+    async def hosted_quote(request: Request, draft: HostedDraft) -> object:
         require_hosted(request, True)
         try:
-            return issue_quote(draft, hosted_cloud.settings())
+            return issue_quote(
+                PreflightRequest.model_validate(
+                    draft.model_dump(exclude={"compare_models"})
+                ),
+                hosted_cloud.settings(),
+                compare_models=draft.compare_models,
+            )
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from exc
 

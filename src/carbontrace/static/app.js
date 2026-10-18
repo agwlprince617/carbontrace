@@ -2,7 +2,7 @@ import { requestLocal as api } from "./api-client.mjs";
 import { loadResearch, wireResearch } from "./research.mjs";
 import { loadDecision, wireDecision } from "./decision.mjs";
 import { loadLive, wireLive, importDraft, openPrepared, showPrepared, showExistingOrRecorded } from "./live-comparison.mjs";
-import { prepareHosted, wireHosted } from "./hosted-live.mjs";
+import { prepareHosted, runHosted, openHosted, invalidateHosted, wireHosted } from "./hosted-live.mjs";
 
 const $ = (id) => document.getElementById(id);
 const state = { tasks: [], task: "clamp", result: null, profile: "compact" };
@@ -215,6 +215,7 @@ function showAdvisor() {
 }
 
 function invalidatePreview() {
+  invalidateHosted();
   $("advisor-live-consent").checked=false;
   clearTimeout(advisor.timer);
   advisor.timer = null;
@@ -380,7 +381,13 @@ async function previewDraft(event, quiet = false) {
   try {
     const reference = $("advisor-workload").value ? {workload: $("advisor-workload").value, grid_g_per_kwh: $("advisor-reference-grid").value} : null;
     const result = await api("/api/preflight", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ prompt: $("advisor-prompt").value, context: $("advisor-context").value, selected_model: $("advisor-model").value, generated_low: Number($("generated-low").value), generated_high: Number($("generated-high").value), carbon_scenario: carbonScenario, research_reference: reference }) });
-    if (sequence === advisor.sequence) renderPreview(result);
+    if (sequence === advisor.sequence) {
+      renderPreview(result);
+      if ($("hosted-prepare")) {
+        const draft={prompt:$("advisor-prompt").value,context:$("advisor-context").value,selected_model:$("advisor-model").value,generated_low:Number($("generated-low").value),generated_high:Number($("generated-high").value),research_reference:reference};
+        await prepareHosted(draft, result.prompt_sha256);
+      }
+    }
   } catch (error) {
     if (sequence === advisor.sequence) showError(error);
   } finally {
@@ -426,6 +433,7 @@ function advisorCarbonScenario() {
 }
 
 function invalidateCarbonPreview() {
+  invalidateHosted();
   $("precall-card").hidden=true;
   $("advisor-live-consent").checked=false;
   // Keep the assumption editor visible while hiding obsolete numeric results.
@@ -463,11 +471,17 @@ function wireAdvisor() {
   $("hosted-prepare")?.addEventListener("click", async () => {
     if (!advisor.result || !$("advisor-form").reportValidity()) return;
     const hash = advisor.result.prompt_sha256;
-    const request={prompt:$("advisor-prompt").value,context:$("advisor-context").value,selected_model:$("advisor-model").value,generated_low:Number($("generated-low").value),generated_high:Number($("generated-high").value),research_reference:$("advisor-workload").value ? {workload:$("advisor-workload").value,grid_g_per_kwh:$("advisor-reference-grid").value} : null};
     $("hosted-prepare").disabled = true;
-    try { await showLive(); await prepareHosted(request, hash); }
+    try { await showLive(); $("hero").querySelector("p").textContent="Inspect returned text, actual token usage and API cost. Review quality against your requirements."; await runHosted(hash); }
     catch (error) { showError(error); }
-    finally { $("hosted-prepare").disabled = false; }
+  });
+  $("hosted-compare")?.addEventListener("click", async () => {
+    if (!advisor.result || !$("advisor-form").reportValidity()) return;
+    const hash = advisor.result.prompt_sha256;
+    $("hosted-prepare").disabled = true;
+    $("hosted-compare").disabled = true;
+    try { await showLive(); $("hero").querySelector("p").textContent="Compare both responses, actual token usage and API cost. Review quality against your requirements."; await runHosted(hash, true); }
+    catch (error) { showError(error); }
   });
   $("prepare-selected").addEventListener("click",prepareSelected);
   $("use-suggestion").addEventListener("click",()=>{
@@ -610,7 +624,9 @@ async function boot() {
     await Promise.all([loadData(), loadResearch()]);
     await previewDraft();
     const preparedId=new URLSearchParams(window.location.search).get("live");
-    if(preparedId) { await showLive(); await openPrepared(document.body.dataset.deploymentMode!=="local" ? "recorded" : preparedId); }
+    const hostedId=new URLSearchParams(window.location.search).get("hosted");
+    if(hostedId && document.body.dataset.deploymentMode==="hosted-live") { await showLive(); await openHosted(hostedId); }
+    else if(preparedId) { await showLive(); await openPrepared(document.body.dataset.deploymentMode!=="local" ? "recorded" : preparedId); }
   } catch (error) { showError(error); }
 }
 

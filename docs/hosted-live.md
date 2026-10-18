@@ -1,14 +1,27 @@
 # Hosted Gemini integration
 
-Deployed and verified on 18 October 2026. Revision carbontrace-demo-00002-8j8
-serves the approved source snapshot. Both model checks completed through the
-public browser form, consuming two of six reservations. Four remained immediately
-after verification. The pool expires 25 October 2026 at 23:59 UTC.
+Deployed and verified on 18 October 2026. Revision `carbontrace-demo-00005-l9k`
+provides one-click, sponsor-funded selected or paired Gemini runs. The original six-run limit has been
+replaced by a durable **USD 4 model allowance**, including prior usage. Three prior
+reservations were preserved; after the approved two-model shipping-fee verification,
+**USD 3.753830 remained**. Both responses completed with raw usage preserved.
+Live runs expire 6 November 2026 at 11:59 PM IST (18:29 UTC), or earlier when the
+remaining allowance cannot fund the selected request.
+
+[Current paired update and checks](hosted-comparison-update.md),
+[deployment receipt](hosted-comparison-result.json),
+[raw paired responses](hosted-comparison-live-results.json), and
+[priced approval](hosted-comparison-approval.json).
+
+## Earlier integration evidence
 
 [Deployment receipt](hosted-deployment-result.json),
 [real responses and usage](hosted-live-results.json),
 [HTTP checks](hosted-http-smoke.json), and
 [user approval](hosted-deployment-approval.json).
+
+The earlier [expiry-extension receipt](judging-extension-result.json) records
+the date-only update before the dollar-budget migration.
 
 The two fresh responses used 162 input tokens each and 359 / 384 output tokens.
 Their combined conservative catalog estimate was USD 0.0040691. This is not the
@@ -19,25 +32,34 @@ invoice. Fresh output was not executed or quality evaluated.
 ## One complete decision
 
 Preview an example without model calls → inspect historical quality and separate
-CLEER context → choose one model → review a signed exact request and cost → approve
-one generation → inspect actual usage and returned text.
+CLEER context → choose one model → inspect the sponsor reservation → click
+**Run Gemini** once → inspect actual usage and returned text.
+
+For a direct experiment, **Compare Flash-Lite + Flash** reserves both requests
+atomically and returns their outputs side by side. One pair reserves USD 0.089293.
+The comparison identifies lower observed catalog cost, with no automatic quality
+winner or measured carbon-saving claim. Saved links make no new inference calls.
 
 Fresh code is never executed on Cloud Run. Saved mutation-test results describe
 the saved suites, not a new response. Actual per-request energy/carbon stay null.
 
 ## Shared allowance
 
-Six one-generation reservations are shared by everyone, including two verification
-runs. The fixed epoch is `carbontrace-public-demo-20261018-v1`; it is not regenerated
+USD 4 in model reservations is shared by everyone, including earlier runs.
+The fixed epoch is `carbontrace-public-demo-20261018-v1`; it is not regenerated
 on startup, redeployment or receipt expiry. A single private Cloud Storage object
 uses generation-match compare-and-swap to reserve capacity before provider-client
 creation. Duplicate request IDs return the previous receipt without dispatch.
 The operator initializes the meter once; a missing meter stops execution rather
 than creating a new allowance.
-Errors consume reservations; storage failure stops execution. Quotes expire in
-ten minutes. The whole public pool stops at the fixed deployment expiry.
+Reservations use the full-rate stress scenario, rounded upward to microdollars:
+USD 0.021709 for Flash-Lite and USD 0.067584 for Flash. All reservations are retained
+without refunds, including failures. This is reserved allowance, not actual billed
+spend. Storage failure stops execution. Quotes expire in ten minutes; the shared
+budget stops accepting fresh runs at the fixed deployment expiry.
 
-The browser must approve the exact signed plan hash and USD 0.10 allowance. Requests
+Clicking Run approves the exact signed request and disclosed reservation, without
+a separate allowance checkbox or approval page. Preview never sends a model call. Requests
 use only Gemini 3.5 Flash-Lite or 3.7 Flash, global Standard PayGo, one candidate,
 LOW thinking, 4,096 input tokens and a requested 4,096 output tokens. One count
 operation precedes one generation; no metadata, tools, grounding, fallback, paid
@@ -48,26 +70,26 @@ Cost uses conservative full catalog rates: Lite USD 0.30/2.50 and Flash 1.50/7.5
 per million input/generated tokens. Flash's current introductory rates may make
 the invoice lower. Catalog estimates exclude tax, FX and credits.
 
-## Cloud plan and estimate
+## Cloud configuration and estimate
 
-Update the existing public service in `carbontrace-511814`, `us-central1`. One build
+The public service is in `carbontrace-511814`, `us-central1`. This update used one build
 with a ten-minute timeout, one revision, 1 vCPU / 512 MiB, min 0 / max 1 instance,
 concurrency 16 and a 180-second request timeout. Existing build/source resources
-remain private. Add one private ledger bucket and one Secret Manager signing key;
-enable Secret Manager API. No database or API keys.
+remain private. The existing private ledger bucket, signing secret, APIs and IAM
+were reused. No database or API keys.
 
 Runtime permissions: project custom role containing `aiplatform.endpoints.predict`,
 `roles/storage.objectUser` on the ledger bucket, and `roles/secretmanager.secretAccessor`
 on the signing secret. The build identity retains its existing limited permissions.
-Only the Cloud Run web service is public. Publication follows successful verification.
+Only the Cloud Run web service is public. Runtime settings were verified unchanged.
 
-Proposed first-week allowance: **USD 1.50**, before tax/FX, not a hard billing cap.
-Light infrastructure/build/storage/secret use: approximately USD 0.25–1.00.
-All six generations at the more expensive model's conservative caps: USD 0.221184;
-doubling generated tokens for the stress scenario gives USD 0.405504. The two
-verification calls (one per model) are included, not added to those six: combined
-estimate USD 0.0483328; stress USD 0.0892928. Actual output is usually much shorter.
-One secret version costs about USD 0.06 per full month before shared free quotas.
+Approved overall allowance: **USD 5**, before tax/FX, not a hard billing cap.
+USD 4 covers model reservations including prior usage; USD 1 covers the update and
+light hosting (estimate USD 0.25–1.00). The latest image update was followed by the
+approved pair: two agent generations and two token counts, with zero retries.
+Per-model reservations use 4,096 input and 8,192 generated
+tokens; actual generation still requests at most 4,096 output tokens. Introductory
+credits and shared free tiers are not assumed in these conservative estimates.
 Traffic and retained infrastructure can continue to incur charges after the
 generation pool expires; maximum instances does not cap total web spending.
 

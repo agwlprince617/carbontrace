@@ -1,0 +1,264 @@
+{
+  "provenance": "actual_hosted_pair",
+  "approved_deployment_plan_sha256": "3d3650c2d38a7d9b070d0369d1f753ca3d6e57ed98af6a48ced2614aecb8029a",
+  "recorded_at": "2026-10-18T08:38:16.556083+00:00",
+  "quality": "not_evaluated",
+  "generated_code_executed": false,
+  "receipt": {
+    "id": "592fc8d97aca4ea5a96ac2cd94c144f6",
+    "status": "completed",
+    "quote": {
+      "id": "592fc8d97aca4ea5a96ac2cd94c144f6",
+      "created_at": "2026-10-18T08:38:09.457122+00:00",
+      "expires_at": "2026-10-18T08:48:09.457122+00:00",
+      "draft": {
+        "prompt": "Write Python unittest tests for shipping_fee in the visible context. Cover zero, negative totals, just below $50, exactly $50, and above $50, with standard and expedited shipping. Use the documented rules as expected behavior. Assume shipping_fee is already available in the test environment. Return only Python test code, without explanation or Markdown fences.",
+        "context": "def shipping_fee(order_total: float, expedited: bool = False) -> float:\n    \"\"\"Calculate shipping in dollars.\n\n    Negative totals raise ValueError. Standard shipping costs $5 below $50\n    and is free at $50 or more. Expedited shipping adds $7.\n    \"\"\"\n    if order_total < 0:\n        raise ValueError(\"Order total cannot be negative\")\n    standard_fee = 0.0 if order_total >= 50 else 5.0\n    return standard_fee + (7.0 if expedited else 0.0)\n",
+        "selected_model": "strong",
+        "generated_low": 256,
+        "generated_high": 1024,
+        "carbon_scenario": null,
+        "research_reference": {
+          "workload": "chat.light",
+          "grid_g_per_kwh": "400"
+        }
+      },
+      "exact_payload": "Write Python unittest tests for shipping_fee in the visible context. Cover zero, negative totals, just below $50, exactly $50, and above $50, with standard and expedited shipping. Use the documented rules as expected behavior. Assume shipping_fee is already available in the test environment. Return only Python test code, without explanation or Markdown fences.\n\nAdditional context:\ndef shipping_fee(order_total: float, expedited: bool = False) -> float:\n    \"\"\"Calculate shipping in dollars.\n\n    Negative totals raise ValueError. Standard shipping costs $5 below $50\n    and is free at $50 or more. Expedited shipping adds $7.\n    \"\"\"\n    if order_total < 0:\n        raise ValueError(\"Order total cannot be negative\")\n    standard_fee = 0.0 if order_total >= 50 else 5.0\n    return standard_fee + (7.0 if expedited else 0.0)\n",
+      "prompt_sha256": "c20dc84aa8d8c824c2b14c7defb7ec07a27dba60b7c5eb0ee9454dd312d9b549",
+      "project": "carbontrace-511814",
+      "location": "global",
+      "api_version": "v1",
+      "models": [
+        {
+          "model_id": "gemini-3.5-flash-lite",
+          "model_name": "Gemini 3.5 Flash-Lite",
+          "input_usd_per_million": "0.30",
+          "generated_usd_per_million": "2.50"
+        },
+        {
+          "model_id": "gemini-3.7-flash",
+          "model_name": "Gemini 3.7 Flash",
+          "input_usd_per_million": "1.50",
+          "generated_usd_per_million": "7.50"
+        }
+      ],
+      "generation_calls": 2,
+      "token_count_calls": 2,
+      "metadata_reads": 0,
+      "maximum_input_tokens": 4096,
+      "maximum_generated_tokens": 4096,
+      "stress_generated_tokens": 8192,
+      "thinking_level": "LOW",
+      "candidate_count": 1,
+      "automatic_retries": 0,
+      "automatic_continuation": false,
+      "tools": false,
+      "usage_policy": "protojson_full_v3",
+      "pricing_checked": "2026-10-18",
+      "pricing_url": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+      "allowance_usd": "0.089293",
+      "estimated_cost_usd": "0.0483328",
+      "stress_cost_usd": "0.0892928",
+      "cost_note": "Global Standard PayGo catalog estimate before credits/tax/FX. Flash promotional credits excluded. Output requests and allowance are not a hard Google billing cap.",
+      "quality_note": "Fresh output is text only; quality has not been evaluated.",
+      "privacy_note": "Approved request and response are stored privately and scheduled for deletion after seven days. Do not submit secrets.",
+      "research": {
+        "mode": "published_workload_scenario",
+        "live_model_calls": 0,
+        "source": {
+          "publisher": "Sustainable AI Group",
+          "title": "CLEER Dataset",
+          "dataset_generated_at": "2026-09-09",
+          "dataset_engine": "CLEER-Text-0826",
+          "related_report_version": "CLEER-Text-0926 (29 September 2026)",
+          "commit": "c0253b43c50f91e538fecdcd0355a99c62359b78",
+          "source_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/v1/cleer-dashboard-data.csv",
+          "schema_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/v1/schema.md",
+          "report_url": "https://reports.sustainableaigroup.com/CLEER-Tech-Report/",
+          "license_url": "https://github.com/sustainableaigroup/CLEER/blob/c0253b43c50f91e538fecdcd0355a99c62359b78/data/LICENSE",
+          "license": "CC BY-NC 4.0",
+          "adapted_csv_sha256": "fa698cdb9f43a54288888a915b4784ac354e990a85a5331ac9c861360b1c4ce8",
+          "modifications": "CSV line endings normalized to LF. Published energy mean/SD unchanged. CarbonTrace scales energy means by session count and separately calculates operational electricity emissions under the user's grid assumption. Published carbon/cost fields are not used.",
+          "limitations": [
+            "Standardized sessions only. No published per-token intensities or workload token recipes; not an estimate for the pasted prompt.",
+            "Closed-model figures are modelled, not provider energy measurements. Equal workload does not establish equal quality.",
+            "Reported SD describes source model variation, not a validated confidence interval. Session-count scaling does not imply independent errors.",
+            "Dataset declares engine 0826; linked report is 0926. Versions are preserved separately, not represented as identical.",
+            "Upstream metadata lists 52 models; this pinned CSV contains 51. Only actual CSV records are offered.",
+            "CarbonTrace reports operational electricity emissions only, excluding embodied hardware, training, construction, networking, and end-user devices.",
+            "Dataset carbon columns are excluded: their scope differs and their operational factor does not match the declared metadata scenario.",
+            "Data is licensed for non-commercial use with attribution; commercial reuse requires separate written permission from Sustainable AI Group."
+          ]
+        },
+        "request": {
+          "model_a": "Gemini 3.5 Flash-Lite",
+          "model_b": "Gemini 3.7 Flash",
+          "workload": "chat.light",
+          "sessions": 1,
+          "grid_g_per_kwh": "400"
+        },
+        "models": [
+          {
+            "model_name": "Gemini 3.5 Flash-Lite",
+            "available": true,
+            "evidence": {
+              "model_name": "Gemini 3.5 Flash-Lite",
+              "workload": "chat.light",
+              "description": "A quick single question. A definition, a short explanation, or a one-off task, answered and done in a single exchange.",
+              "estimation_basis": "CLEER TPU calibration",
+              "energy_wh_mean": "0.062106712990",
+              "energy_wh_sd": "0.047052759722"
+            },
+            "total_energy_wh": "0.062106712990",
+            "operational_carbon_g": "0.02484268519600",
+            "note": "Published workload estimate; quality for your task is not established."
+          },
+          {
+            "model_name": "Gemini 3.7 Flash",
+            "available": true,
+            "evidence": {
+              "model_name": "Gemini 3.7 Flash",
+              "workload": "chat.light",
+              "description": "A quick single question. A definition, a short explanation, or a one-off task, answered and done in a single exchange.",
+              "estimation_basis": "CLEER TPU calibration",
+              "energy_wh_mean": "0.141987097860",
+              "energy_wh_sd": "0.106774389007"
+            },
+            "total_energy_wh": "0.141987097860",
+            "operational_carbon_g": "0.05679483914400",
+            "note": "Published workload estimate; quality for your task is not established."
+          }
+        ],
+        "uncertainty_note": "Per-session SD is preserved from the source. No aggregate confidence interval is calculated; model uncertainty need not average away across sessions.",
+        "carbon_basis": "Published facility Wh \u00d7 sessions \u00f7 1000 \u00d7 user-assumed gCO2e/kWh. Facility energy already includes overheads: PUE is not applied again. This is operational electricity only, not CLEER's published lifecycle carbon. A zero electricity factor does not establish a zero total footprint."
+      },
+      "schema_version": 5,
+      "execution_mode": "hosted_model_comparison",
+      "quality_task": null,
+      "precall_decision": {
+        "status": "insufficient_quality_evidence",
+        "evidence_scope": "unmatched_draft",
+        "recommended_role": null,
+        "recommended_model_id": null,
+        "headline": "Choose a model manually: quality evidence is insufficient.",
+        "reasons": [
+          "This draft has no matching quality evidence for both exact models. Editing the prompt or context removes the saved match.",
+          "Token/cost scenarios can guide a budget decision, but cannot establish task quality.",
+          "A CLEER workload is separate published context; it does not classify or predict this prompt."
+        ],
+        "selected_matches_recommendation": null,
+        "caveat": "Historical task evidence supports a candidate, not a guarantee for a new response. Actual prompt energy/carbon are unmeasured. No model call was made."
+      },
+      "pool_epoch": "carbontrace-public-demo-20261018-v1",
+      "pool_budget_usd": "4",
+      "reservation_usd": "0.089293",
+      "pool_expires_at": "2026-11-06T18:29:00+00:00",
+      "plan_sha256": "4c16f083a36d9aab3ab7a3b4259ab5552ada047317fa21031716be8f43d5e957"
+    },
+    "started_at": "2026-10-18T08:38:10.704130+00:00",
+    "operations": [],
+    "response": null,
+    "billing_uncertain": false,
+    "actual_energy_wh": null,
+    "actual_carbon_g": null,
+    "responses": [
+      {
+        "model_id": "gemini-3.5-flash-lite",
+        "model_name": "Gemini 3.5 Flash-Lite",
+        "status": "completed",
+        "operations": [
+          "count_tokens_dispatched",
+          "generate_dispatched"
+        ],
+        "response": {
+          "text": "import unittest\n\nclass TestShippingFee(unittest.TestCase):\n    def test_negative_total(self):\n        with self.assertRaises(ValueError):\n            shipping_fee(-1.0)\n        with self.assertRaises(ValueError):\n            shipping_fee(-10.0, expedited=True)\n\n    def test_zero_total_standard(self):\n        self.assertEqual(shipping_fee(0.0), 5.0)\n\n    def test_zero_total_expedited(self):\n        self.assertEqual(shipping_fee(0.0, expedited=True), 12.0)\n\n    def test_just_below_50_standard(self):\n        self.assertEqual(shipping_fee(49.99), 5.0)\n\n    def test_just_below_50_expedited(self):\n        self.assertEqual(shipping_fee(49.99, expedited=True), 12.0)\n\n    def test_exactly_50_standard(self):\n        self.assertEqual(shipping_fee(50.0), 0.0)\n\n    def test_exactly_50_expedited(self):\n        self.assertEqual(shipping_fee(50.0, expedited=True), 7.0)\n\n    def test_above_50_standard(self):\n        self.assertEqual(shipping_fee(100.0), 0.0)\n\n    def test_above_50_expedited(self):\n        self.assertEqual(shipping_fee(100.0, expedited=True), 7.0)\n\nif __name__ == \"__main__\":\n    unittest.main()",
+          "model_version": "gemini-3.5-flash-lite",
+          "finish_reason": "STOP",
+          "raw_usage": {
+            "input_tokens": 209,
+            "candidate_tokens": 379,
+            "thinking_tokens": null,
+            "cached_tokens": null,
+            "total_tokens": 588,
+            "tool_tokens": null
+          },
+          "elapsed_seconds": 1.667510374999999,
+          "quality": "not_evaluated",
+          "effective_usage": {
+            "input_tokens": 209,
+            "candidate_tokens": 379,
+            "thinking_tokens": 0,
+            "cached_tokens": 0,
+            "total_tokens": 588,
+            "tool_tokens": 0
+          },
+          "estimated_cost_usd": "0.0010102",
+          "complete_output": true
+        },
+        "billing_uncertain": false,
+        "input_token_count": 209,
+        "finished_at": "2026-10-18T08:38:12.959615+00:00"
+      },
+      {
+        "model_id": "gemini-3.7-flash",
+        "model_name": "Gemini 3.7 Flash",
+        "status": "completed",
+        "operations": [
+          "count_tokens_dispatched",
+          "generate_dispatched"
+        ],
+        "response": {
+          "text": "import unittest\n\nclass TestShippingFee(unittest.TestCase):\n    def test_negative_totals(self):\n        with self.assertRaises(ValueError):\n            shipping_fee(-1.0, expedited=False)\n        with self.assertRaises(ValueError):\n            shipping_fee(-0.01, expedited=True)\n\n    def test_zero_total(self):\n        self.assertEqual(shipping_fee(0.0, expedited=False), 5.0)\n        self.assertEqual(shipping_fee(0.0, expedited=True), 12.0)\n\n    def test_just_below_fifty(self):\n        self.assertEqual(shipping_fee(49.99, expedited=False), 5.0)\n        self.assertEqual(shipping_fee(49.99, expedited=True), 12.0)\n\n    def test_exactly_fifty(self):\n        self.assertEqual(shipping_fee(50.0, expedited=False), 0.0)\n        self.assertEqual(shipping_fee(50.0, expedited=True), 7.0)\n\n    def test_above_fifty(self):\n        self.assertEqual(shipping_fee(50.01, expedited=False), 0.0)\n        self.assertEqual(shipping_fee(50.01, expedited=True), 7.0)\n        self.assertEqual(shipping_fee(100.0, expedited=False), 0.0)\n        self.assertEqual(shipping_fee(100.0, expedited=True), 7.0)\n\n    def test_default_expedited_parameter(self):\n        self.assertEqual(shipping_fee(25.0), 5.0)\n        self.assertEqual(shipping_fee(50.0), 0.0)\n\nif __name__ == '__main__':\n    unittest.main()",
+          "model_version": "gemini-3.7-flash",
+          "finish_reason": "STOP",
+          "raw_usage": {
+            "input_tokens": 209,
+            "candidate_tokens": 431,
+            "thinking_tokens": null,
+            "cached_tokens": null,
+            "total_tokens": 640,
+            "tool_tokens": null
+          },
+          "elapsed_seconds": 2.889084552,
+          "quality": "not_evaluated",
+          "effective_usage": {
+            "input_tokens": 209,
+            "candidate_tokens": 431,
+            "thinking_tokens": 0,
+            "cached_tokens": 0,
+            "total_tokens": 640,
+            "tool_tokens": 0
+          },
+          "estimated_cost_usd": "0.003546",
+          "complete_output": true
+        },
+        "billing_uncertain": false,
+        "input_token_count": 209,
+        "finished_at": "2026-10-18T08:38:16.184268+00:00"
+      }
+    ],
+    "comparison": {
+      "complete": true,
+      "quality": "not_evaluated",
+      "recommended_model_id": null,
+      "note": "Review both outputs against your requirements. Cost and token usage alone do not establish equal quality or lower carbon.",
+      "latency_note": "One sequential observation per model, not a controlled latency benchmark.",
+      "lower_observed_cost_model": "gemini-3.5-flash-lite",
+      "cost_difference_usd": "0.0025358",
+      "combined_cost_usd": "0.0045562",
+      "cost_reduction_percent": "71.51156232374506486181613085"
+    },
+    "finished_at": "2026-10-18T08:38:16.287627+00:00"
+  },
+  "budget_after": {
+    "budget_usd": "4",
+    "reserved_usd": "0.24617",
+    "remaining_usd": "3.75383",
+    "runs_reserved": 4,
+    "generations_reserved": 5,
+    "halted": false,
+    "expires_at": "2026-11-06T18:29:00+00:00",
+    "scope": "Sponsor-funded model budget shared across visitors. Stress reservations are retained, including failures; not an invoice or Google billing cap."
+  },
+  "result_url": "https://carbontrace-demo-683634661093.us-central1.run.app/?hosted=592fc8d97aca4ea5a96ac2cd94c144f6"
+}

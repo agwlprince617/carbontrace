@@ -1,0 +1,32 @@
+{
+  "verified_at": "2026-10-18T08:42:58.577230+00:00",
+  "source_sha256": "921fb0d75b39a98abb32d155bb2d8f44b6454e5ee83fa4acd3c40eb082123dfc",
+  "source_matches_frozen_snapshot": true,
+  "result_url": "https://carbontrace-demo-683634661093.us-central1.run.app/?hosted=592fc8d97aca4ea5a96ac2cd94c144f6",
+  "both_responses_rendered_in_public_browser": true,
+  "saved_result_read_only": true,
+  "browser_errors": [],
+  "agent_generation_calls": 2,
+  "agent_token_count_calls": 2,
+  "automatic_retries": 0,
+  "generated_code_executed": false,
+  "runtime_quality_evaluated": false,
+  "manual_text_review": "docs/hosted-comparison-review.md",
+  "budget_after_browser_read": {
+    "budget_usd": "4",
+    "reserved_usd": "0.24617",
+    "remaining_usd": "3.75383",
+    "runs_reserved": 4,
+    "generations_reserved": 5,
+    "halted": false,
+    "expires_at": "2026-11-06T18:29:00+00:00",
+    "scope": "Sponsor-funded model budget shared across visitors. Stress reservations are retained, including failures; not an invoice or Google billing cap."
+  },
+  "python_tests_passed": 347,
+  "optional_sandbox_tests_skipped": 22,
+  "coverage_percent": 97.22,
+  "javascript_tests_passed": 13,
+  "mypy_black_ruff_passed": true,
+  "repository_push": false,
+  "submission_upload": false
+}

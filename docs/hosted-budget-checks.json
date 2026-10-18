@@ -1,0 +1,26 @@
+{
+  "verified_at": "2026-10-18T08:08:17.253459+00:00",
+  "source_sha256": "0bf7dccc1019b0508169b9f67e2daea1c7d5b9a952d95b2401281646359730e6",
+  "source_matches_frozen_snapshot": true,
+  "public_preview_run_button_enabled": true,
+  "button_label": "Run Gemini 3.7 Flash \u2192",
+  "disclosed_reservation_usd": "0.067584",
+  "separate_allowance_checkbox": false,
+  "production_run_button_clicked": false,
+  "agent_generation_calls": 0,
+  "agent_token_count_calls": 0,
+  "budget_after_browser_preview": {
+    "budget_usd": "4",
+    "reserved_usd": "0.156877",
+    "remaining_usd": "3.843123",
+    "runs_reserved": 3,
+    "halted": false,
+    "expires_at": "2026-11-06T18:29:00+00:00",
+    "scope": "Sponsor-funded model budget shared across visitors. Stress reservations are retained, including failures; not an invoice or Google billing cap."
+  },
+  "python_tests_passed": 341,
+  "optional_sandbox_tests_skipped": 22,
+  "coverage_percent": 97.17,
+  "javascript_tests_passed": 11,
+  "mypy_black_ruff_passed": true
+}

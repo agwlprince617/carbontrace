@@ -19,6 +19,7 @@ from fastapi.testclient import TestClient
 from carbontrace import hosted_cloud
 from carbontrace.app import create_app
 from carbontrace.hosted import (
+    MODEL_BUDGET_MICROUSD,
     POOL_EPOCH,
     Conflict,
     HostedApproval,
@@ -29,6 +30,7 @@ from carbontrace.hosted import (
     check_approval,
     execute_hosted,
     issue_quote,
+    reservation_microusd,
 )
 from carbontrace.live_smoke import Generation, Provider, Usage
 from carbontrace.preflight import PreflightRequest
@@ -41,7 +43,12 @@ class MemoryObjects:
     def __init__(self) -> None:
         self.items: dict[str, tuple[dict[str, Any], int]] = {
             f"budget/{POOL_EPOCH}.json": (
-                {"epoch": POOL_EPOCH, "limit": 6, "runs": {}},
+                {
+                    "epoch": POOL_EPOCH,
+                    "schema_version": 2,
+                    "budget_microusd": MODEL_BUDGET_MICROUSD,
+                    "runs": {},
+                },
                 1,
             )
         }
@@ -64,18 +71,19 @@ class MemoryObjects:
             self.items[name] = copy.deepcopy(value), old + 1
 
 
-def approved(role: str = "compact") -> HostedApproval:
+def approved(role: str = "compact", *, compare: bool = False) -> HostedApproval:
     plan = issue_quote(
         PreflightRequest.model_validate(
             {"prompt": "Write pytest tests for double(x).", "selected_model": role}
         ),
         CONFIG,
         NOW,
+        compare_models=compare,
     )
     return HostedApproval(
         plan=plan,
         approval_hash=plan.quote["plan_sha256"],
-        allowance_usd=Decimal("0.10"),
+        allowance_usd=Decimal(plan.quote["allowance_usd"]),
         agreed=True,
     )
 
@@ -135,7 +143,7 @@ def test_approval_tamper_expiry_and_consent() -> None:
 
 def test_global_pool_concurrent_and_persistent() -> None:
     objects = MemoryObjects()
-    quotes = [approved().plan.quote for _ in range(20)]
+    quotes = [approved("strong").plan.quote for _ in range(80)]
 
     def reserve(quote: dict[str, Any]) -> bool:
         try:
@@ -145,10 +153,14 @@ def test_global_pool_concurrent_and_persistent() -> None:
 
     with ThreadPoolExecutor(max_workers=10) as executor:
         results = list(executor.map(reserve, quotes))
-    assert sum(results) == 6
-    assert HostedLedger(objects).remaining() == 0
+    assert 6 < sum(results) <= 59
+    ledger = HostedLedger(objects)
+    while Decimal(str(ledger.status()["remaining_usd"])) >= Decimal("0.067584"):
+        ledger.reserve(approved("strong").plan.quote)
+    assert ledger.status()["runs_reserved"] == 59
+    assert Decimal(str(ledger.status()["remaining_usd"])) >= 0
     with pytest.raises(PoolExhausted):
-        HostedLedger(objects).reserve(approved().plan.quote)
+        ledger.reserve(approved("strong").plan.quote)
     first = quotes[results.index(True)]
     assert HostedLedger(objects).reserve(first) is False
     with pytest.raises(HostedError, match="mismatch"):
@@ -157,7 +169,7 @@ def test_global_pool_concurrent_and_persistent() -> None:
         HostedLedger(objects).receipt("../invalid")
     objects.items.clear()
     with pytest.raises(HostedError, match="not initialized"):
-        HostedLedger(objects).remaining()
+        HostedLedger(objects).status()
 
 
 @pytest.mark.parametrize("role", ["compact", "strong"])
@@ -173,7 +185,7 @@ def test_one_execution_replay_and_real_usage(role: str) -> None:
     assert provider.calls == ["client", "count", "generate"]
     assert asyncio.run(execute_hosted(quote, ledger, provider.context)) == result
     assert provider.calls == ["client", "count", "generate"]
-    assert ledger.remaining() == 5
+    assert ledger.status()["runs_reserved"] == 1
 
 
 @pytest.mark.parametrize(
@@ -206,7 +218,7 @@ def test_failure_consumes_reservation_without_retry(failure: str) -> None:
         assert result["status"] == "failed"
         assert "secret token" not in str(result)
         assert provider.calls.count("generate") == (0 if failure == "count" else 1)
-    assert ledger.remaining() == 5
+    assert ledger.status()["runs_reserved"] == 1
     asyncio.run(execute_hosted(quote, ledger, provider.context))
     assert provider.calls.count("generate") <= 1
 
@@ -222,7 +234,8 @@ def test_hosted_app_keeps_local_routes_closed(monkeypatch: pytest.MonkeyPatch) -
     with TestClient(create_app()) as client:
         assert 'id="hosted-prepare"' in client.get("/").text
         assert client.get("/api/health").json()["live_enabled"]
-        assert client.get("/api/hosted/status").json()["remaining"] == 6
+        assert client.get("/api/hosted/status").json()["remaining_usd"] == "4"
+        assert "hosted-consent" not in client.get("/").text
         assert client.post("/api/live-runs", json={}).status_code == 423
         assert (
             client.post(
@@ -237,7 +250,7 @@ def test_hosted_app_keeps_local_routes_closed(monkeypatch: pytest.MonkeyPatch) -
         request = {
             "plan": plan,
             "approval_hash": plan["quote"]["plan_sha256"],
-            "allowance_usd": "0.10",
+            "allowance_usd": plan["quote"]["allowance_usd"],
             "agreed": True,
         }
         result = client.post("/api/hosted/execute", json=request)
@@ -297,3 +310,213 @@ def test_cloud_storage_preconditions_and_config(
     session.request.side_effect = RuntimeError("secret")
     with pytest.raises(HostedError, match="unavailable"):
         cloud.read("object")
+
+
+def test_legacy_budget_migration_never_resets_usage() -> None:
+    objects = MemoryObjects()
+    key = f"budget/{POOL_EPOCH}.json"
+    quotes = [approved(role).plan.quote for role in ("compact", "strong")]
+    legacy: dict[str, Any] = {
+        "epoch": POOL_EPOCH,
+        "limit": 6,
+        "runs": {
+            quote["id"]: {
+                "plan_sha256": quote["plan_sha256"],
+                "model_id": quote["models"][0]["model_id"],
+            }
+            for quote in quotes
+        },
+    }
+    objects.items[key] = legacy, 1
+    ledger = HostedLedger(objects)
+    assert ledger.status()["runs_reserved"] == 2
+    assert objects.items[key][0] == legacy  # A status read never writes.
+    assert ledger.reserve(quotes[0]) is False  # Old ID remains consumed.
+    ledger.reserve(approved().plan.quote)
+    persisted = objects.items[key][0]
+    assert persisted["schema_version"] == 2 and "limit" not in persisted
+    assert persisted["runs"].keys() >= legacy["runs"].keys()
+    assert ledger.status()["runs_reserved"] == 3
+    assert ledger.status()["reserved_usd"] == str(
+        Decimal(
+            2 * reservation_microusd("gemini-3.5-flash-lite")
+            + reservation_microusd("gemini-3.7-flash")
+        )
+        / 1_000_000
+    )
+    assert HostedLedger(objects).status() == ledger.status()
+
+
+@pytest.mark.parametrize("damage", ["amount", "model", "budget", "legacy_overflow"])
+def test_budget_corruption_stops_before_provider(damage: str) -> None:
+    objects, provider = MemoryObjects(), FakeProvider()
+    ledger = HostedLedger(objects)
+    ledger.reserve(approved().plan.quote)
+    key = f"budget/{POOL_EPOCH}.json"
+    meter = objects.items[key][0]
+    row = next(iter(meter["runs"].values()))
+    if damage == "amount":
+        row["reserved_microusd"] = 0
+    elif damage == "model":
+        row["model_id"] = "unknown"
+    elif damage == "budget":
+        meter["budget_microusd"] = 5_000_000
+    else:
+        meter.pop("schema_version")
+        meter["limit"] = 6
+        meter["runs"] = {str(i): row for i in range(7)}
+    with pytest.raises(HostedError, match="verified"):
+        asyncio.run(execute_hosted(approved().plan.quote, ledger, provider.context))
+    assert not provider.calls
+
+
+def test_above_stress_usage_stops_new_runs() -> None:
+    ledger, provider = HostedLedger(MemoryObjects()), FakeProvider()
+    provider.usage = Usage(
+        input_tokens=10, candidate_tokens=30_000, total_tokens=30_010
+    )
+    result = asyncio.run(
+        execute_hosted(approved().plan.quote, ledger, provider.context)
+    )
+    assert result["status"] == "failed"
+    assert "limit breach" in result["error"]
+    assert ledger.status()["halted"] is True
+    prior = list(provider.calls)
+    with pytest.raises(PoolExhausted):
+        asyncio.run(execute_hosted(approved().plan.quote, ledger, provider.context))
+    assert provider.calls == prior
+
+
+class PairedProvider(FakeProvider):
+    def __init__(self) -> None:
+        super().__init__()
+        self.payloads: list[tuple[str, str]] = []
+        self.fail_second = False
+
+    async def generate(self, model_id: str, text: str) -> Generation:
+        self.payloads.append((model_id, text))
+        self.failure = self.fail_second and model_id == "gemini-3.7-flash"
+        output = 20 if model_id == "gemini-3.5-flash-lite" else 40
+        self.usage = Usage(
+            input_tokens=10, candidate_tokens=output, total_tokens=10 + output
+        )
+        return await super().generate(model_id, text)
+
+
+def test_pair_exact_quote_atomic_reservation_and_no_repeat() -> None:
+    approval = approved(compare=True)
+    quote = check_approval(approval, CONFIG, NOW)
+    assert quote["generation_calls"] == quote["token_count_calls"] == 2
+    assert quote["reservation_usd"] == "0.089293"
+    assert quote["allowance_usd"] == "0.089293"
+    assert quote["estimated_cost_usd"] == "0.0483328"
+    assert len(quote["models"]) == 2
+    objects, provider = MemoryObjects(), PairedProvider()
+    ledger = HostedLedger(objects)
+    result = asyncio.run(execute_hosted(quote, ledger, provider.context))
+    assert provider.calls == ["client", "count", "generate", "count", "generate"]
+    assert provider.payloads == [
+        (model["model_id"], quote["exact_payload"]) for model in quote["models"]
+    ]
+    assert result["status"] == "completed"
+    assert [
+        row["response"]["effective_usage"]["candidate_tokens"]
+        for row in result["responses"]
+    ] == [20, 40]
+    assert result["comparison"]["complete"] is True
+    assert result["comparison"]["lower_observed_cost_model"] == "gemini-3.5-flash-lite"
+    assert result["comparison"]["recommended_model_id"] is None
+    assert result["actual_carbon_g"] is None
+    assert ledger.status()["reserved_usd"] == "0.089293"
+    assert ledger.status()["runs_reserved"] == 1
+    assert ledger.status()["generations_reserved"] == 2
+    assert (
+        asyncio.run(execute_hosted(quote, HostedLedger(objects), provider.context))
+        == result
+    )
+    assert provider.calls.count("generate") == 2
+
+
+def test_pair_budget_cannot_partially_dispatch() -> None:
+    objects, provider = MemoryObjects(), PairedProvider()
+    ledger = HostedLedger(objects)
+    for _ in range(58):
+        ledger.reserve(approved("strong").plan.quote)
+    remaining = Decimal(str(ledger.status()["remaining_usd"]))
+    assert Decimal("0.067584") <= remaining < Decimal("0.089293")
+    with pytest.raises(PoolExhausted):
+        asyncio.run(
+            execute_hosted(approved(compare=True).plan.quote, ledger, provider.context)
+        )
+    assert provider.calls == []
+    assert Decimal(str(ledger.status()["remaining_usd"])) == remaining
+
+
+@pytest.mark.parametrize("fail_second", [False, True])
+def test_pair_failure_preserves_first_output_and_never_retries(
+    fail_second: bool,
+) -> None:
+    ledger, provider = HostedLedger(MemoryObjects()), PairedProvider()
+    provider.fail_second = fail_second
+    if not fail_second:
+        provider.count_value = 4097
+    quote = approved(compare=True).plan.quote
+    result = asyncio.run(execute_hosted(quote, ledger, provider.context))
+    assert result["status"] == ("partial_failure" if fail_second else "failed")
+    assert result["comparison"]["complete"] is False
+    assert result["comparison"]["recommended_model_id"] is None
+    assert "lower_observed_cost_model" not in result["comparison"]
+    assert "secret token" not in str(result)
+    assert result["responses"][0]["status"] == (
+        "completed" if fail_second else "failed"
+    )
+    assert result["responses"][1]["status"] == (
+        "failed" if fail_second else "not_started"
+    )
+    prior = list(provider.calls)
+    asyncio.run(execute_hosted(quote, ledger, provider.context))
+    assert provider.calls == prior
+    assert ledger.status()["reserved_usd"] == "0.089293"
+
+
+def test_pair_corrupt_model_list_stops_execution() -> None:
+    objects = MemoryObjects()
+    ledger = HostedLedger(objects)
+    ledger.reserve(approved(compare=True).plan.quote)
+    meter = objects.items[f"budget/{POOL_EPOCH}.json"][0]
+    row = next(iter(meter["runs"].values()))
+    row["model_ids"] = ["gemini-3.5-flash-lite", "gemini-3.5-flash-lite"]
+    with pytest.raises(HostedError, match="verified"):
+        ledger.status()
+
+
+def test_paired_route_only_prepares_until_explicit_execute(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("CARBONTRACE_MODE", "hosted-live")
+    ledger, provider = HostedLedger(MemoryObjects()), PairedProvider()
+    config = HostedSettings(b"p" * 32, datetime.now(UTC) + timedelta(days=1))
+    monkeypatch.setattr(
+        hosted_cloud,
+        "settings",
+        lambda: config,
+    )
+    monkeypatch.setattr(hosted_cloud, "cloud_ledger", lambda: ledger)
+    monkeypatch.setattr(hosted_cloud, "cloud_provider", provider.context)
+    with TestClient(create_app()) as client:
+        plan = client.post(
+            "/api/hosted/quote", json={"prompt": "Write tests", "compare_models": True}
+        ).json()
+        assert len(plan["quote"]["models"]) == 2
+        assert not provider.calls
+        assert ledger.status()["reserved_usd"] == "0"
+        result = client.post(
+            "/api/hosted/execute",
+            json={
+                "plan": plan,
+                "approval_hash": plan["quote"]["plan_sha256"],
+                "allowance_usd": plan["quote"]["allowance_usd"],
+                "agreed": True,
+            },
+        )
+        assert result.status_code == 200 and len(result.json()["responses"]) == 2

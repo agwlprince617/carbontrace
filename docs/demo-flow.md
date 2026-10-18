@@ -1,16 +1,20 @@
 # CarbonTrace demo
 
 [Public Cloud Run demo](https://carbontrace-demo-683634661093.us-central1.run.app).
-The public app supports planning, recorded evidence and a small shared Gemini pool.
+The public app supports planning, recorded evidence and sponsor-funded Gemini runs.
 
 1. Open **Before you send**. Keep Clamp selected and choose the `chat.light`
    benchmark. Explain the saved quality evidence, assumed output size and cost
    range. CLEER supplies environmental context, not this prompt's actual footprint.
 2. Use the suggested model. Editing the prompt removes the exact quality match;
    the app then asks for a manual choice instead of promising equivalent quality.
-3. Click **Review selected model run**. Review the exact text and cost, then approve
-   one generation if shared capacity remains. Inspect real usage and returned text.
-   Fresh output has not been quality checked. Preparing the quote makes no model call.
+3. Review the sponsor reservation, then use **Compare Flash-Lite + Flash** to send
+   the same prompt/code to both models. Inspect both outputs, real usage, catalog
+   cost and response times. **Run Gemini** still sends only the selected model.
+   Fresh quality is not automatically checked. Preview and preparation make no
+   model calls. During rehearsal, reopen the
+   [saved shipping-fee pair](https://carbontrace-demo-683634661093.us-central1.run.app/?hosted=592fc8d97aca4ea5a96ac2cd94c144f6)
+   instead of starting another paid run. Saved receipts have seven-day retention.
 4. Open **Run & validate** to inspect the bundled recorded comparison. It shows actual responses,
    tokens, catalog cost and correct-function / four-fault checks. Its label makes
    clear that viewing it makes no new calls. Expand the returned tests if useful.
@@ -18,8 +22,11 @@ The public app supports planning, recorded evidence and a small shared Gemini po
    Source, licence and uncertainty details stay available in disclosures.
    The hypothetical hardware calculator is excluded from the demo interface.
 
-Six reservations are shared by everyone, including two completed verification
-runs. Four remained on 18 October 2026. The pool expires 25 October at 23:59 UTC.
+The shared model allowance is USD 4, including prior usage. USD 3.753830 remained
+after paired verification on 18 October 2026. The overall demo allowance is
+USD 5 including USD 1 for the update and light hosting, before tax/FX, not a hard
+Google billing cap. Live runs expire 6 November 2026 at 11:59 PM IST, or earlier
+if the remaining allowance cannot fund the selected request.
 The planner and recorded comparison continue to work afterward.
 
 For the separate local workflow, from the project root with the virtual environment

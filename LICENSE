@@ -1,0 +1,45 @@
+CarbonTrace Restricted Evaluation License 1.0
+
+Copyright (c) 2026 CarbonTrace contributors. All rights reserved.
+
+1. Scope
+
+This license covers original CarbonTrace source code, documentation and assets
+only to the extent their copyright holders can grant these rights. Third-party
+materials retain their own terms; see THIRD_PARTY_NOTICES.md. This is a restricted,
+source-available license, not an open-source license.
+
+2. Limited evaluation permission
+
+You may view, inspect, download and run copies solely for private evaluation or
+AI Builder Cup 2026 review and judging. You may make local configuration changes
+necessary for that evaluation. Retain this license and copyright notices in all
+permitted copies. This permission does not grant access to credentials, private
+accounts or funded cloud resources; the hosted demo has separate usage controls.
+
+3. Other uses require written permission
+
+Except as allowed above or under section 4, prior written permission from the
+relevant copyright holders is required for modification, redistribution,
+sublicensing, commercial use, incorporation into another product or service, or
+hosting a public copy. Public availability of this repository does not itself
+grant those permissions. Permission requests may be directed to the repository
+owner at https://github.com/agwlprince617/carbontrace.
+
+4. Existing rights and exceptions
+
+This license does not restrict rights granted under GitHub's applicable terms,
+including viewing and forking public repositories; rights already granted or
+required under the applicable, accepted AI Builder Cup event terms, including
+review, judging and promotional use; separately licensed third-party materials;
+or exceptions and nonwaivable rights provided by applicable law. It does not
+claim ownership of abstract ideas or grant trademark rights. It does not transfer
+ownership or revoke any previously granted rights.
+
+5. Disclaimer
+
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE MATERIALS ARE PROVIDED "AS IS",
+WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. THE COPYRIGHT HOLDERS
+ARE NOT LIABLE FOR CLAIMS, DAMAGES OR OTHER LIABILITY ARISING FROM USE OF THE
+MATERIALS. NOTHING HERE EXCLUDES LIABILITY THAT CANNOT LAWFULLY BE EXCLUDED.

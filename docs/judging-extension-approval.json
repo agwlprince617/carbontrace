@@ -1,0 +1,9 @@
+{
+  "approved": true,
+  "plan_sha256": "12302e6f28824dce21271c6d33e2dc46a58543bb382602c8a2a423361a883978",
+  "user_answer": "Approve US$1 expiry extension",
+  "additional_allowance_usd": "1.00",
+  "hard_provider_billing_cap": false,
+  "approved_at": "2026-10-18T06:31:46.989698+00:00",
+  "scope": "One expiry-only Cloud Run update, zero rebuilds and agent model/token-count calls, unchanged six-run global allowance, light hosting through 6 November 2026 23:59 IST; no submission upload or repository push."
+}

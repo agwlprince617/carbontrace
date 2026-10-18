@@ -1,0 +1,11 @@
+{
+  "approved": true,
+  "plan_sha256": "eca5c42b29332e1bd0a0ddd371f820a1440c57205afe14e245497104ffb5c107",
+  "user_answer": "Approve US$5 one-click demo update",
+  "allowance_usd": "5.00",
+  "model_budget_usd": "4.00",
+  "build_and_hosting_allowance_usd": "1.00",
+  "hard_provider_billing_cap": false,
+  "approved_at": "2026-10-18T08:02:56.399577+00:00",
+  "scope": "One build, one Cloud Run image update and at most one ledger migration write; preserve prior usage and expiry. Zero agent model/token-count calls, retries, GitHub pushes or submission uploads."
+}
